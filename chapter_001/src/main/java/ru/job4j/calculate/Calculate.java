@@ -18,13 +18,13 @@ public class Calculate {
 		
 		System.out.println("Hello world");		
 		System.out.println("Calculate: 3 + 3 = ");
-		System.out.println(calc.add(3,3));
+		System.out.println(calc.add(3, 3));
 		System.out.println("Calculate: a + b = ");
-		System.out.println(calc.sub(3,3));
+		System.out.println(calc.sub(3, 3));
 		System.out.println("Calculate: a + b = ");
-		System.out.println(calc.mul(3,3));
+		System.out.println(calc.mul(3, 3));
 		System.out.println("Calculate: a + b = ");
-		System.out.println(calc.div(3,3));
+		System.out.println(calc.div(3, 3));
 	}
 	
 	/**
