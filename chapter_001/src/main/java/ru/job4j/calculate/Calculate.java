@@ -7,7 +7,7 @@ package ru.job4j.calculate;
  * @version 0.1
  */
 
-public class Calculate{
+public class Calculate {
 	
 	/**
 	 * Главный метод для запуска программы.
@@ -28,12 +28,21 @@ public class Calculate{
 	}
 	
 	/**
+	 * Метод echo.
+	 * @param name Твоё имя.
+	 * @return Echo плюс твоё имя.
+	 */
+	public String echo(String name) {
+        return "Echo, echo, echo : " + name;
+    }
+	 
+	/**
 	 * Сложение.
 	 * @param first первый аргумент.
 	 * @param second второй аргумент.
 	 * @return результат сложения.
 	 */
-	public static double add(double first, double second){
+	public static double add(double first, double second) {
 		return first + second;
 	}
 	
@@ -43,7 +52,7 @@ public class Calculate{
 	 * @param second второй аргумент.
 	 * @return результат вычитания.
 	 */
-	public static double sub(double first, double second){
+	public static double sub(double first, double second) {
 		return first - second;
 	}
 	
@@ -53,7 +62,7 @@ public class Calculate{
 	 * @param second второй аргумент.
 	 * @return результат Умножения.
 	 */
-	public static double mul(double first, double second){
+	public static double mul(double first, double second) {
 		return first * second;
 	}
 	
@@ -63,7 +72,7 @@ public class Calculate{
 	 * @param second второй аргумент.
 	 * @return результат деления.
 	 */
-	public static double div(double first, double second){
+	public static double div(double first, double second) {
 		return first / second;
 	}
 }
