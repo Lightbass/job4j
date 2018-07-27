@@ -1,7 +1,7 @@
 package ru.job4j.calculate;
 
 /**
- * Class Класс для вычисления арифметических операций + - * / ^.
+ * Класс для вычисления арифметических операций + - * / ^.
  * @author Alexey Makarov
  * @since 27.07.2018
  * @version 0.1
