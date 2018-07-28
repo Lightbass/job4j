@@ -42,7 +42,7 @@ public class Calculate {
 	 * @param second второй аргумент.
 	 * @return результат сложения.
 	 */
-	public static double add(double first, double second) {
+	public double add(double first, double second) {
 		return first + second;
 	}
 	
@@ -52,7 +52,7 @@ public class Calculate {
 	 * @param second второй аргумент.
 	 * @return результат вычитания.
 	 */
-	public static double sub(double first, double second) {
+	public double sub(double first, double second) {
 		return first - second;
 	}
 	
@@ -62,7 +62,7 @@ public class Calculate {
 	 * @param second второй аргумент.
 	 * @return результат Умножения.
 	 */
-	public static double mul(double first, double second) {
+	public double mul(double first, double second) {
 		return first * second;
 	}
 	
@@ -72,7 +72,7 @@ public class Calculate {
 	 * @param second второй аргумент.
 	 * @return результат деления.
 	 */
-	public static double div(double first, double second) {
+	public double div(double first, double second) {
 		return first / second;
 	}
 }

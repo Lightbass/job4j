@@ -16,7 +16,7 @@ public class CalculateTest {
 	 * Тест метода echo.
 	 */
 	@Test
-	public void whenTakeNameThenTreeEchoPlusName() {
+	public void whenTakeNameThenThreeEchoPlusName() {
 		String input = "Alexey Makarov";
 		String expect = "Echo, echo, echo : Alexey Makarov";
 		Calculate calc = new Calculate();
@@ -24,4 +24,51 @@ public class CalculateTest {
 		assertThat(result, is(expect));
 	}
 	
-}
+	/**
+	 * Тест метода суммирования add().
+	 */
+	@Test
+	public void whenThreeAddToThreeThenSix() {
+		Double x = 3D, y = 3D;
+		Double expect = 6.0;
+		Calculate calc = new Calculate();
+		Double result = calc.add(x, y);
+		assertThat(result, is(expect));
+	}
+	
+	/**
+	 * Тест метода вычитания sub().
+	 */
+	@Test
+	public void whenThreeSubToThreeThenZero() {
+		Double x = 3D, y = 3D;
+		Double expect = 0.0;
+		Calculate calc = new Calculate();
+		Double result = calc.sub(x, y);
+		assertThat(result, is(expect));
+	}
+	
+	/**
+	 * Тест метода умножения mul().
+	 */
+	@Test
+	public void whenThreeMulToThreeThenNine() {
+		Double x = 3D, y = 3D;
+		Double expect = 9.0;
+		Calculate calc = new Calculate();
+		Double result = calc.mul(x, y);
+		assertThat(result, is(expect));
+	}
+	
+	/**
+	 * Тест метода деления div().
+	 */
+	@Test
+	public void whenThreeDivToThreeThenOne() {
+		Double x = 3D, y = 3D;
+		Double expect = 1.0;
+		Calculate calc = new Calculate();
+		Double result = calc.div(x, y);
+		assertThat(result, is(expect));
+	}
+	}
