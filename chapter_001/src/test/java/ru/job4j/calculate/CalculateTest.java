@@ -29,10 +29,10 @@ public class CalculateTest {
 	 */
 	@Test
 	public void whenThreeAddToThreeThenSix() {
-		Double x = 3D, y = 3D;
-		Double expect = 6.0;
+		double x = 3D, y = 3D;
+		double expect = 6.0;
 		Calculate calc = new Calculate();
-		Double result = calc.add(x, y);
+		double result = calc.add(x, y);
 		assertThat(result, is(expect));
 	}
 	
@@ -41,10 +41,10 @@ public class CalculateTest {
 	 */
 	@Test
 	public void whenThreeSubToThreeThenZero() {
-		Double x = 3D, y = 3D;
-		Double expect = 0.0;
+		double x = 3D, y = 3D;
+		double expect = 0.0;
 		Calculate calc = new Calculate();
-		Double result = calc.sub(x, y);
+		double result = calc.sub(x, y);
 		assertThat(result, is(expect));
 	}
 	
@@ -53,10 +53,10 @@ public class CalculateTest {
 	 */
 	@Test
 	public void whenThreeMulToThreeThenNine() {
-		Double x = 3D, y = 3D;
-		Double expect = 9.0;
+		double x = 3D, y = 3D;
+		double expect = 9.0;
 		Calculate calc = new Calculate();
-		Double result = calc.mul(x, y);
+		double result = calc.mul(x, y);
 		assertThat(result, is(expect));
 	}
 	
@@ -65,10 +65,10 @@ public class CalculateTest {
 	 */
 	@Test
 	public void whenThreeDivToThreeThenOne() {
-		Double x = 3D, y = 3D;
-		Double expect = 1.0;
+		double x = 3D, y = 3D;
+		double expect = 1.0;
 		Calculate calc = new Calculate();
-		Double result = calc.div(x, y);
+		double result = calc.div(x, y);
 		assertThat(result, is(expect));
 	}
-	}
+}
