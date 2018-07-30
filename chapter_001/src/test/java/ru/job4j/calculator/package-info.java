@@ -1,5 +1,5 @@
 /**
- * Package for calculator task.
+ * Package for job4j tasks.
  *
  * @author Makarov Alexey
  * @version 0.1
