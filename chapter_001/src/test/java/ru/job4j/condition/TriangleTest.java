@@ -1,7 +1,7 @@
 package ru.job4j.condition;
 
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
 /**
@@ -54,7 +54,7 @@ public class TriangleTest {
      * Тест метода нахождения площади с параллельными точками.
      */
     @Test
-    public void whenThreePointsAreParallelThenNothing1() {
+    public void whenThreePointsOnOneLineThenNothing1() {
         // создаем три объекта класса Point.
         Point a = new Point(0, 0);
         Point b = new Point(1, 1);
@@ -73,7 +73,7 @@ public class TriangleTest {
      * Тест метода нахождения площади с параллельными точками.
      */
     @Test
-    public void whenThreePointsAreParallelThenNothing2() {
+    public void whenThreePointsOnOneLineThenNothing2() {
         // создаем три объекта класса Point.
         Point a = new Point(0, 2);
         Point b = new Point(1, 2);
@@ -92,7 +92,7 @@ public class TriangleTest {
      * Тест метода нахождения площади с параллельными точками.
      */
     @Test
-    public void whenThreePointsAreParallelThenNothing3() {
+    public void whenThreePointsOnOneLineThenNothing3() {
         // создаем три объекта класса Point.
         Point a = new Point(1, 0);
         Point b = new Point(2, 1);
@@ -111,7 +111,7 @@ public class TriangleTest {
      * Тест метода нахождения площади с параллельными точками.
      */
     @Test
-    public void whenThreePointsAreParallelThenNothing4() {
+    public void whenThreePointsOnOneLineThenNothing4() {
         // создаем три объекта класса Point.
         Point a = new Point(-10, 0);
         Point b = new Point(-10, 1);

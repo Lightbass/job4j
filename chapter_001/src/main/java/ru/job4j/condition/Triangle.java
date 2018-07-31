@@ -36,7 +36,7 @@ public class Triangle {
 
     /**
      * Площадь треугольника.
-     * @return
+     * @return площадь.
      */
     public double area() {
         double rsl = -1; // мы устанавливаем значение -1, так как может быть что треугольника нет. Это значение говорит о том. что треугольника нет.
@@ -50,6 +50,13 @@ public class Triangle {
         return rsl;
     }
 
+    /**
+     * Проверка, существует ли треугольник.
+     * @param ab сторона a.
+     * @param ac сторона c.
+     * @param bc сторона b.
+     * @return true - если существует.
+     */
     public boolean exist(double ab, double ac, double bc) {
         double max = ab > ac ? (ab > bc ? ab : bc) : (ac > bc ? ac : bc);
         double sum2min = (ab < max ? ab : 0) + (ac < max ? ac : 0) + (bc < max ? bc : 0);

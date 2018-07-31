@@ -1,4 +1,4 @@
-package ru.job4j.even;
+package ru.job4j.loop;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

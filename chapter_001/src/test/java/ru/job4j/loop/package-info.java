@@ -4,4 +4,4 @@
  * @since 31.07.2018
  * @version 0.1
  */
-package ru.job4j.even;
+package ru.job4j.loop;
