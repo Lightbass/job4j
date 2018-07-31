@@ -58,9 +58,7 @@ public class Triangle {
      * @return true - если существует.
      */
     public boolean exist(double ab, double ac, double bc) {
-        double max = ab > ac ? (ab > bc ? ab : bc) : (ac > bc ? ac : bc);
-        double sum2min = (ab < max ? ab : 0) + (ac < max ? ac : 0) + (bc < max ? bc : 0);
-        if (sum2min > max) {
+        if (ab + ac > bc && ab + bc > ac && ac + bc > ac) {
             return true;
         }
         return false;
