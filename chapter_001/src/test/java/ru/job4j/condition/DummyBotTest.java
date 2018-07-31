@@ -11,6 +11,9 @@ import static org.hamcrest.core.Is.is;
  * @version 0.1
  */
 public class DummyBotTest {
+    /**
+     * Тест ответа приветствия.
+     */
     @Test
     public void whenGreetBot() {
         DummyBot db = new DummyBot();
@@ -18,6 +21,10 @@ public class DummyBotTest {
         String result = db.answer(str);
         assertThat(result, is("Привет, умник."));
     }
+
+    /**
+     * Тест ответа на прощание.
+     */
     @Test
     public void whenByeBot() {
         DummyBot db = new DummyBot();
@@ -25,6 +32,10 @@ public class DummyBotTest {
         String result = db.answer(str);
         assertThat(result, is("До скорой встречи."));
     }
+
+    /**
+     * Тест ответа на любую другую строку.
+     */
     @Test
     public void whenUnknownBot() {
         DummyBot db = new DummyBot();
