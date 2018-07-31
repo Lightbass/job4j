@@ -27,7 +27,23 @@ public class Point {
      */
     public double distanceTo(Point that) {
         return Math.sqrt(
-                Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.x, 2)
+                Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2)
         );
+    }
+
+    /**
+     * Возвращает координату X.
+     * @return значение x.
+     */
+    public double getX() {
+        return x;
+    }
+
+    /**
+     * Возвращает координату Y.
+     * @return значение y.
+     */
+    public double getY() {
+        return y;
     }
 }
