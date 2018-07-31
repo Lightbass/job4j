@@ -12,12 +12,22 @@ import static org.hamcrest.core.Is.is;
  */
 public class MaxTest {
     /**
-     * Тест метода max.
+     * Тест метода max() для двух параметров.
      */
     @Test
     public void whenFirstLessSecond() {
         Max maxim = new Max();
         int result = maxim.max(1, 2);
         assertThat(result, is(2));
+    }
+
+    /**
+     * Тест метода max() для трёх параметров.
+     */
+    @Test
+    public void whenFirstLessSecondLessThird() {
+        Max maxim = new Max();
+        int result = maxim.max(1, 2, 3);
+        assertThat(result, is(3));
     }
 }
