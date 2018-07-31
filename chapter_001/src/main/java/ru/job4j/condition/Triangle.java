@@ -51,25 +51,12 @@ public class Triangle {
     }
 
     public boolean exist(double ab, double ac, double bc) {
-        if (ab == 0 || ac == 0 || bc == 0) {
-            return false;
+        double max = ab > ac ? (ab > bc ? ab : bc) : (ac > bc ? ac : bc);
+        double sum2min = (ab < max ? ab : 0) + (ac < max ? ac : 0) + (bc < max ? bc : 0);
+        if (sum2min > max) {
+            return true;
         }
-
-        double kab, kbc;
-        if (a.getY() == b.getY()) {
-            kab = 0;
-            if (a.getY() == c.getY()) {
-                return false;
-            }
-        } else {
-            kab = (a.getX() - b.getX()) / (a.getY() - b.getY());
-        }
-        kbc = (b.getX() - c.getX()) / (b.getY() - c.getY());
-        if (kab == kbc) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
 }
