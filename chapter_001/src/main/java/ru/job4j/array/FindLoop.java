@@ -7,7 +7,6 @@ package ru.job4j.array;
  * @since 31.07.18
  * @version 0.1
  */
-
 public class FindLoop {
 
     /**
