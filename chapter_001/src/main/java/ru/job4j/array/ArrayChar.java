@@ -25,15 +25,15 @@ public class ArrayChar {
     public boolean startWith(String prefix) {
         boolean result = true;
         char[] value = prefix.toCharArray();
-        if (value.length > data.length) {
-            result = false;
-            return result;
-        }
-        for (int i = 0; i < value.length; i++) {
-            if (value[i] != data[i]) {
-                result = false;
-                break;
+        if (value.length <= data.length) {
+            for (int i = 0; i < value.length; i++) {
+                if (value[i] != data[i]) {
+                    result = false;
+                    break;
+                }
             }
+        } else {
+            result = false;
         }
         return result;
     }
