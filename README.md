@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Lightbass/job4j.svg?branch=master)](https://travis-ci.org/Lightbass/job4j)
+
 # Репозиторий Макарова Алексея.
 
 Я прохожу обучение по курсу Job4j:
