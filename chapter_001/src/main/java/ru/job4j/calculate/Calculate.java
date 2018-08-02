@@ -15,7 +15,6 @@ public class Calculate {
 	 */
 	public static void main(String[] args) {
 		Calculate calc = new Calculate();
-		
 		System.out.println("Hello world");		
 		System.out.println("Calculate: 3 + 3 = ");
 		System.out.println(calc.add(3, 3));
