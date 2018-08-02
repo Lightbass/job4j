@@ -22,6 +22,16 @@ public class MaxTest {
     }
 
     /**
+     * Тест метода max() для двух параметров.
+     */
+    @Test
+    public void whenSecondLessFirst() {
+        Max maxim = new Max();
+        int result = maxim.max(2, 1);
+        assertThat(result, is(2));
+    }
+
+    /**
      * Тест метода max() для трёх параметров.
      */
     @Test
