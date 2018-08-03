@@ -49,6 +49,14 @@ public class Logic3T {
     }
 
     public boolean hasGap() {
-        return true;
+        boolean result = false;
+        for (int i = 0; i < table.length * table.length; i++) {
+            if (!table[i / table.length][i % table.length].hasMarkX()
+                    && !table[i / table.length][i % table.length].hasMarkO()) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }
