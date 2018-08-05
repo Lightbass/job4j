@@ -32,6 +32,15 @@ public class Item {
     }
 
     /**
+     * Создание заявки без идентификатора.
+     * @param name имя.
+     * @param desc описание.
+     */
+    public Item(String name, String desc) {
+        this(name, desc, 0);
+    }
+
+    /**
      * Изменить имя на другое.
      * @param name новое имя.
      */

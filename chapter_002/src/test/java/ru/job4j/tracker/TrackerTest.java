@@ -20,6 +20,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
+        System.out.println(tracker.findAll()[0].getId());
         assertThat(tracker.findAll()[0], is(item));
     }
 
