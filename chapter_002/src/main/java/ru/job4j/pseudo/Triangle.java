@@ -23,7 +23,7 @@ public class Triangle implements Shape {
         return this.loopBy(
                 height,
                 height * 2 - 1,
-                (row, column) -> column >= height - row - 1 && column <= height + row - 1
+                (row, column) -> column == height - row - 1 || column == height + row - 1 || row == (height - 1)
         );
     }
 

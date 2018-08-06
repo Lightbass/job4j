@@ -24,9 +24,9 @@ public class TriangleTest {
                 triangle.draw(),
                 is(new StringBuilder()
                                 .append("    +    ").append(ls)
-                                .append("   +++   ").append(ls)
-                                .append("  +++++  ").append(ls)
-                                .append(" +++++++ ").append(ls)
+                                .append("   + +   ").append(ls)
+                                .append("  +   +  ").append(ls)
+                                .append(" +     + ").append(ls)
                                 .append("+++++++++").append(ls)
                                 .toString()
                 )
