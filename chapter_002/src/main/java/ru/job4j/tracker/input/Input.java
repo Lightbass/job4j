@@ -7,5 +7,11 @@ package ru.job4j.tracker.input;
  * @version 0.1
  */
 public interface Input {
+
+    /**
+     * Вывод строки для запроса ввода.
+     * @param question запрос.
+     * @return ответ.
+     */
     String ask(String question);
 }

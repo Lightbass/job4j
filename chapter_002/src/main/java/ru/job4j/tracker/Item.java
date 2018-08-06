@@ -1,9 +1,13 @@
 package ru.job4j.tracker;
 
 /**
- * Created by a.makarov on 03.08.2018.
+ * Класс - заявка.
+ * @author Alexey Makarov
+ * @since 03.08.2018
+ * @version 0.1
  */
 public class Item {
+
     /**
      * Имя заявки.
      */
@@ -93,13 +97,13 @@ public class Item {
      */
     @Override
     public String toString() {
-        String sep = System.lineSeparator();
-        StringBuilder sb = new StringBuilder();
-        sb.append("Заявка: " + name);
-        sb.append(sep);
-        sb.append("Описание: " + description);
-        sb.append(sep);
-        sb.append("ID: " + id);
-        return sb.toString();
+        return new StringBuilder().append("Заявка: ")
+                .append(name)
+                .append(System.lineSeparator())
+                .append("Описание: ")
+                .append(description)
+                .append(System.lineSeparator())
+                .append("ID: ")
+                .append(id).toString();
     }
 }

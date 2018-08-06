@@ -61,7 +61,7 @@ public class StartUI {
     /**
      * Переход на следующую строку.
      */
-    private String nextLine = System.lineSeparator();
+    private final String nextLine = System.lineSeparator();
 
     /**
      * Конструтор инициализирующий поля.

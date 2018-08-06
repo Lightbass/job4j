@@ -18,6 +18,10 @@ public class StubInput implements Input {
      */
     private int position = 0;
 
+    /**
+     * Конструктор инициализирующий последовательность тестового ввода.
+     * @param value массив из комманд для меню.
+     */
     public StubInput(String[] value) {
         this.value = value;
     }

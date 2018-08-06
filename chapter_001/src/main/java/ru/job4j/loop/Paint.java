@@ -9,15 +9,22 @@ import java.util.function.BiPredicate;
  * @version 0.1
  */
 public class Paint {
+    private final char space;
+    private final char fill;
+
+    public Paint(char fill, char space) {
+        this.fill = fill;
+        this.space = space;
+    }
 
     private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict) {
         StringBuilder screen = new StringBuilder();
         for (int row = 0; row != height; row++) {
             for (int column = 0; column != weight; column++) {
                 if (predict.test(row, column)) {
-                    screen.append("^");
+                    screen.append(fill);
                 } else {
-                    screen.append(" ");
+                    screen.append(space);
                 }
             }
             screen.append(System.lineSeparator());

@@ -18,7 +18,7 @@ public class PaintTest {
      */
     @Test
     public void whenPyramid4Left() {
-        Paint paint = new Paint();
+        Paint paint = new Paint('^', ' ');
         String rst = paint.leftTrl(4);
         assertThat(rst,
                 is(
@@ -37,7 +37,7 @@ public class PaintTest {
      */
     @Test
     public void whenPyramid4Right() {
-        Paint paint = new Paint();
+        Paint paint = new Paint('^', ' ');
         String rst = paint.rightTrl(4);
         assertThat(rst,
                 is(
@@ -56,7 +56,7 @@ public class PaintTest {
      */
     @Test
     public void whenPyramidFull4() {
-        Paint paint = new Paint();
+        Paint paint = new Paint('^', ' ');
         String rst = paint.pyramid(4);
         assertThat(rst,
                 is(
@@ -75,7 +75,7 @@ public class PaintTest {
      */
     @Test
     public void whenPyramidFull7() {
-        Paint paint = new Paint();
+        Paint paint = new Paint('^', ' ');
         String rst = paint.pyramid(7);
         assertThat(rst,
                 is(
