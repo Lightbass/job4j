@@ -11,15 +11,15 @@ public class StubInput implements Input {
     /**
      * Нужные для теста ответы.
      */
-    private String[] answers;
+    private final String[] value;
 
     /**
      * Позиция в массиве.
      */
     private int position = 0;
 
-    public StubInput(String[] answers) {
-        this.answers = answers;
+    public StubInput(String[] value) {
+        this.value = value;
     }
 
     /**
@@ -28,7 +28,7 @@ public class StubInput implements Input {
      * @return ответ пользователя.
      */
     public String ask(String question) {
-        return answers[position++];
+        return value[position++];
     }
 
 }
