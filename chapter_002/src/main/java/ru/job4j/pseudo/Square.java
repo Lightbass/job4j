@@ -15,21 +15,6 @@ public class Square implements Shape {
      */
     final int height = 5;
 
-    private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict) {
-        StringBuilder screen = new StringBuilder();
-        for (int row = 0; row != height; row++) {
-            for (int column = 0; column != weight; column++) {
-                if (predict.test(row, column)) {
-                    screen.append('+');
-                } else {
-                    screen.append(' ');
-                }
-            }
-            screen.append(System.lineSeparator());
-        }
-        return screen.toString();
-    }
-
     /**
      * Нарисовать квадрат в строке.
      * @return строка.
