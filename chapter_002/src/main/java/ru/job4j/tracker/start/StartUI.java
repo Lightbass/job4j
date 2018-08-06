@@ -19,9 +19,29 @@ public class StartUI {
     private static final String ADD = "0";
 
     /**
-     * Константа меню для добавления новой заявки.
+     * Константа меню для отображения всех заявок.
+     */
+    private static final String SHOW_ALL = "1";
+
+    /**
+     * Константа меню для редактирования заявки.
+     */
+    private static final String EDIT = "2";
+
+    /**
+     * Константа меню для удаления заявки.
+     */
+    private static final String DELETE = "3";
+
+    /**
+     * Константа меню для поиска заявки по идентификатору.
      */
     private static final String FIND_BY_ID = "4";
+
+    /**
+     * Константа меню для поиска заявок по имени.
+     */
+    private static final String FIND_BY_NAME = "5";
 
     /**
      * Константа для выхода из цикла.
@@ -58,8 +78,16 @@ public class StartUI {
             String answer = this.input.ask("Введите пункт меню : ");
             if (ADD.equals(answer)) {
                 this.createItem();
+            } else if (SHOW_ALL.equals(answer)) {
+                this.showAllItems();
+            } else if (EDIT.equals(answer)) {
+                this.editItem();
+            } else if (DELETE.equals(answer)) {
+                this.deleteItem();
             } else if (FIND_BY_ID.equals(answer)) {
                 this.findById();
+            } else if (FIND_BY_NAME.equals(answer)) {
+                this.findByName();
             } else if (EXIT.equals(answer)) {
                 exit = true;
             }
@@ -79,6 +107,59 @@ public class StartUI {
     }
 
     /**
+     * Метод реализует вывод всех заявок.
+     */
+    private void showAllItems() {
+        System.out.println("\n------------ Заявки в трекере --------------");
+        Item[] items = tracker.findAll();
+        for (Item i : items) {
+            System.out.println("\nЗаявка: " + i.getName() + "\nОписание: " + i.getDescription()
+                    + "\nID: " + i.getId());
+        }
+        System.out.println("------------ Перечисление завершено --------------");
+    }
+
+    /**
+     * Метод реализует редактирование заявки.
+     */
+    private void editItem() {
+        System.out.println("\n------------ Редактирование заявки --------------");
+        long id = Long.parseLong(input.ask("Введите ID заявки: "));
+        Item item = tracker.findById(id);
+        System.out.println("------------ Найдена заявка с getId : "
+                + item.getId() + "-----------\n Имя: " + item.getName() + "\n Описание: "
+                + item.getDescription());
+        item.setName(input.ask("Введите новое имя заявки: "));
+        item.setDescription(input.ask("Введите новое описание заявки: "));
+        tracker.replace(id, item);
+        System.out.println("------------ Редактирование завершено --------------");
+    }
+
+    /**
+     * Метод реализует удаление заявки.
+     */
+    private void deleteItem() {
+        System.out.println("\n------------ Удаление заявки --------------");
+        long id = Long.parseLong(input.ask("Введите ID заявки: "));
+        tracker.delete(id);
+        System.out.println("------------ Удаление завершено --------------");
+    }
+
+    /**
+     * Метод реализует поиск заявок по имени.
+     */
+    private void findByName() {
+        System.out.println("\n------------ Поиск заявок по имени --------------");
+        String findName = input.ask("Введите искомое имя заявки: ");
+        Item[] items = tracker.findByName(findName);
+        for (Item i : items) {
+            System.out.println("\nЗаявка: " + i.getName() + "\nОписание: " + i.getDescription()
+                    + "\nID: " + i.getId());
+        }
+        System.out.println("------------ Перечисление завершено --------------");
+    }
+
+    /**
      * Метод реализует поиск заявки по идентификатору.
      */
     private void findById() {
@@ -94,7 +175,7 @@ public class StartUI {
      * Метод показывает главное меню.
      */
     private void showMenu() {
-        System.out.println("Меню.");
+        System.out.println("\nМеню.");
         System.out.println("0. Добавить новую заявку");
         System.out.println("1. Показать все заявки");
         System.out.println("2. Редактировать заявку");
