@@ -87,4 +87,19 @@ public class Item {
     public String getDescription() {
         return description;
     }
+
+    /**
+     * Вывод заявки
+     */
+    @Override
+    public String toString() {
+        String sep = System.lineSeparator();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Заявка: " + name);
+        sb.append(sep);
+        sb.append("Описание: " + description);
+        sb.append(sep);
+        sb.append("ID: " + id);
+        return sb.toString();
+    }
 }

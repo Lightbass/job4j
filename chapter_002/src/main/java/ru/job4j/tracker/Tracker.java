@@ -64,25 +64,32 @@ public class Tracker {
      * @param id идентификатор заявки, которую нужно заменить/редактировать.
      * @param item заявка на которую нужно заменить.
      */
-    public void replace(long id, Item item) {
-        delete(id);
-        item.setId(id);
-        add(item, id);
+    public boolean replace(long id, Item item) {
+        boolean result = false;
+        if (delete(id)) {
+            item.setId(id);
+            add(item, id);
+            result = true;
+        }
+        return result;
     }
 
     /**
      * Удаление заявки из трекера.
      * @param id идентификатор заявки.
      */
-    public void delete(long id) {
+    public boolean delete(long id) {
+        boolean result = false;
         for (int i = 0; i != position; i++) {
             if (items[i].getId() == id) {
                 --position;
                 System.arraycopy(items, i + 1, items, i, position - i);
                 items[position] = null;
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**

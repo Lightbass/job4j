@@ -59,6 +59,11 @@ public class StartUI {
     private Tracker tracker;
 
     /**
+     * Переход на следующую строку.
+     */
+    private String nextLine = System.lineSeparator();
+
+    /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
@@ -98,23 +103,22 @@ public class StartUI {
      * Метод реализует добавленяи новый заявки в хранилище.
      */
     private void createItem() {
-        System.out.println("\n------------ Добавление новой заявки --------------");
+        System.out.println(nextLine + "------------ Добавление новой заявки --------------" + nextLine);
         String name = this.input.ask("Введите имя заявки : ");
         String desc = this.input.ask("Введите описание заявки : ");
         Item item = new Item(name, desc);
         this.tracker.add(item);
-        System.out.println("\n------------ Новая заявка с getId : " + item.getId() + "-----------");
+        System.out.println(nextLine + item + nextLine + nextLine + "------------ Новая заявка создана -----------" + nextLine);
     }
 
     /**
      * Метод реализует вывод всех заявок.
      */
     private void showAllItems() {
-        System.out.println("\n------------ Заявки в трекере --------------");
+        System.out.println(nextLine + "------------ Заявки в трекере --------------" + nextLine);
         Item[] items = tracker.findAll();
         for (Item i : items) {
-            System.out.println("\nЗаявка: " + i.getName() + "\nОписание: " + i.getDescription()
-                    + "\nID: " + i.getId());
+            System.out.println(i + nextLine);
         }
         System.out.println("------------ Перечисление завершено --------------");
     }
@@ -123,59 +127,62 @@ public class StartUI {
      * Метод реализует редактирование заявки.
      */
     private void editItem() {
-        System.out.println("\n------------ Редактирование заявки --------------");
-        long id = Long.parseLong(input.ask("Введите ID заявки: "));
-        Item item = tracker.findById(id);
-        System.out.println("------------ Найдена заявка с getId : "
-                + item.getId() + "-----------\n Имя: " + item.getName() + "\n Описание: "
-                + item.getDescription());
-        item.setName(input.ask("Введите новое имя заявки: "));
-        item.setDescription(input.ask("Введите новое описание заявки: "));
-        tracker.replace(id, item);
-        System.out.println("------------ Редактирование завершено --------------");
+        System.out.println(nextLine + "------------ Редактирование заявки --------------" + nextLine);
+        Item item = checkStrGetItem(input.ask("Введите ID заявки: "));
+        if (item != null) {
+                System.out.println(nextLine + item);
+                item.setName(input.ask("Введите новое имя заявки: "));
+                item.setDescription(input.ask("Введите новое описание заявки: "));
+                tracker.replace(item.getId(), item);
+                System.out.println(nextLine + "------------ Редактирование завершено --------------");
+        }
     }
 
     /**
      * Метод реализует удаление заявки.
      */
     private void deleteItem() {
-        System.out.println("\n------------ Удаление заявки --------------");
-        long id = Long.parseLong(input.ask("Введите ID заявки: "));
-        tracker.delete(id);
-        System.out.println("------------ Удаление завершено --------------");
+        System.out.println(nextLine + "------------ Удаление заявки --------------" + nextLine);
+        Item item = checkStrGetItem(input.ask("Введите ID заявки: "));
+        if (item != null) {
+            tracker.delete(item.getId());
+            System.out.println(nextLine + "------------ Удаление завершено --------------");
+        }
     }
 
     /**
      * Метод реализует поиск заявок по имени.
      */
     private void findByName() {
-        System.out.println("\n------------ Поиск заявок по имени --------------");
+        System.out.println(nextLine + "------------ Поиск заявок по имени --------------" + nextLine);
         String findName = input.ask("Введите искомое имя заявки: ");
         Item[] items = tracker.findByName(findName);
-        for (Item i : items) {
-            System.out.println("\nЗаявка: " + i.getName() + "\nОписание: " + i.getDescription()
-                    + "\nID: " + i.getId());
+        if (items.length == 0) {
+            System.out.println(nextLine + "------------ Заявок с таким именем не существует --------------");
+            return;
         }
-        System.out.println("------------ Перечисление завершено --------------");
+        for (Item i : items) {
+            System.out.println(nextLine + i);
+        }
+        System.out.println(nextLine + "------------ Перечисление завершено --------------");
     }
 
     /**
      * Метод реализует поиск заявки по идентификатору.
      */
     private void findById() {
-        System.out.println("\n------------ Поиск существующей заявки --------------");
-        Long id = Long.parseLong(this.input.ask("Введите идентификатор(ID) заявки : "));
-        Item item = tracker.findById(id);
-        System.out.println("------------ Найдена заявка с getId : "
-                + item.getId() + "-----------\n Имя: " + item.getName() + "\n Описание: "
-                + item.getDescription());
+        System.out.println(nextLine + "------------ Поиск заявки по идентификатору --------------" + nextLine);
+        Item item = checkStrGetItem(this.input.ask("Введите идентификатор(ID) заявки : "));
+        if (item != null) {
+            System.out.println(nextLine + item + nextLine + nextLine + "------------ Найдена заявка -----------");
+        }
     }
 
     /**
      * Метод показывает главное меню.
      */
     private void showMenu() {
-        System.out.println("\nМеню.");
+        System.out.println(nextLine + "Меню.");
         System.out.println("0. Добавить новую заявку");
         System.out.println("1. Показать все заявки");
         System.out.println("2. Редактировать заявку");
@@ -183,6 +190,20 @@ public class StartUI {
         System.out.println("4. Найти заявку по идентификатору(id)");
         System.out.println("5. Найти заявку по имени");
         System.out.println("6. Выход из программы");
+    }
+
+    private Item checkStrGetItem(String str) {
+        Item result = null;
+        try {
+            long id = Long.parseLong(str);
+            result = tracker.findById(id);
+            if (result == null) {
+                System.out.println(nextLine + "------------ Заявок с таким идентификатором не существует --------------");
+            }
+        } catch (NumberFormatException nfe) {
+            System.out.println(nextLine + "------------ Введено недопустимое значение -----------");
+        }
+        return result;
     }
 
     /**
