@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @since 05.08.2018
  * @version 0.1
  */
-public class StubInput implements Input{
+public class StubInput implements Input {
 
     /**
      * Нужные для теста ответы.
