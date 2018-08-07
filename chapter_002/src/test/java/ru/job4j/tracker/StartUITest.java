@@ -160,8 +160,8 @@ public class StartUITest {
                 "2", "0.00",
                 "3", "0.00",
                 "4", "0.00",
-                "ыв",
-                "7",
+                "ыв", "1",
+                "7", "1",
                 "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll().length, is(5));

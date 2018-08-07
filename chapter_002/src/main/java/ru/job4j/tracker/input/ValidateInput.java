@@ -10,7 +10,7 @@ import java.util.*;
  * @since 05.08.2018
  * @version 0.1
  */
-public class ValidateInput extends ConsoleInput{
+public class ValidateInput extends ConsoleInput {
 
     /**
      * Реализация метода ask для безопасного пользовательского ввода числа из заданного массива.

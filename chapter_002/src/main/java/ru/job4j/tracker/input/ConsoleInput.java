@@ -33,7 +33,7 @@ public class ConsoleInput implements Input {
      * @param range массив возможных значений.
      * @return ответ пользователя.
      */
-    public int ask(String question, int[] range) throws MenuOutException{
+    public int ask(String question, int[] range) throws MenuOutException {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {
@@ -42,7 +42,7 @@ public class ConsoleInput implements Input {
                 break;
             }
         }
-        if(exist) {
+        if (exist) {
             return key;
         } else {
             throw new MenuOutException("Out of menu range.");
