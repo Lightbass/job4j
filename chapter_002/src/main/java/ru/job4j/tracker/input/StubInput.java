@@ -1,5 +1,8 @@
 package ru.job4j.tracker.input;
 
+import java.util.InputMismatchException;
+import java.util.List;
+
 /**
  * Реализация интерфейса Input.
  * @author Alexey Makarov
@@ -33,6 +36,22 @@ public class StubInput implements Input {
      */
     public String ask(String question) {
         return value[position++];
+    }
+
+    public int ask(String question, List<Integer> range) {
+        System.out.print(question);
+        int result = -1;
+        try {
+            Integer scan = Integer.parseInt(value[position++]);
+            for (int i = 0; i != range.size(); i++) {
+                if (range.get(i).equals(scan)) {
+                    result = scan;
+                    break;
+                }
+            }
+        } catch (NumberFormatException nfe) {
+        }
+        return result;
     }
 
 }

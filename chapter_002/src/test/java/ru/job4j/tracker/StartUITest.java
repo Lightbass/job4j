@@ -2,10 +2,11 @@ package ru.job4j.tracker;
 
 import org.junit.After;
 import org.junit.Before;
+import ru.job4j.tracker.data.Item;
+import ru.job4j.tracker.data.Tracker;
 import ru.job4j.tracker.input.*;
 import org.junit.Test;
 import ru.job4j.tracker.input.StubInput;
-import ru.job4j.tracker.start.StartUI;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -141,6 +142,8 @@ public class StartUITest {
      * 5) Попытка указать неверный формат ID при редактировании.
      * 6) Попытка указать неверный формат ID при удалении.
      * 7) Попытка указать неверный формат ID при поиске по ID.
+     * 8) Попытка указать неверный пункт меню, букву.
+     * 9) Попытка указать неверный пункт меню, цифру.
      */
     @Test
     public void whenTryToThrowExceptionThenOK() {
@@ -157,6 +160,8 @@ public class StartUITest {
                 "2", "0.00",
                 "3", "0.00",
                 "4", "0.00",
+                "ыв",
+                "7",
                 "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll().length, is(5));

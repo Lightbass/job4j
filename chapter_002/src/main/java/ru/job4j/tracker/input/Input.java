@@ -1,5 +1,7 @@
 package ru.job4j.tracker.input;
 
+import java.util.*;
+
 /**
  * Интерфейс для консольного ввода и вывода.
  * @author Alexey Makarov
@@ -14,4 +16,5 @@ public interface Input {
      * @return ответ.
      */
     String ask(String question);
+    int ask(String question, List<Integer> range);
 }
