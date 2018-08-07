@@ -67,7 +67,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%d %s", this.key(), info);
+            return String.format("%d. %s", this.key(), info);
         }
     }
 
@@ -122,7 +122,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%d %s", this.key(), info);
+            return String.format("%d. %s", this.key(), info);
         }
     }
 
@@ -177,7 +177,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%d %s", this.key(), info);
+            return String.format("%d. %s", this.key(), info);
         }
     }
 
@@ -237,7 +237,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%d %s", this.key(), info);
+            return String.format("%d. %s", this.key(), info);
         }
     }
 
@@ -291,7 +291,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%d %s", this.key(), info);
+            return String.format("%d. %s", this.key(), info);
         }
     }
 
@@ -341,7 +341,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%d %s", this.key(), info);
+            return String.format("%d. %s", this.key(), info);
         }
     }
 
@@ -396,7 +396,7 @@ public class MenuTracker {
          */
         @Override
         public String info() {
-            return String.format("%d %s", this.key(), info);
+            return String.format("%d. %s", this.key(), info);
         }
     }
 
@@ -437,13 +437,13 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions.add(new AddItem(0, "0. Добавить новую заявку"));
-        this.actions.add(new ShowItems(1, "1. Показать все заявки"));
-        this.actions.add(new EditItem(2, "2. Редактировать заявку"));
-        this.actions.add(new DeleteItem(3, "3. Удалить заявку"));
-        this.actions.add(new FindItemById(4, "4. Найти заявку по идентификатору(id)"));
-        this.actions.add(new FindItemsByName(5, "5. Найти заявку по имени"));
-        this.actions.add(new ExitProgram(6, "6. Выход из программы"));
+        this.actions.add(new AddItem(0, "Добавить новую заявку"));
+        this.actions.add(new ShowItems(1, "Показать все заявки"));
+        this.actions.add(new EditItem(2, "Редактировать заявку"));
+        this.actions.add(new DeleteItem(3, "Удалить заявку"));
+        this.actions.add(new FindItemById(4, "Найти заявку по идентификатору(id)"));
+        this.actions.add(new FindItemsByName(5, "Найти заявку по имени"));
+        this.actions.add(new ExitProgram(6, "Выход из программы"));
     }
 
     /**
