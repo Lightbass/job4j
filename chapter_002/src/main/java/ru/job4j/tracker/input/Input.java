@@ -16,5 +16,5 @@ public interface Input {
      * @return ответ.
      */
     String ask(String question);
-    int ask(String question, List<Integer> range);
+    int ask(String question, int[] range);
 }

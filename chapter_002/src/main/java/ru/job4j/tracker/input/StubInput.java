@@ -38,13 +38,12 @@ public class StubInput implements Input {
         return value[position++];
     }
 
-    public int ask(String question, List<Integer> range) {
-        System.out.print(question);
+    public int ask(String question, int[] range) {
         int result = -1;
         try {
             Integer scan = Integer.parseInt(value[position++]);
-            for (int i = 0; i != range.size(); i++) {
-                if (range.get(i).equals(scan)) {
+            for (int i : range) {
+                if (i == scan) {
                     result = scan;
                     break;
                 }

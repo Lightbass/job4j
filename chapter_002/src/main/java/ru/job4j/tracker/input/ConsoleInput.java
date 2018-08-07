@@ -1,5 +1,7 @@
 package ru.job4j.tracker.input;
 
+import ru.job4j.tracker.MenuOutException;
+
 import java.util.*;
 
 /**
@@ -17,7 +19,7 @@ public class ConsoleInput implements Input {
 
     /**
      * Реализация метода ask для пользовательского ввода в консоли.
-     * @param question Вывод запроса от программы в консоль.
+     * @param question вывод запроса от программы в консоль.
      * @return ответ пользователя.
      */
     public String ask(String question) {
@@ -27,23 +29,24 @@ public class ConsoleInput implements Input {
 
     /**
      * Реализация метода ask для пользовательского ввода числа из заданного массива.
-     * @param question Вывод запроса от программы в консоль.
+     * @param question вывод запроса от программы в консоль.
+     * @param range массив возможных значений.
      * @return ответ пользователя.
      */
-    public int ask(String question, List<Integer> range) {
-        System.out.print(question);
-        int result = -1;
-        try {
-            Integer scan = Integer.parseInt(sc.next());
-            for (int i = 0; i != range.size(); i++) {
-                if (range.get(i).equals(scan)) {
-                    result = scan;
-                    break;
-                }
+    public int ask(String question, int[] range) throws MenuOutException{
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
             }
-        } catch (NumberFormatException nfe) {
         }
-        return result;
+        if(exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
     }
 
 }

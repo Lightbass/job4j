@@ -44,20 +44,15 @@ public class StartUI {
      */
     public void init() {
         int select;
-        List<Integer> range = new ArrayList<>();
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
-        for (int i = 0; i < menu.getActionsLentgh(); i++) {
-            range.add(i);
+        int[] range = new int[menu.getActionsLentgh()];
+        for (int i = 0; i != range.length; i++) {
+            range[i] = i;
         }
         do {
             menu.show();
             select = input.ask("Выберите пункт меню : ", range);
-            if (select == -1) {
-                System.out.println(System.lineSeparator() + "------------ Заявок с таким идентификатором не существует --------------");
-                select = 0;
-                continue;
-            }
             menu.select(select);
         } while (select != 6);
     }
@@ -67,6 +62,6 @@ public class StartUI {
      * @param args параметры.
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
