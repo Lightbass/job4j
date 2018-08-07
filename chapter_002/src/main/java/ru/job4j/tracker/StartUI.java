@@ -46,10 +46,7 @@ public class StartUI {
         int select;
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
-        int[] range = new int[menu.getActionsLentgh()];
-        for (int i = 0; i != range.length; i++) {
-            range[i] = i;
-        }
+        int[] range = menu.getActionKeys();
         do {
             menu.show();
             select = input.ask("Выберите пункт меню : ", range);

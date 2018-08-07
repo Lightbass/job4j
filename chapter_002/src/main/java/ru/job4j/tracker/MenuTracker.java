@@ -447,6 +447,18 @@ public class MenuTracker {
     }
 
     /**
+     * Метод возвращает массив ключей действий.
+     * @return массив ключей.
+     */
+    public int[] getActionKeys() {
+        int[] result = new int[actions.size()];
+        for (int i = 0; i != actions.size(); i++) {
+            result[i] = actions.get(i).key();
+        }
+        return result;
+    }
+
+    /**
      * Метод в зависимости от указанного ключа, выполняет соотвествующие действие.
      *
      * @param key ключ операции
