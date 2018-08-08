@@ -37,31 +37,23 @@ public class StubInput implements Input {
      * @return ответ пользователя.
      */
     public String ask(String question) {
-
         return value[position++];
     }
 
     public int ask(String question, int[] range) {
         int number = -1;
         boolean invalid = true;
-        do {
-            try {
-                number = Integer.parseInt(value[position++]);
-                for (int i : range) {
-                    if (i == number) {
-                        invalid = false;
-                    }
-                }
-                if (invalid) {
-                    throw new MenuOutException("Out of menu range.");
-                }
-            } catch (MenuOutException nfe) {
-                System.out.println("------------ Пожалуйста, введите значение из диапазона меню --------------");
-            } catch (NumberFormatException moe) {
-                System.out.println("------------ Пожалуйста, введите корректное значение --------------");
+        number = Integer.parseInt(value[position++]);
+        for (int i : range) {
+            if (i == number) {
+                invalid = false;
             }
-        } while (invalid);
+        }
+        if (invalid) {
+            throw new MenuOutException("Out of menu range.");
+        }
         return number;
     }
-
 }
+
+

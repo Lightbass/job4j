@@ -153,7 +153,7 @@ public class StartUITest {
         Item item3 = tracker.add(new Item("test name3", "desc3"));
         Item item4 = tracker.add(new Item("test name4", "desc4"));
         Item item5 = tracker.add(new Item("test name5", "desc5"));
-        Input input = new StubInput(new String[]{"2", "-1",
+        Input input = new ValidateInput(new StubInput(new String[]{"2", "-1",
                 "3", "-1",
                 "4", "-1",
                 "5", "null",
@@ -162,7 +162,7 @@ public class StartUITest {
                 "4", "0.00",
                 "ыв", "1",
                 "7", "1",
-                "6"});
+                "6"}));
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll().length, is(5));
     }
