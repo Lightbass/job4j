@@ -41,18 +41,17 @@ public class StubInput implements Input {
     }
 
     public int ask(String question, int[] range) {
-        int number = -1;
-        boolean invalid = true;
-        number = Integer.parseInt(value[position++]);
+        int key = Integer.parseInt(value[position++]);
+        boolean exist = false;
         for (int i : range) {
-            if (i == number) {
-                invalid = false;
+            if (i == key) {
+                exist = true;
             }
         }
-        if (invalid) {
+        if (!exist) {
             throw new MenuOutException("Out of menu range.");
         }
-        return number;
+        return key;
     }
 }
 
