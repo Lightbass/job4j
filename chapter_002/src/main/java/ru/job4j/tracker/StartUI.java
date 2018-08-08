@@ -43,15 +43,13 @@ public class StartUI {
      * Инициализация интерфейса.
      */
     public void init() {
-        int select;
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
         int[] range = menu.getActionKeys();
         do {
             menu.show();
-            select = input.ask("Выберите пункт меню : ", range);
-            menu.select(select);
-        } while (select != 6);
+            menu.select(input.ask("Выберите пункт меню : ", range));
+        } while (!menu.isExit());
     }
 
     /**

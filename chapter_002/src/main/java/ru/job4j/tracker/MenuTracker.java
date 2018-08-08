@@ -333,6 +333,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println(LS + "------------ Выход из программы --------------" + LS);
+            exit = true;
         }
 
         /**
@@ -404,14 +405,21 @@ public class MenuTracker {
      * @param хранит ссылку на объект .
      */
     private Input input;
+
     /**
      * @param хранит ссылку на объект .
      */
     private Tracker tracker;
+
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
     private List<UserAction> actions = new ArrayList<>();
+
+    /**
+     * Хранит активное состояние меню.
+     */
+    private boolean exit = false;
 
     /**
      * Конструктор.
@@ -477,5 +485,9 @@ public class MenuTracker {
                 System.out.println(action.info());
             }
         }
+    }
+
+    public boolean isExit() {
+        return exit;
     }
 }
