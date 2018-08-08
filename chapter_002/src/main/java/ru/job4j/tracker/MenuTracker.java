@@ -19,28 +19,15 @@ public class MenuTracker {
      * @since 07.08.2018
      * @version 0.1
      */
-    private class EditItem implements UserAction {
-
-        private final int key;
-        private final String info;
+    private class EditItem extends BaseAction {
 
         /**
          * Конструктор инициализирует информацию о данном действии и его ключ.
-         * @param key ключ
+         * @param key  ключ
          * @param info информация.
          */
         public EditItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Метод возвращает ключ опции.
-         * @return ключ
-         */
-        @Override
-        public int key() {
-            return key;
+            super(key, info);
         }
 
         /**
@@ -60,15 +47,6 @@ public class MenuTracker {
                 System.out.println(LS + "------------ Редактирование завершено --------------");
             }
         }
-
-        /**
-         * Информация об операции AddAction.
-         * @return строка с информацией.
-         */
-        @Override
-        public String info() {
-            return String.format("%d. %s", this.key(), info);
-        }
     }
 
     /**
@@ -77,28 +55,15 @@ public class MenuTracker {
      * @since 07.08.2018
      * @version 0.1
      */
-    private class DeleteItem implements UserAction {
-
-        private final int key;
-        private final String info;
+    private class DeleteItem extends BaseAction {
 
         /**
          * Конструктор инициализирует информацию о данном действии и его ключ.
-         * @param key ключ
+         * @param key  ключ
          * @param info информация.
          */
         public DeleteItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Метод возвращает ключ опции.
-         * @return ключ
-         */
-        @Override
-        public int key() {
-            return key;
+            super(key, info);
         }
 
         /**
@@ -115,15 +80,6 @@ public class MenuTracker {
                 System.out.println(LS + "------------ Удаление завершено --------------");
             }
         }
-
-        /**
-         * Информация об операции AddAction.
-         * @return строка с информацией.
-         */
-        @Override
-        public String info() {
-            return String.format("%d. %s", this.key(), info);
-        }
     }
 
     /**
@@ -132,28 +88,15 @@ public class MenuTracker {
      * @since 07.08.2018
      * @version 0.1
      */
-    private class ShowItems implements UserAction {
-
-        private final int key;
-        private final String info;
+    private class ShowItems extends BaseAction {
 
         /**
          * Конструктор инициализирует информацию о данном действии и его ключ.
-         * @param key ключ
+         * @param key  ключ
          * @param info информация.
          */
         public ShowItems(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Метод возвращает ключ опции.
-         * @return ключ
-         */
-        @Override
-        public int key() {
-            return key;
+            super(key, info);
         }
 
         /**
@@ -170,15 +113,6 @@ public class MenuTracker {
             }
             System.out.println("------------ Перечисление завершено --------------");
         }
-
-        /**
-         * Информация об операции AddAction.
-         * @return строка с информацией.
-         */
-        @Override
-        public String info() {
-            return String.format("%d. %s", this.key(), info);
-        }
     }
 
     /**
@@ -187,28 +121,15 @@ public class MenuTracker {
      * @since 07.08.2018
      * @version 0.1
      */
-    private class FindItemsByName implements UserAction {
-
-        private final int key;
-        private final String info;
+    private class FindItemsByName extends BaseAction {
 
         /**
          * Конструктор инициализирует информацию о данном действии и его ключ.
-         * @param key ключ
+         * @param key  ключ
          * @param info информация.
          */
         public FindItemsByName(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Метод возвращает ключ опции.
-         * @return ключ
-         */
-        @Override
-        public int key() {
-            return key;
+            super(key, info);
         }
 
         /**
@@ -230,15 +151,6 @@ public class MenuTracker {
             }
             System.out.println(LS + "------------ Перечисление завершено --------------");
         }
-
-        /**
-         * Информация об операции AddAction.
-         * @return строка с информацией.
-         */
-        @Override
-        public String info() {
-            return String.format("%d. %s", this.key(), info);
-        }
     }
 
     /**
@@ -247,28 +159,15 @@ public class MenuTracker {
      * @since 07.08.2018
      * @version 0.1
      */
-    private class FindItemById implements UserAction {
-
-        private final int key;
-        private final String info;
+    private class FindItemById extends BaseAction {
 
         /**
          * Конструктор инициализирует информацию о данном действии и его ключ.
-         * @param key ключ
+         * @param key  ключ
          * @param info информация.
          */
         public FindItemById(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Метод возвращает ключ опции.
-         * @return ключ
-         */
-        @Override
-        public int key() {
-            return key;
+            super(key, info);
         }
 
         /**
@@ -284,15 +183,6 @@ public class MenuTracker {
                 System.out.println(LS + item + LS + LS + "------------ Найдена заявка -----------");
             }
         }
-
-        /**
-         * Информация об операции AddAction.
-         * @return строка с информацией.
-         */
-        @Override
-        public String info() {
-            return String.format("%d. %s", this.key(), info);
-        }
     }
 
     /**
@@ -301,28 +191,15 @@ public class MenuTracker {
      * @since 07.08.2018
      * @version 0.1
      */
-    private class ExitProgram implements UserAction {
-
-        private final int key;
-        private final String info;
+    private class ExitProgram extends BaseAction {
 
         /**
          * Конструктор инициализирует информацию о данном действии и его ключ.
-         * @param key ключ
+         * @param key  ключ
          * @param info информация.
          */
         public ExitProgram(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Метод возвращает ключ опции.
-         * @return ключ
-         */
-        @Override
-        public int key() {
-            return key;
+            super(key, info);
         }
 
         /**
@@ -335,15 +212,6 @@ public class MenuTracker {
             System.out.println(LS + "------------ Выход из программы --------------" + LS);
             exit = true;
         }
-
-        /**
-         * Информация об операции AddAction.
-         * @return строка с информацией.
-         */
-        @Override
-        public String info() {
-            return String.format("%d. %s", this.key(), info);
-        }
     }
 
     /**
@@ -352,28 +220,15 @@ public class MenuTracker {
      * @since 07.08.2018
      * @version 0.1
      */
-    private class AddItem implements UserAction {
-
-        private final int key;
-        private final String info;
+    private class AddItem extends BaseAction {
 
         /**
          * Конструктор инициализирует информацию о данном действии и его ключ.
-         * @param key ключ
+         * @param key  ключ
          * @param info информация.
          */
         public AddItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        /**
-         * Метод возвращает ключ опции.
-         * @return ключ
-         */
-        @Override
-        public int key() {
-            return key;
+            super(key, info);
         }
 
         /**
@@ -389,15 +244,6 @@ public class MenuTracker {
             Item item = new Item(name, desc);
             tracker.add(item);
             System.out.println(LS + item + LS + LS + "------------ Новая заявка создана -----------");
-        }
-
-        /**
-         * Информация об операции AddAction.
-         * @return строка с информацией.
-         */
-        @Override
-        public String info() {
-            return String.format("%d. %s", this.key(), info);
         }
     }
 
