@@ -4,6 +4,7 @@ import ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
+import java.awt.*;
 import java.util.ListIterator;
 
 /**
@@ -35,10 +36,9 @@ public class PawnWhite implements Figure {
     public Cell[] way(Cell source, Cell dest) {
         Cell[] steps = new Cell[0];
         if (longMove && source.y == dest.y - 2 && source.x == dest.x) {
-            Cell first = Cell.valueOf(Cell.getName(dest.x, dest.y));
+            Cell first = Cell.valueOf(Cell.getName(dest.x, dest.y - 1));
             steps = new Cell[] {first, dest};
             longMove = false;
-
         } else if (source.y == dest.y - 1 && source.x == dest.x) {
             longMove = false;
             steps = new Cell[]{dest};
