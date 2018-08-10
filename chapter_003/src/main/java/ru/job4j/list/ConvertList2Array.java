@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -35,16 +36,26 @@ public class ConvertList2Array {
         return array;
     }
 
+    /**
+     * Возвращает двумерный массив с нужным количеством строк из элементов предоставленного списка.
+     * @param list список.
+     * @param rows кол-во строк.
+     * @return двумерный массив.
+     */
     public int[][] toArray2(List<Integer> list, int rows) {
         int cells = list.size() / rows;
         if (list.size() % rows != 0) {
             cells++;
         }
         int[][] array = new int[rows][cells];
-        int count = 0;
-        for (Integer i : list) {
-            array[count / cells][count % cells] = i;
-            count++;
+        Iterator<Integer> iter = list.iterator();
+        for (int i = 0; i != rows; i++) {
+            for (int j = 0; j != cells; j++) {
+                if (!iter.hasNext()) {
+                   break;
+                }
+                array[i][j] = iter.next();
+            }
         }
         return array;
     }
