@@ -19,7 +19,7 @@ public class ConvertMatrix2List {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
         for (int[] arrayi : array) {
-            for(int arrayj : arrayi) {
+            for (int arrayj : arrayi) {
                 list.add(arrayj);
             }
         }
