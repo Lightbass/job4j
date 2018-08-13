@@ -106,7 +106,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
     /**
@@ -130,7 +130,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"3", "" + item.getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(0));
+        assertThat(tracker.findAll().isEmpty(), is(true));
     }
 
     /**
@@ -164,7 +164,7 @@ public class StartUITest {
                 "7", "1",
                 "6"}));
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(5));
+        assertThat(tracker.findAll().size(), is(5));
     }
 
 }

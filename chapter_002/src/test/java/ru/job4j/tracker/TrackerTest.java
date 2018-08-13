@@ -4,6 +4,10 @@ import org.junit.Test;
 import ru.job4j.tracker.data.Item;
 import ru.job4j.tracker.data.Tracker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -23,8 +27,8 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        System.out.println(tracker.findAll()[0].getId());
-        assertThat(tracker.findAll()[0], is(item));
+        System.out.println(tracker.findAll().get(0).getId());
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     /**
@@ -39,7 +43,8 @@ public class TrackerTest {
         tracker.add(item[0]);
         tracker.add(item[1]);
         tracker.add(item[2]);
-        assertThat(tracker.findAll(), is(item));
+        List<Item> answer = Arrays.asList(item);
+        assertThat(tracker.findAll(), is(answer));
     }
 
     /**
@@ -58,10 +63,11 @@ public class TrackerTest {
         tracker.add(item[2]);
         tracker.add(item1[0]);
         tracker.add(item1[1]);
-        assertThat(tracker.findByName("item1")[0].getDescription(), is(item[0].getDescription()));
-        assertThat(tracker.findByName("item2")[0].getDescription(), is(item[1].getDescription()));
-        assertThat(tracker.findByName("item3")[0].getDescription(), is(item[2].getDescription()));
-        assertThat(tracker.findByName("item4"), is(item1));
+        assertThat(tracker.findByName("item1").get(0).getDescription(), is(item[0].getDescription()));
+        assertThat(tracker.findByName("item2").get(0).getDescription(), is(item[1].getDescription()));
+        assertThat(tracker.findByName("item3").get(0).getDescription(), is(item[2].getDescription()));
+        List<Item> answer = Arrays.asList(item1);
+        assertThat(tracker.findByName("item4"), is(answer));
     }
 
     /**
@@ -80,10 +86,10 @@ public class TrackerTest {
         tracker.add(items[2]);
         tracker.add(items[3]);
         tracker.add(items[4]);
-        Item[] answer = {items[1], items[2], items[4]};
+        List<Item> answer = Arrays.asList(new Item[]{items[1], items[2], items[4]});
         tracker.delete(items[0].getId());
         tracker.delete(items[3].getId());
-        Item[] result = tracker.findAll();
+        List<Item> result = tracker.findAll();
         assertThat(result, is(answer));
     }
 
