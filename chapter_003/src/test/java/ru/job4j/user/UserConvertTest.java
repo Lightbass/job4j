@@ -28,6 +28,7 @@ public class UserConvertTest {
         User u1 = new User(5, "Alexey", "Spb");
         User u2 = new User(2, "Maksim", "Moscow");
         User u3 = new User(7, "Ivan", "Vladivostok");
+        User u4 = new User(7, "Ivan", "Vladivostok");
         list.add(u1);
         list.add(u2);
         list.add(u3);
@@ -35,6 +36,7 @@ public class UserConvertTest {
         answer.put(5, u1);
         answer.put(2, u2);
         answer.put(7, u3);
+        assertThat(list.contains(u4), is(true));
         assertThat(uconv.process(list), is(answer));
     }
 }

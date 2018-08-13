@@ -11,6 +11,12 @@ public class User {
     private String name;
     private String city;
 
+    /**
+     * Конструктор инициализирующий поля ID, имени и города.
+     * @param id идентификатор.
+     * @param name имя.
+     * @param city город.
+     */
     public User(int id, String name, String city) {
         this.id = id;
         this.name = name;
@@ -39,5 +45,40 @@ public class User {
      */
     public String getCity() {
         return city;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (id != user.id) {
+            return false;
+        }
+        if (name != null ? !name.equals(user.name) : user.name != null) {
+            return false;
+        }
+        return city != null ? city.equals(user.city) : user.city == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id
+                + ", name='" + name + '\''
+                + ", city='" + city + '\'' + '}';
     }
 }
