@@ -1,9 +1,6 @@
 package ru.job4j.sort;
 
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Класс - сортирует список по возрасту(age).
@@ -23,6 +20,35 @@ public class SortUser {
         for (User user : list) {
             result.add(user);
         }
+        return result;
+    }
+
+    /**
+     * Отсортировать список по длине имени.
+     * @param list список.
+     * @return отсортированный список.
+     */
+    public List<User> sortNameLength(List<User> list) {
+        List<User> result = new ArrayList<>(list);
+        Collections.sort(result, (o1, o2) -> {
+            int n1 = o1.getName().length();
+            int n2 = o2.getName().length();
+            return n1 > n2 ? 1 : (n1 < n2 ? -1 : 0);
+        });
+        return result;
+    }
+
+    /**
+     * Отсортировать список по обоим полям, сначала по имени, потом по возрасту.
+     * @param list список.
+     * @return отсортированный список.
+     */
+    public List<User> sortByAllFields(List<User> list) {
+        List<User> result = new ArrayList<>(list);
+        Collections.sort(result, (o1, o2) -> {
+            final int rs = o1.getName().compareTo(o2.getName());
+            return rs != 0 ? rs : Integer.compare(o1.getAge(), o2.getAge());
+        });
         return result;
     }
 }

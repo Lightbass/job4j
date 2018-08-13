@@ -20,8 +20,29 @@ public class User implements Comparable<User> {
         this.age = age;
     }
 
+    /**
+     * Сравнение двух пользователей по возрасту.
+     * @param o пользователь с которым происходит сравнение.
+     * @return результат сравнения.
+     */
     @Override
     public int compareTo(User o) {
         return age > o.age ? 1 : (age < o.age ? -1 : 0);
+    }
+
+    /**
+     * Метод возвращает имя.
+     * @return имя
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Метод возврашает возраст.
+     * @return возраст.
+     */
+    public int getAge() {
+        return age;
     }
 }
