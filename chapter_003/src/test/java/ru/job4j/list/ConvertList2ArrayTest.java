@@ -2,7 +2,9 @@ package ru.job4j.list;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -128,5 +130,25 @@ public class ConvertList2ArrayTest {
                 {17, 18, 19, 20, 21, 22, 23, 24}
         };
         assertThat(result, is(expect));
+    }
+
+    /**
+     * Проверка конвертации списка с массивами.
+     */
+    @Test
+    public void when4ArraysInListThenListWith14Elements() {
+        ConvertList2Array list = new ConvertList2Array();
+        int[] a1 = {123, 45, 324};
+        int[] a2 = {1, 2, 3, 4};
+        int[] a3 = {5};
+        int[] a4 = {5, 4, 1, 3, 5, 6};
+        List<int[]> full = new ArrayList();
+        full.add(a1);
+        full.add(a2);
+        full.add(a3);
+        full.add(a4);
+        Integer[] result = {123, 45, 324, 1, 2, 3, 4, 5, 5, 4, 1, 3, 5, 6};
+        List<Integer> expect = Arrays.asList(result);
+        assertThat(list.convert(full), is(expect));
     }
 }

@@ -1,6 +1,7 @@
 package ru.job4j.list;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -58,5 +59,15 @@ public class ConvertList2Array {
             }
         }
         return array;
+    }
+
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new LinkedList();
+        for (int[] i : list) {
+            for (int j : i) {
+                result.add(j);
+            }
+        }
+        return result;
     }
 }
