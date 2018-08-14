@@ -63,9 +63,9 @@ public class ConvertList2Array {
 
     public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new LinkedList();
-        for (int[] i : list) {
-            for (int j : i) {
-                result.add(j);
+        for (int[] numbers : list) {
+            for (int number : numbers) {
+                result.add(number);
             }
         }
         return result;

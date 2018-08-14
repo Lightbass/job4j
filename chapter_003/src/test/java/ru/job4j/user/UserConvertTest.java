@@ -39,4 +39,25 @@ public class UserConvertTest {
         assertThat(list.contains(u4), is(true));
         assertThat(uconv.process(list), is(answer));
     }
+
+    /**
+     * Проверка метода process().
+     */
+    @Test
+    public void whenListToMapThenOK2() {
+        UserConvert uconv = new UserConvert();
+        List<User> list = new ArrayList<>();
+        User u1 = new User(1, "Ivan", "Slantsy");
+        User u2 = new User(2, "Maksim", "Pskov");
+        User u3 = new User(3, "Viktoria", "Rostov");
+        User u4 = new User(4, "Maria", "Vladivostok");
+        list.add(u1);
+        list.add(u2);
+        list.add(u3);
+        HashMap<Integer, User> answer = new HashMap<>();
+        answer.put(1, u1);
+        answer.put(2, u2);
+        answer.put(3, u3);
+        assertThat(uconv.process(list), is(answer));
+    }
 }

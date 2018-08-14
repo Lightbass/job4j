@@ -10,6 +10,17 @@ import java.util.*;
  */
 public class SortUser {
 
+    private Comparator<User> compLength = (o1, o2) -> {
+        int n1 = o1.getName().length();
+        int n2 = o2.getName().length();
+        return n1 > n2 ? 1 : (n1 < n2 ? -1 : 0);
+    };
+
+    private Comparator<User> compNameOld = (o1, o2) -> {
+        final int rs = o1.getName().compareTo(o2.getName());
+        return rs;
+    };
+
     /**
      * Возвращает отсортированный Set с пользователями из списка в параметрах.
      * @param list список пользователей.
@@ -28,11 +39,7 @@ public class SortUser {
      */
     public List<User> sortNameLength(List<User> list) {
         List<User> result = new ArrayList<>(list);
-        Collections.sort(result, (o1, o2) -> {
-            int n1 = o1.getName().length();
-            int n2 = o2.getName().length();
-            return n1 > n2 ? 1 : (n1 < n2 ? -1 : 0);
-        });
+        result.sort(compLength);
         return result;
     }
 
@@ -43,10 +50,7 @@ public class SortUser {
      */
     public List<User> sortByAllFields(List<User> list) {
         List<User> result = new ArrayList<>(list);
-        Collections.sort(result, (o1, o2) -> {
-            final int rs = o1.getName().compareTo(o2.getName());
-            return rs != 0 ? rs : Integer.compare(o1.getAge(), o2.getAge());
-        });
+        result.sort(compNameOld.thenComparing(user -> user.getAge()));
         return result;
     }
 }
