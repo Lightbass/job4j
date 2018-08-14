@@ -12,6 +12,11 @@ import java.util.Arrays;
 public class CoffeeMachine {
 
     /**
+     * Номиналы монет.
+     */
+    private int[] cc = {10, 5, 2, 1};
+
+    /**
      * Метод выдает сдачу автомата в массиве.
      * @param value кол-во денежных средств закинутых в автомат.
      * @param price цена товара.
@@ -19,7 +24,7 @@ public class CoffeeMachine {
      * @throws RuntimeException
      */
     public int[] changes(int value, int price) throws RuntimeException {
-        int[] cc = {10, 5, 2, 1};
+
         int[] result = new int[0];
         value = value - price;
         if (value < 0) {
