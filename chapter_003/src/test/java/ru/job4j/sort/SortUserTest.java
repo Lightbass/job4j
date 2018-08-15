@@ -1,9 +1,7 @@
 package ru.job4j.sort;
 
-import org.junit.Test;
-
 import java.util.*;
-
+import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,7 +14,7 @@ import static org.junit.Assert.assertThat;
 public class SortUserTest {
 
     /**
-     * Проверка метода sort().
+     * Проверка метода ascSort().
      */
     @Test
     public void whenListToMapThensSortedByAge() {
