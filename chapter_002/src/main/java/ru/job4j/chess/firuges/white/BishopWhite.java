@@ -35,7 +35,7 @@ public class BishopWhite implements Figure {
         for (int index = 0; index != result.length; index++) {
             int i = source.x + stepX * (index + 1);
             int j = source.y + stepY * (index + 1);
-            result[index] = Cell.valueOf(Cell.getName(i, j));
+            result[index] = Cell.values()[i * 8 + j];
         }
         return result;
     }

@@ -31,13 +31,13 @@ public class RookWhite implements Figure {
             result = new Cell[Math.abs(source.y - dest.y)];
             int step = source.y - dest.y > 0 ? -1 : 1;
             for (int i = 0; i != result.length; i++) {
-                result[i] = Cell.valueOf(Cell.getName(source.x, source.y + (i + 1) * step));
+                result[i] = Cell.values()[source.x * 8 + (source.y + (i + 1) * step)];
             }
         } else if (source.y == dest.y) {
             result = new Cell[Math.abs(source.x - dest.x)];
             int step = source.x - dest.x > 0 ? -1 : 1;
             for (int i = 0; i != result.length; i++) {
-                result[i] = Cell.valueOf(Cell.getName(source.x + (i + 1) * step, source.y));
+                result[i] = Cell.values()[(source.x + (i + 1) * step) * 8 + source.y];
             }
         }
         return result;

@@ -17,8 +17,4 @@ public enum Cell {
         this.x = x;
         this.y = y;
     }
-    public static String getName(int x, int y) {
-        char ch = (char) ('A' + x);
-        return Character.toString(ch) + (y + 1);
-    }
 }

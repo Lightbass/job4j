@@ -32,7 +32,7 @@ public class PawnBlack implements Figure {
     public Cell[] way(Cell source, Cell dest) {
         Cell[] steps = new Cell[0];
         if (longMove && source.y == dest.y + 2 && source.x == dest.x) {
-            Cell first = Cell.valueOf(Cell.getName(dest.x, dest.y + 1));
+            Cell first = Cell.values()[dest.x * 8 + (dest.y + 1)];
             steps = new Cell[] {first, dest};
             longMove = false;
 
