@@ -16,9 +16,8 @@ public class SortGroupTest {
     public void whenStringWith3GroupsAscSortThenValidSort() {
         SortGroup sort = new SortGroup();
         String[] input = {"K2", "K1\\SK1\\SSK2", "K2\\SK1\\SSK1"};
-        sort.ascSort(input);
-        String[] answer = {"K1\\SK1\\SSK2", "K2", "K2\\SK1\\SSK1"};
-        assertThat(input, is(answer));
+        String[] answer = {"K1", "K1\\SK1\\SSK2", "K2", "K2\\SK1\\SSK1"};
+        assertThat(sort.ascSort(input), is(answer));
     }
 
     @Test
@@ -26,19 +25,17 @@ public class SortGroupTest {
         SortGroup sort = new SortGroup();
         String[] input = {"K2\\SK1\\SSK2", "K1\\SK1", "K2\\SK1\\SSK1",
                 "K1\\SK1\\SSK2", "K1", "K2", "K2\\SK1", "K1\\SK1\\SSK1", "K1\\SK2"};
-        sort.ascSort(input);
         String[] answer = {"K1", "K1\\SK1", "K1\\SK1\\SSK1",
             "K1\\SK1\\SSK2", "K1\\SK2", "K2", "K2\\SK1", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"};
-        assertThat(input, is(answer));
+        assertThat(sort.ascSort(input), is(answer));
     }
 
     @Test
     public void whenStringWith3GroupsDescSortThenValidSort() {
         SortGroup sort = new SortGroup();
         String[] input = {"K1\\SK1\\SSK1", "K2", "K1\\SK1"};
-        sort.descSort(input);
-        String[] answer = {"K2", "K1\\SK1", "K1\\SK1\\SSK1"};
-        assertThat(input, is(answer));
+        String[] answer = {"K2", "K1", "K1\\SK1", "K1\\SK1\\SSK1"};
+        assertThat(sort.descSort(input), is(answer));
     }
 
     @Test
@@ -46,9 +43,8 @@ public class SortGroupTest {
         SortGroup sort = new SortGroup();
         String[] input = {"K1\\SK1", "K2\\SK1\\SSK2", "K2\\SK1\\SSK1",
                 "K1\\SK1\\SSK2", "K1", "K2", "K2\\SK1", "K1\\SK1\\SSK1", "K1\\SK2"};
-        sort.descSort(input);
         String[] answer = {"K2", "K2\\SK1", "K2\\SK1\\SSK2", "K2\\SK1\\SSK1", "K1",
                 "K1\\SK2", "K1\\SK1", "K1\\SK1\\SSK2", "K1\\SK1\\SSK1"};
-        assertThat(input, is(answer));
+        assertThat(sort.descSort(input), is(answer));
     }
 }

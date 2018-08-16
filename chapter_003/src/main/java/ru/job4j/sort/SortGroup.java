@@ -10,19 +10,36 @@ import java.util.*;
  */
 public class SortGroup {
 
+    private String[] addBaseGroup(String[] str) {
+        Set<String> set = new HashSet(Arrays.asList(str));
+        for (String group : str) {
+            if (group.contains("\\")) {
+                String mainGroup = group.substring(0, group.indexOf("\\"));
+                if (!set.contains(mainGroup)) {
+                    set.add(mainGroup);
+                }
+            }
+        }
+        str = set.toArray(new String[set.size()]);
+        return str;
+    }
+
     /**
      * Сортировка по возрастанию.
      * @param str массив с подразделениями.
      */
-    public void ascSort(String[] str) {
+    public String[] ascSort(String[] str) {
+        str = addBaseGroup(str);
         Arrays.sort(str);
+        return str;
     }
 
     /**
      * Сортировка по убыванию.
      * @param str массив с подразделениями.
      */
-    public void descSort(String[] str) {
+    public String[] descSort(String[] str) {
+        str = addBaseGroup(str);
         Arrays.sort(str, (s1, s2) -> {
             int result = s1.length() - s2.length();
             int min = Math.min(s1.length(), s2.length());
@@ -34,5 +51,8 @@ public class SortGroup {
             }
             return result;
         });
+        return str;
     }
+
+
 }
