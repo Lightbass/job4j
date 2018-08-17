@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @version 0.1
  */
 public class MatrixIterator implements Iterator {
-    private int[][] mas;
+    private final int[][] mas;
     private int posi;
     private int posj;
 

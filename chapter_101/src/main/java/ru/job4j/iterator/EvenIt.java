@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @version 0.1
  */
 public class EvenIt implements Iterator {
-    private int[] num;
+    private final int[] num;
     private int pos;
 
     /**

@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
  */
 public class SimpleArray<T> implements Iterable<T> {
     private int size;
-    private Object[] data;
+    private final Object[] data;
 
     private void checkBounds(int index) {
         if (index >= size) {
@@ -71,6 +71,14 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     /**
+     * Метод возвращает кол-во элементов в контейнере.
+     * @return кол-во элементов.
+     */
+    public int size() {
+        return size;
+    }
+
+    /**
      * Метод возвращает итератор контейнера.
      * @return итератор.
      */
@@ -81,11 +89,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                boolean result = false;
-                if (pos != size) {
-                    result = true;
-                }
-                return result;
+                return pos != size;
             }
 
             @Override
