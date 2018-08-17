@@ -15,6 +15,21 @@ public class CustomLinkedList<E> implements Iterable<E> {
     private int size;
     private Node<E> last;
 
+    private void checkBounds(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private Node<E> findByIndex(int index) {
+        checkBounds(index);
+        Node<E> result = this.last.next;
+        for (int i = 0; i < index; i++) {
+            result = result.next;
+        }
+        return result;
+    }
+
     /**
      * Метод вставляет в начало списка данные.
      * @param data вставляемы данные.
@@ -39,11 +54,29 @@ public class CustomLinkedList<E> implements Iterable<E> {
      * @return элемент.
      */
     public E get(int index) {
-        Node<E> result = this.last.next;
-        for (int i = 0; i < index; i++) {
-            result = result.next;
-        }
-        return result.date;
+        return findByIndex(index).data;
+    }
+
+    /**
+     * Метод удаления первого элемента в списке.
+     * @return объект, который был удален.
+     */
+    public E delete(int index) {
+        Node<E> prev;
+        prev = index == 0 ? last : findByIndex(index - 1);
+        Node<E> onIndex = prev.next;
+        prev.next = onIndex.next;
+        modCount++;
+        this.size--;
+        return onIndex.data;
+    }
+
+    /**
+     * Метод возвращает кол-во элементов в контейнере.
+     * @return кол-во элементов.
+     */
+    public int size() {
+        return size;
     }
 
     /**
@@ -51,11 +84,11 @@ public class CustomLinkedList<E> implements Iterable<E> {
      */
     private static class Node<E> {
 
-        E date;
+        E data;
         Node<E> next;
 
-        Node(E date) {
-            this.date = date;
+        Node(E data) {
+            this.data = data;
         }
     }
 
@@ -81,7 +114,7 @@ public class CustomLinkedList<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                E result = current.date;
+                E result = current.data;
                 current = current.next;
                 pos++;
                 return (E) result;

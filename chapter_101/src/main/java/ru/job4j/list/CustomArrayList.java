@@ -54,6 +54,28 @@ public class CustomArrayList<E> implements Iterable<E> {
     }
 
     /**
+     * Метод удаляет объект из контейнера.
+     * @param index индекс удаляемого объекта.
+     */
+    public E delete(int index) {
+        checkBounds(index);
+        modCount++;
+        --size;
+        System.arraycopy(data, index + 1, data, index, size - index);
+        E result = (E) data[size];
+        data[size] = null;
+        return result;
+    }
+
+    /**
+     * Метод возвращает кол-во элементов в контейнере.
+     * @return кол-во элементов.
+     */
+    public int size() {
+        return size;
+    }
+
+    /**
      * Метод возвращает итератор контейнера.
      * @return итератор.
      */
