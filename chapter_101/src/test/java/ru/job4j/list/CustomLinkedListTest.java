@@ -1,7 +1,7 @@
 package ru.job4j.list;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -11,16 +11,16 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * JUnit тест класса CustomArrayList.
+ * JUnit тест класса CustomLinkedList.
  * @author Alexey Makarov
  * @since 17.08.18
  * @version 0.1
  */
-public class CustomArrayListTest {
-    CustomArrayList<String> list;
+public class CustomLinkedListTest {
+    CustomLinkedList<String> list;
     @Before
     public void prepare() {
-        list = new CustomArrayList<>();
+        list = new CustomLinkedList<>();
         list.add("String 0");
         list.add("String 1");
         list.add("String 2");
