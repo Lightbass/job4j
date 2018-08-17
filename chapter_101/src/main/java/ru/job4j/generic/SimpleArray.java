@@ -34,7 +34,7 @@ public class SimpleArray<T> implements Iterable<T> {
      */
     public void add(T model) {
         if (data.length == size) {
-            throw new IllegalStateException("Container is reach full capasity");
+            throw new IllegalStateException("Container is reach full capacity");
         }
         data[size++] = model;
     }
