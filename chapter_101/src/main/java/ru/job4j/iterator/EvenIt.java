@@ -14,21 +14,6 @@ public class EvenIt implements Iterator {
     private int pos;
 
     /**
-     * Метод возвращает индекс первого четного числа начиная искать от каретки.
-     * @return индекс следующего четного числа.
-     */
-    private int stepToEven() {
-        int result = -1;
-        for (int i = pos; i != num.length; i++) {
-            if (num[i] % 2 == 0) {
-                result = i;
-                break;
-            }
-        }
-        return result;
-    }
-
-    /**
      * Конструктор инициализирует поле перебираемого массива.
      * @param num массив.
      */
@@ -43,8 +28,12 @@ public class EvenIt implements Iterator {
     @Override
     public boolean hasNext() {
         boolean result = false;
-        if (stepToEven() != -1) {
-            result = true;
+        for (int i = pos; i != num.length; i++) {
+            if (num[i] % 2 == 0) {
+                pos = i;
+                result = true;
+                break;
+            }
         }
         return result;
     }
@@ -55,11 +44,8 @@ public class EvenIt implements Iterator {
      */
     @Override
     public Integer next() {
-        int result = stepToEven();
-        if (result == -1) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
-        } else {
-            pos = result;
         }
         return num[pos++];
     }
