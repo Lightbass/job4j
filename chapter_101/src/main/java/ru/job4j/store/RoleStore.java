@@ -6,7 +6,7 @@ package ru.job4j.store;
  * @since 17.08.18
  * @version 0.1
  */
-public class RoleStore<T extends Role> extends AbstractStore<T> {
+public class RoleStore extends AbstractStore<Role> {
 
     /**
      * Конструктор инициализирует кол-во ролей в контейнере.

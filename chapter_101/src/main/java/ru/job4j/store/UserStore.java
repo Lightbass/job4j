@@ -8,7 +8,7 @@ import ru.job4j.generic.SimpleArray;
  * @since 17.08.18
  * @version 0.1
  */
-public class UserStore<E extends User> extends AbstractStore<E> {
+public class UserStore extends AbstractStore<User> {
 
     /**
      * Конструктор инициализирует кол-во пользователей в контейнере.

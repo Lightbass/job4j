@@ -82,11 +82,9 @@ public class CustomLinkedList<E> implements Iterable<E> {
     /**
      * Класс предназначен для хранения данных.
      */
-    private static class Node<E> {
-
+    private class Node<E> {
         E data;
         Node<E> next;
-
         Node(E data) {
             this.data = data;
         }

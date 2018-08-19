@@ -14,7 +14,7 @@ import static org.hamcrest.core.IsNull.nullValue;
  * @version 0.1
  */
 public class UserStoreTest {
-    UserStore<User> store;
+    UserStore store;
     User u1, u2, u3, u4, u5;
     @Before
     public void prepare() {

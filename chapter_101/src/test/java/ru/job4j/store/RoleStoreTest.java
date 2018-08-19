@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
  * @version 0.1
  */
 public class RoleStoreTest {
-    RoleStore<Role> store;
+    RoleStore store;
     Role u1, u2, u3, u4, u5;
     @Before
     public void prepare() {
