@@ -11,17 +11,16 @@ import java.util.*;
 public class SortGroup {
 
     private String[] addBaseGroup(String[] str) {
-        Set<String> set = new HashSet(Arrays.asList(str));
+        Set<String> set = new TreeSet(Arrays.asList(str));
         for (String group : str) {
             if (group.contains("\\")) {
-                String mainGroup = group.substring(0, group.indexOf("\\"));
-                if (!set.contains(mainGroup)) {
+                for (int ind = 0; ind != -1; ind = group.indexOf("\\", ind + 1)) {
+                    String mainGroup = group.substring(0, group.indexOf("\\", ind));
                     set.add(mainGroup);
                 }
             }
         }
-        str = set.toArray(new String[set.size()]);
-        return str;
+        return set.toArray(new String[set.size()]);
     }
 
     /**
@@ -30,7 +29,6 @@ public class SortGroup {
      */
     public String[] ascSort(String[] str) {
         str = addBaseGroup(str);
-        Arrays.sort(str);
         return str;
     }
 
@@ -41,7 +39,7 @@ public class SortGroup {
     public String[] descSort(String[] str) {
         str = addBaseGroup(str);
         Arrays.sort(str, (s1, s2) -> {
-            int result = s1.length() - s2.length();
+            int result = 0;
             int min = Math.min(s1.length(), s2.length());
             for (int i = 0; i != min; i++) {
                 if (s1.charAt(i) - s2.charAt(i) != 0) {
@@ -49,7 +47,7 @@ public class SortGroup {
                     break;
                 }
             }
-            return result;
+            return result == 0 ? s1.length() - s2.length() : result;
         });
         return str;
     }

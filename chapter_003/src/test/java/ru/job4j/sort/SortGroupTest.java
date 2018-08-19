@@ -13,28 +13,28 @@ import static org.junit.Assert.assertThat;
 public class SortGroupTest {
 
     @Test
-    public void whenStringWith3GroupsAscSortThenValidSort() {
+    public void whenStringWith3GroupsAscSortThenSevenResultGroupsSort() {
         SortGroup sort = new SortGroup();
-        String[] input = {"K2", "K1\\SK1\\SSK2", "K2\\SK1\\SSK1"};
-        String[] answer = {"K1", "K1\\SK1\\SSK2", "K2", "K2\\SK1\\SSK1"};
+        String[] input = {"K2", "K1\\SK1\\SSK2\\SSSK3", "K2\\SK1\\SSK1"};
+        String[] answer = {"K1", "K1\\SK1", "K1\\SK1\\SSK2", "K1\\SK1\\SSK2\\SSSK3", "K2", "K2\\SK1", "K2\\SK1\\SSK1"};
         assertThat(sort.ascSort(input), is(answer));
     }
 
     @Test
-    public void whenStringWith9GroupsAscSortThenValidSort() {
+    public void whenStringWith7GroupsAscSortThenNineResultGroupsSort() {
         SortGroup sort = new SortGroup();
-        String[] input = {"K2\\SK1\\SSK2", "K1\\SK1", "K2\\SK1\\SSK1",
-                "K1\\SK1\\SSK2", "K1", "K2", "K2\\SK1", "K1\\SK1\\SSK1", "K1\\SK2"};
+        String[] input = {"K2\\SK1\\SSK2", "K2\\SK1\\SSK1",
+                "K1\\SK1\\SSK2", "K2", "K2\\SK1", "K1\\SK1\\SSK1", "K1\\SK2"};
         String[] answer = {"K1", "K1\\SK1", "K1\\SK1\\SSK1",
             "K1\\SK1\\SSK2", "K1\\SK2", "K2", "K2\\SK1", "K2\\SK1\\SSK1", "K2\\SK1\\SSK2"};
         assertThat(sort.ascSort(input), is(answer));
     }
 
     @Test
-    public void whenStringWith3GroupsDescSortThenValidSort() {
+    public void whenStringWith2GroupsDescSortThenSixResultGroupsSort() {
         SortGroup sort = new SortGroup();
-        String[] input = {"K1\\SK1\\SSK1", "K2", "K1\\SK1"};
-        String[] answer = {"K2", "K1", "K1\\SK1", "K1\\SK1\\SSK1"};
+        String[] input = {"K1\\SK1\\SSK1", "K2\\SK1\\SSK1"};
+        String[] answer = {"K2", "K2\\SK1", "K2\\SK1\\SSK1", "K1", "K1\\SK1", "K1\\SK1\\SSK1"};
         assertThat(sort.descSort(input), is(answer));
     }
 
