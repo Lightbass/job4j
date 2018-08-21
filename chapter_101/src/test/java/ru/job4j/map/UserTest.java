@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * JUnit тест класса User.
@@ -40,5 +42,17 @@ public class UserTest {
         assertThat(user.getName(), is("name2"));
         assertThat(user.getChildren(), is(2));
         assertThat(user.getBirthday().equals(second), is(true));
+    }
+
+    /**
+     * Тест для задания "2. Не перекрывать equals hashCode"
+     */
+    @Test
+    public void whenTestMapWithTwoSameUsersThen2UsersInMap() {
+        User user2 = new User("name", 1, calendar);
+        Map<User, Object> map = new HashMap<>();
+        map.put(user, new Object());
+        map.put(user2, new Object());
+        System.out.print(map);
     }
 }
