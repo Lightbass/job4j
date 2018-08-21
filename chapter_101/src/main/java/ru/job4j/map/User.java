@@ -76,17 +76,21 @@ public class User {
     }
 
     /**
-     * Переопределенный метод с учетом полей класса.
+     * Переопределенный метод hashCode() с учетом полей класса.
      * @return хеш-код
      */
-    /*@Override
+    @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + children;
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         return result;
-    }*/
+    }
 
+    /**
+     * Переопределенный метод equals() с учетом полей класса.
+     * @return true если объекты идентичны; false если нет.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
