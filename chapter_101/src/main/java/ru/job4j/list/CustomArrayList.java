@@ -87,12 +87,12 @@ public class CustomArrayList<E> implements Iterable<E> {
 
             @Override
             public boolean hasNext() {
+                checkMod();
                 return pos != size;
             }
 
             @Override
             public E next() {
-                checkMod();
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }

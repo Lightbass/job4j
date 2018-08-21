@@ -15,18 +15,15 @@ public class CycleNode {
      */
     public boolean hasCycle(Node first) {
         boolean result = false;
+        if (first != null) {
         Node current = first.next;
-        if (current != null) {
-            while (true) {
-                if (current == first) {
+            while (current != null && current.next != null) {
+                if (first == current) {
                     result = true;
                     break;
-                } else if (current.next != null && current.next.next != null) {
-                    first = first.next;
-                    current = current.next.next;
-                } else {
-                    break;
                 }
+                first = first.next;
+                current = current.next.next;
             }
         }
         return result;
