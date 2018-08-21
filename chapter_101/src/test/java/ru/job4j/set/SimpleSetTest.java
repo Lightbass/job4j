@@ -1,13 +1,9 @@
 package ru.job4j.set;
 
 import org.junit.Test;
-import org.junit.Before;
-
-import java.util.Iterator;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-
+import java.util.Iterator;
 /**
  * JUnit тест класса SimpleSet.
  * @author Alexey Makarov

@@ -2,6 +2,7 @@ package ru.job4j.set;
 
 import ru.job4j.list.CustomArrayList;
 
+import java.util.Deque;
 import java.util.Iterator;
 
 /**
