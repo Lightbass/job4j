@@ -11,7 +11,7 @@ import java.util.*;
 public class SortGroup {
 
     private String[] addBaseGroup(String[] str) {
-        Set<String> set = new TreeSet(Arrays.asList(str));
+        Set<String> set = new TreeSet<>(Arrays.asList(str));
         for (String group : str) {
             if (group.contains("\\")) {
                 for (int ind = 0; ind != -1; ind = group.indexOf("\\", ind + 1)) {
@@ -20,7 +20,7 @@ public class SortGroup {
                 }
             }
         }
-        return set.toArray(new String[set.size()]);
+        return set.toArray(new String[0]);
     }
 
     /**
@@ -28,8 +28,7 @@ public class SortGroup {
      * @param str массив с подразделениями.
      */
     public String[] ascSort(String[] str) {
-        str = addBaseGroup(str);
-        return str;
+        return addBaseGroup(str);
     }
 
     /**

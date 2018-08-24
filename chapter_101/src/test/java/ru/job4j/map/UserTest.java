@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 /**
@@ -49,10 +50,16 @@ public class UserTest {
      */
     @Test
     public void whenTestMapWithTwoSameUsersThen2UsersInMap() {
-        User user2 = new User("name", 1, calendar);
+        User user2 = new User("name", 2, calendar);
         Map<User, Object> map = new HashMap<>();
         map.put(user, new Object());
         map.put(user2, new Object());
-        System.out.print(map);
+        System.out.println(map);
+        Hashtable<User, String> table = new Hashtable<>();
+        table.put(user2, "string2");
+        table.put(new User("name", 3, calendar), "string2");
+        table.put(user, "string2");
+        System.out.println(table);
+        System.out.println(table.keySet());
     }
 }

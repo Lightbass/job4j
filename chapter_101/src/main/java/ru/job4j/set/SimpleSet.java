@@ -2,7 +2,6 @@ package ru.job4j.set;
 
 import ru.job4j.list.CustomArrayList;
 
-import java.util.Deque;
 import java.util.Iterator;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Iterator;
  * @version 0.1
  */
 public class SimpleSet<T> implements Iterable<T> {
-    private CustomArrayList<T> list = new CustomArrayList<>();
+    private final CustomArrayList<T> list = new CustomArrayList<>();
 
     /**
      * Метод добавляет объект к списку только если такого объекта ещё в нем нет.
