@@ -92,4 +92,55 @@ public class TreeTest {
         tree.add(1, 444);
         iter.next();
     }
+
+    @Test
+    public void whenCheckBinaryTreeThenOk() {
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(1, 2);
+        tree.add(1, 3);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(2, 3);
+        tree.add(2, 4);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(3, 5);
+        tree.add(3, 6);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(4, 7);
+        tree.add(4, 8);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(5, 9);
+        tree.add(5, 10);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(6, 11);
+        tree.add(6, 12);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(7, 13);
+        tree.add(7, 14);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(8, 15);
+        tree.add(8, 16);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(9, 17);
+        tree.add(9, 18);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(10, 19);
+        tree.add(10, 20);
+        assertThat(tree.isBinary(), is(true));
+        assertThat(tree.isBinary2(), is(true));
+        tree.add(11, 21);
+        tree.add(11, 22);
+        tree.add(11, 23);
+        assertThat(tree.isBinary(), is(false));
+        assertThat(tree.isBinary2(), is(false));
+    }
 }

@@ -74,19 +74,53 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Метод определяет бинарное дерево.
+     * @return true, если дерево бинарное; false, если нет;
+     */
+    public boolean isBinary() {
+        return isBinary(root);
+    }
+
+    private boolean isBinary(Node<E> root) {
+        if (root.leaves().size() == 1 || root.leaves().size() == 2) {
+            for (Node<E> parent : root.leaves()) {
+                if (!isBinary(parent)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return root.leaves().size() == 0 ? true : false;
+    }
+
+    /**
+     * Метод определяет бинарное дерево.
+     * @return true, если дерево бинарное; false, если нет;
+     */
+    public boolean isBinary2() {
+        boolean result = true;
+        Iterator<Node<E>> iter = nodeIterator();
+        while (iter.hasNext()) {
+            if (iter.next().leaves().size() > 2) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
      * Метод возвращает итератор значений дерева.
      * @return итератор значений.
      */
-    @Override
-    public Iterator<E> iterator() {
-        return new Iterator<E>() {
+    public Iterator<Node<E>> nodeIterator() {
+        return new Iterator<Node<E>>() {
             final Queue<Iterator<Node<E>>> poolIter = new LinkedList<>();
             final long fixedModCount = modCount;
             Iterator<Node<E>> iter;
-            Node<E> current = root;
-
 
             {
+                poolIter.offer(Arrays.asList(root).iterator());
                 prepareIterators(root);
                 iter = poolIter.poll();
             }
@@ -99,7 +133,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 if (!node.leaves().isEmpty()) {
                     poolIter.offer(node.leaves().iterator());
                     for (Node<E> parent : node.leaves()) {
-                       prepareIterators(parent);
+                        prepareIterators(parent);
                     }
                 }
             }
@@ -108,24 +142,22 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             public boolean hasNext() {
                 checkMod();
                 boolean result = true;
-                if (current == null) {
-                    result = false;
+                while (!iter.hasNext()) {
+                    if (poolIter.isEmpty()) {
+                        result = false;
+                        break;
+                    }
+                    iter = poolIter.poll();
                 }
                 return result;
             }
 
             @Override
-            public E next() {
+            public Node<E> next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                E result = current.getValue();
-                if (!iter.hasNext()) {
-                    iter = poolIter.poll();
-                    current = iter == null ? null : iter.next();
-                } else {
-                    current = iter.next();
-                }
+                Node<E> result = iter.next();
                 return result;
             }
 
@@ -133,6 +165,27 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 if (fixedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
+            }
+        };
+    }
+
+    /**
+     * Метод возвращает итератор значений дерева.
+     * @return итератор значений.
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            Iterator<Node<E>> iter = nodeIterator();
+
+            @Override
+            public boolean hasNext() {
+                return iter.hasNext();
+            }
+
+            @Override
+            public E next() {
+                return iter.next().getValue();
             }
         };
     }
