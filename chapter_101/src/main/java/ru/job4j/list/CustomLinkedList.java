@@ -103,19 +103,19 @@ public class CustomLinkedList<E> implements Iterable<E> {
 
             @Override
             public boolean hasNext() {
+                checkMod();
                 return pos != size;
             }
 
             @Override
             public E next() {
-                checkMod();
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 E result = current.data;
                 current = current.next;
                 pos++;
-                return (E) result;
+                return result;
             }
 
             final private void checkMod() {

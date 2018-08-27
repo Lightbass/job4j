@@ -40,22 +40,6 @@ public class CustomMap<K, V> {
         this(16, 0.75f);
     }
 
-    /**
-     * Класс - узел.
-     * @param <K> объект класса ключ.
-     * @param <V> объект класса значение.
-     */
-    private class Node<K, V> {
-        private K key;
-        private V value;
-        private Node<K, V> next;
-        Node(K key, V value, Node<K, V> next) {
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
-    }
-
     private int getTrueCapacity(int capacity) {
         capacity--;
         capacity |= capacity >> 1;
@@ -81,13 +65,12 @@ public class CustomMap<K, V> {
      * Также увеличение порога элементов для следующего вызова resize().
      */
     private void resize() {
-        int oldCap = capacity;
         capacity = capacity << 1;
         Node<K, V>[] dataOld = data;
         data = new Node[capacity];
         threshold = threshold << 1;
         size = 0;
-        for (int i = 0; i != oldCap; i++) {
+        for (int i = 0; i != dataOld.length; i++) {
             Node<K, V> first = dataOld[i];
             dataOld[i] = null;
             while (first != null) {
@@ -176,6 +159,7 @@ public class CustomMap<K, V> {
                 } else {
                     if (node.next != null) {
                         prevNode.next = node.next;
+                        node.next = null;
                     } else {
                         prevNode.next = null;
                     }
@@ -186,6 +170,22 @@ public class CustomMap<K, V> {
             node = node.next;
         }
         return result;
+    }
+
+    /**
+     * Метод возвращает кол-во ячеек в массиве.
+     * @return кол-во ячеек.
+     */
+    public int capacity() {
+        return capacity;
+    }
+
+    /**
+     * Метод возвращает кол-во занятых ячеек в массиве.
+     * @return кол-во занятых ячеек в массиве.
+     */
+    public int size() {
+        return size;
     }
 
     private Iterator<Node<K, V>> iterator() {
@@ -228,22 +228,6 @@ public class CustomMap<K, V> {
     }
 
     /**
-     * Метод возвращает кол-во ячеек в массиве.
-     * @return кол-во ячеек.
-     */
-    public int capacity() {
-        return capacity;
-    }
-
-    /**
-     * Метод возвращает кол-во занятых ячеек в массиве.
-     * @return кол-во занятых ячеек в массиве.
-     */
-    public int size() {
-        return size;
-    }
-
-    /**
      * Возвращает итератор ключей.
      * @return итератор ключей.
      */
@@ -281,5 +265,21 @@ public class CustomMap<K, V> {
                 return iter.next().value;
             }
         };
+    }
+
+    /**
+     * Класс - узел.
+     * @param <K> объект класса ключ.
+     * @param <V> объект класса значение.
+     */
+    private class Node<K, V> {
+        private K key;
+        private V value;
+        private Node<K, V> next;
+        Node(K key, V value, Node<K, V> next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
     }
 }
