@@ -97,14 +97,13 @@ public class CustomLinkedList<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            int pos;
             Node<E> current = last.next;
             final long fixedModCount = modCount;
 
             @Override
             public boolean hasNext() {
                 checkMod();
-                return pos != size;
+                return current != null;
             }
 
             @Override
@@ -114,7 +113,9 @@ public class CustomLinkedList<E> implements Iterable<E> {
                 }
                 E result = current.data;
                 current = current.next;
-                pos++;
+                if (current == last.next) {
+                    current = null;
+                }
                 return result;
             }
 
