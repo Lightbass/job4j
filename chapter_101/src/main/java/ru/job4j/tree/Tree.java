@@ -13,8 +13,8 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     /**
      * Корневой узел.
      */
-    Node<E> root;
-    long modCount;
+    private Node<E> root;
+    private long modCount;
 
     /**
      * Конструктор инициализирует корневой узел, в который вставляется значение.
@@ -22,7 +22,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     public Tree(E rootObj) {
         if (rootObj == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Tree couldn't contain null values.");
         }
         root = new Node<>(rootObj);
     }
@@ -37,7 +37,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public boolean add(E parent, E child) {
         boolean result = false;
         if (parent == null || child == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Tree couldn't contain null values.");
         }
         if (!findBy(child).isPresent()) {
             Optional<Node<E>> value = findBy(parent);
@@ -78,26 +78,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * @return true, если дерево бинарное; false, если нет;
      */
     public boolean isBinary() {
-        return isBinary(root);
-    }
-
-    private boolean isBinary(Node<E> root) {
-        if (root.leaves().size() == 1 || root.leaves().size() == 2) {
-            for (Node<E> parent : root.leaves()) {
-                if (!isBinary(parent)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return root.leaves().size() == 0 ? true : false;
-    }
-
-    /**
-     * Метод определяет бинарное дерево.
-     * @return true, если дерево бинарное; false, если нет;
-     */
-    public boolean isBinary2() {
         boolean result = true;
         Iterator<Node<E>> iter = nodeIterator();
         while (iter.hasNext()) {
@@ -113,30 +93,11 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * Метод возвращает итератор значений дерева.
      * @return итератор значений.
      */
-    public Iterator<Node<E>> nodeIterator() {
+    private Iterator<Node<E>> nodeIterator() {
         return new Iterator<Node<E>>() {
             final Queue<Iterator<Node<E>>> poolIter = new LinkedList<>();
             final long fixedModCount = modCount;
-            Iterator<Node<E>> iter;
-
-            {
-                poolIter.offer(Arrays.asList(root).iterator());
-                prepareIterators(root);
-                iter = poolIter.poll();
-            }
-
-            /**
-             * Метод добавляет в пулл итераторов итераторы всех родителей.
-             * @param node начальный узел.
-             */
-            private void prepareIterators(Node<E> node) {
-                if (!node.leaves().isEmpty()) {
-                    poolIter.offer(node.leaves().iterator());
-                    for (Node<E> parent : node.leaves()) {
-                        prepareIterators(parent);
-                    }
-                }
-            }
+            Iterator<Node<E>> iter = Arrays.asList(root).iterator();
 
             @Override
             public boolean hasNext() {
@@ -158,6 +119,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                     throw new NoSuchElementException();
                 }
                 Node<E> result = iter.next();
+                if (!result.leaves().isEmpty()) {
+                    poolIter.offer(result.leaves().iterator());
+                }
                 return result;
             }
 
