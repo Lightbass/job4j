@@ -18,21 +18,22 @@ class Store {
      */
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        for (User user : previous) {
-            boolean checked = false;
-            for (User user2 : current) {
-                if (user.id == user2.id) {
-                    checked = true;
-                    if (!user.name.equals(user2.name)) {
-                        info.modified++;
+        if (current.isEmpty()) {
+            info.deleted = previous.size();
+        } else {
+                int n = 0;
+                for (User user : previous) {
+                    if (current.get(n).id == user.id) {
+                        if (!user.name.equals(current.get(n).name)) {
+                            info.modified++;
+                        }
+                    } else {
+                        info.deleted++;
                     }
+                    n++;
                 }
-            }
-            if (!checked) {
-                info.deleted++;
-            }
+                info.created = current.size() - previous.size() + info.deleted;
         }
-        info.created = current.size() - previous.size() + info.deleted;
         return info;
     }
 

@@ -54,6 +54,10 @@ public class StoreTest {
         assertThat(info.getCreated(), is(0));
         assertThat(info.getModified(), is(0));
         assertThat(info.getDeleted(), is(5));
+        info = store.diff(list2, list1);
+        assertThat(info.getCreated(), is(5));
+        assertThat(info.getModified(), is(0));
+        assertThat(info.getDeleted(), is(0));
     }
 
     @Test
