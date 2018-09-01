@@ -1,12 +1,8 @@
-package ru.job4j;
+package ru.job4j.exam;
 
 import org.junit.Test;
 import org.junit.Before;
-import ru.job4j.exam.StringShuffle;
-
-import java.util.HashMap;
 import java.util.Map;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
