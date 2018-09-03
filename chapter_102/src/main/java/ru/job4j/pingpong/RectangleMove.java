@@ -14,6 +14,7 @@ public class RectangleMove implements Runnable {
     private int stepY = 1;
     private int sceneWidth;
     private int sceneHeight;
+    private boolean run = true;
 
     /**
      * Конструктор инициализирующий поля для квадрата, ширины рабочей области и высоты.
@@ -32,7 +33,7 @@ public class RectangleMove implements Runnable {
      */
     @Override
     public void run() {
-        while (true) {
+        while (run) {
             moveFigure();
         }
     }
@@ -50,9 +51,9 @@ public class RectangleMove implements Runnable {
             stepY *= -1;
         }
         try {
-            Thread.sleep(30);
+            Thread.currentThread().sleep(30);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            run = false;
         }
     }
 }
