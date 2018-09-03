@@ -1,6 +1,7 @@
 package ru.job4j.pingpong;
 
 import javafx.scene.shape.Rectangle;
+import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,27 +14,39 @@ import static org.junit.Assert.assertThat;
  */
 public class RectangleMoveTest {
 
-    @Test
-    public void whenRectangleMovesThenOk() {
-        int square = 50;
-        Rectangle rect = new Rectangle(10, 10);
+    private int square = 50;
+    private Rectangle rect;
+    private RectangleMove rm;
+
+    @Before
+    public void prepare() {
+        rect = new Rectangle(10, 10);
         rect.setX(5);
         rect.setY(10);
-        RectangleMove rm = new RectangleMove(rect, square, square);
+        rm = new RectangleMove(rect, square, square);
+    }
+
+    @Test
+    public void whenRectangleMoves10TimesThenOk() {
         for (int i = 0; i < 10; i++) {
             rm.moveFigure();
         }
-        assertThat(rect.getX() == 15, is(true));
-        assertThat(rect.getY() == 20, is(true));
-        for (int i = 0; i < 45; i++) {
+        assertThat(rect.getX() == 15 && rect.getY() == 20, is(true));
+    }
+
+    @Test
+    public void whenRectangleMoves55TimesThenOk() {
+        for (int i = 0; i < 55; i++) {
             rm.moveFigure();
         }
-        assertThat(rect.getX() == 40, is(true));
-        assertThat(rect.getY() == 35, is(true));
-        for (int i = 0; i < 45; i++) {
+        assertThat(rect.getX() == 40 && rect.getY() == 35, is(true));
+    }
+
+    @Test
+    public void whenRectangleMoves100TimesThenOk() {
+        for (int i = 0; i < 100; i++) {
             rm.moveFigure();
         }
-        assertThat(rect.getX() == 5, is(true));
-        assertThat(rect.getY() == 10, is(true));
+        assertThat(rect.getX() == 5 && rect.getY() == 10, is(true));
     }
 }

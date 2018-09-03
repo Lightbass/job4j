@@ -83,5 +83,27 @@ public class StringShuffle {
         return set.size() == 1;
     }
 
-
+    /**
+     * Метод определяет, являются ли строки анаграммами друг друга.
+     * @param first первая строка.
+     * @param second вторая строка.
+     * @return true, если слова являются анаграммами, false - если нет.
+     */
+    public boolean containsAll(String first, String second) {
+        boolean result = false;
+        Map<Character, Integer> map1 = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
+        if (first.length() == second.length()) {
+            for (int i = 0; i != first.length(); i++) {
+                Integer temp1 = map1.get(first.charAt(i));
+                Integer temp2 = map2.get(second.charAt(i));
+                map1.put(first.charAt(i), temp1 == null ? 1 : (temp1 + 1));
+                map2.put(second.charAt(i), temp2 == null ? 1 : (temp2 + 1));
+            }
+            if (map1.equals(map2)) {
+                result = true;
+            }
+        }
+        return result;
+    }
 }
