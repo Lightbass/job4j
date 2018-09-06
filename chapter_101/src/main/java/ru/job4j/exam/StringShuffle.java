@@ -100,9 +100,12 @@ public class StringShuffle {
                 map1.put(first.charAt(i), temp1 == null ? 1 : (temp1 + 1));
                 map2.put(second.charAt(i), temp2 == null ? 1 : (temp2 + 1));
             }
-            if (map1.equals(map2)) {
-                result = true;
+            for (Character ch : first.toCharArray()) {
+                if (!map1.get(ch).equals(map2.get(ch))) {
+                    break;
+                }
             }
+            result = true;
         }
         return result;
     }
