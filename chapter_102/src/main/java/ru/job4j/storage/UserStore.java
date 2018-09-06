@@ -12,7 +12,6 @@ import java.util.List;
  * @since 05.09.18
  * @version 0.1
  */
-
 @ThreadSafe
 public class UserStore {
 

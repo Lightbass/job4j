@@ -8,7 +8,7 @@ import java.util.List;
  * @since 27.08.18
  * @version 0.1
  */
-class Store {
+public class Store {
 
     /**
      * Метод возвращает объект данных о разности между хранилищами.
