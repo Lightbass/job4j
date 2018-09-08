@@ -13,13 +13,13 @@ import static org.junit.Assert.assertThat;
 public class ThreadProblemTest {
 
     /**
-     * Метод отражает проблемы с многопоточностью, но метод assertThat я убрал, ибо при тесте в travis результат таки
+     * Тест отражает проблемы с многопоточностью, но метод assertThat я убрал, ибо при тесте в travis результат таки
      * временами сходится, я бы мог поставить число побольше, да тест начинает выполняться дольше, поэтому просто убрал.
      */
     @Test
     public void when2ThreadsIncrementSameValueThenFailed() {
         Increment inc = new Increment();
-        ThreadProblem problem = new ThreadProblem(10000000, inc);
+        ThreadProblem problem = new ThreadProblem(100000, inc);
         Thread thread1 = new Thread(problem);
         Thread thread2 = new Thread(problem);
         thread1.start();
@@ -31,6 +31,6 @@ public class ThreadProblemTest {
             ie.printStackTrace();
         }
         System.out.println(inc.get());
-        //assertThat(inc.get() == 20000000, is(false));
+        //assertThat(inc.get() == 200000, is(false));
     }
 }
