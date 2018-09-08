@@ -28,13 +28,9 @@ public class SimpleBlockingQueueTest {
 
         @Override
         public void run() {
-            try {
                 while (!queue.isEmpty()) {
                     block.offer(queue.poll());
                 }
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-            }
         }
     }
 

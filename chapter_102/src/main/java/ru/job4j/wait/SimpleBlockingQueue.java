@@ -24,10 +24,14 @@ public class SimpleBlockingQueue<T> {
      * @param value добавляемый элемент.
      * @throws InterruptedException
      */
-    public void offer(final T value) throws InterruptedException {
+    public void offer(final T value) {
         synchronized (this) {
             while (queue.size() == capacity) {
-                wait();
+                try {
+                    wait();
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
+                }
             }
             queue.offer(value);
             notify();
@@ -49,5 +53,15 @@ public class SimpleBlockingQueue<T> {
             notify();
         }
         return result;
+    }
+
+    /**
+     * Метод возвращает информацию о заполнении очереди.
+     * @return true, если в очереди нет элементов; false, если в очереди есть элементы.
+     */
+    public boolean isEmpty() {
+        synchronized (this) {
+            return queue.isEmpty();
+        }
     }
 }

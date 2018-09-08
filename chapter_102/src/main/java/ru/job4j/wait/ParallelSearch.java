@@ -40,12 +40,10 @@ public class ParallelSearch {
         );
         consumer.start();
         producer.start();
-
-        while (!consumer.isInterrupted()) {
+        producer.join();
+        while (!queue.isEmpty()) {
             Thread.sleep(500);
-            if (!producer.isAlive() && consumer.getState() == Thread.State.WAITING) {
-                consumer.interrupt();
-            }
         }
+        consumer.interrupt();
     }
 }
