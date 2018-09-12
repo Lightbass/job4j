@@ -13,7 +13,7 @@ import java.util.List;
 public class ThreadPool {
     private final List<Thread> threads = new LinkedList<>();
     private final SimpleBlockingQueue<Runnable> tasks = new SimpleBlockingQueue<>();
-    private int size = Runtime.getRuntime().availableProcessors();
+    private final int size = Runtime.getRuntime().availableProcessors();
 
     /**
      * Конструктор инициализирует потоки и запускает их на выполнение добавляемых задач.
@@ -21,11 +21,11 @@ public class ThreadPool {
     public ThreadPool() {
         for (int i = 0; i != size; i++) {
             threads.add(new Thread(() -> {
-                while (true) {
+                while (!Thread.currentThread().isInterrupted()) {
                     try {
                         tasks.poll().run();
                     } catch (InterruptedException ie) {
-                        break;
+                        Thread.currentThread().interrupt();
                     }
                 }
             }, "PoolThread-" + i));

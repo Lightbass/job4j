@@ -42,7 +42,6 @@ public class Board {
         boolean result = false;
         try {
             if (dist.getLock().tryLock(timeOut, TimeUnit.MILLISECONDS)) {
-                dist.getLock().lock();
                 source.getLock().unlock();
                 result = true;
             }

@@ -16,7 +16,7 @@ import java.util.Queue;
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
-    private final int capacity = 3;
+    private static final int CAPACITY = 3;
     private final Queue<T> queue = new LinkedList<>();
 
     /**
@@ -26,7 +26,7 @@ public class SimpleBlockingQueue<T> {
      */
     public void offer(final T value) {
         synchronized (this) {
-            while (queue.size() == capacity) {
+            while (queue.size() == CAPACITY) {
                 try {
                     wait();
                 } catch (InterruptedException ie) {
@@ -44,15 +44,13 @@ public class SimpleBlockingQueue<T> {
      * @throws InterruptedException
      */
     public T poll() throws InterruptedException  {
-        final T result;
         synchronized (this) {
             while (queue.size() == 0) {
                 wait();
             }
-            result = queue.poll();
             notify();
+            return queue.poll();
         }
-        return result;
     }
 
     /**
