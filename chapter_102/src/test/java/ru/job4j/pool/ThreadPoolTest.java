@@ -25,15 +25,16 @@ public class ThreadPoolTest {
 
     @Test
     public void whenTaskWorkOnTasksThenOK() throws InterruptedException {
-        final int[] num = new int[5];
-        Arrays.fill(num, 1);
+        final int[] result = new int[5];
+        final int[] answer = {2, 24, 720, 40320, 3628800};
+        Arrays.fill(result, 1);
         Runnable[] runTask = new Runnable[5];
         for (int i = 0; i != runTask.length; i++) {
             final int index = i;
             final int fact = (i + 1) * 2;
             runTask[i] = () -> {
                 for (int n = 2; n != fact + 1; n++) {
-                    num[index] = num[index] * n;
+                    result[index] = result[index] * n;
                 }
             };
 
@@ -41,8 +42,6 @@ public class ThreadPoolTest {
         }
         Thread.sleep(500);
         pool.shutdown();
-        assertThat(num[0] == 2 && num[1] == 24
-                && num[2] == 720 && num[3] == 40320
-                && num[4] == 3628800, is(true));
+        assertThat(result, is(answer));
     }
 }

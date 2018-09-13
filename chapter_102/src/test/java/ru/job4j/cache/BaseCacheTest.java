@@ -95,8 +95,8 @@ public class BaseCacheTest {
         thread2.start();
         thread1.join();
         thread2.join();
-        assertThat(cache.get(1).getVersion() == 2
-                && cache.get(1).getName().equals("111"), is(true));
+        assertThat(cache.get(1).getVersion(), is(2));
+        assertThat(cache.get(1).getName(), is("111"));
     }
 
     @Test

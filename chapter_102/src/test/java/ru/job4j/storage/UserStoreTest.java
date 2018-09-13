@@ -67,6 +67,7 @@ public class UserStoreTest {
         transfer1.join();
         transfer2.join();
         transfer3.join();
-        assertThat(store.get(0).getCash() == 115 && store.get(1).getCash() == 85, is(true));
+        assertThat(store.get(0).getCash(), is(115));
+        assertThat(store.get(1).getCash(), is(85));
     }
 }

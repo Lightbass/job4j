@@ -31,7 +31,8 @@ public class RectangleMoveTest {
         for (int i = 0; i < 10; i++) {
             rm.moveFigure();
         }
-        assertThat(rect.getX() == 15 && rect.getY() == 20, is(true));
+        assertThat(rect.getX(), is(15.0));
+        assertThat(rect.getY(), is(20.0));
     }
 
     @Test
@@ -39,7 +40,8 @@ public class RectangleMoveTest {
         for (int i = 0; i < 55; i++) {
             rm.moveFigure();
         }
-        assertThat(rect.getX() == 40 && rect.getY() == 35, is(true));
+        assertThat(rect.getX(), is(40.0));
+        assertThat(rect.getY(), is(35.0));
     }
 
     @Test
@@ -47,6 +49,7 @@ public class RectangleMoveTest {
         for (int i = 0; i < 100; i++) {
             rm.moveFigure();
         }
-        assertThat(rect.getX() == 5 && rect.getY() == 10, is(true));
+        assertThat(rect.getX(), is(5.0));
+        assertThat(rect.getY(), is(10.0));
     }
 }

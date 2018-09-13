@@ -32,15 +32,15 @@ public class CustomArrayListTest {
     public void thenDeleteElementsByIndexThenResultOK() {
         list.delete(0);
         list.delete(2);
-        assertThat(list.get(0).equals("String 1"),  is(true));
-        assertThat(list.get(1).equals("String 2"),  is(true));
-        assertThat(list.get(2).equals("String 4"),  is(true));
+        assertThat(list.get(0),  is("String 1"));
+        assertThat(list.get(1),  is("String 2"));
+        assertThat(list.get(2),  is("String 4"));
     }
 
     @Test
     public void thenGetElementsInIndexThenResultOK() {
         for (int i = 0; i != 5; i++) {
-            assertThat(list.get(i).equals("String " + i), is(true));
+            assertThat(list.get(i), is("String " + i));
         }
     }
 
@@ -55,7 +55,7 @@ public class CustomArrayListTest {
         list.add("String 11");
         Iterator<String> iter = list.iterator();
         for (int i = 0; i != 12; i++) {
-            assertThat(iter.next().equals("String " + i), is(true));
+            assertThat(iter.next(), is("String " + i));
         }
     }
 

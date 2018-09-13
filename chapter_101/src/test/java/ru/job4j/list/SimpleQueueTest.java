@@ -26,10 +26,10 @@ public class SimpleQueueTest {
 
     @Test
     public void whenPullAllElementsThenOK() {
-        assertThat(list.poll().equals("String 0"),  is(true));
-        assertThat(list.poll().equals("String 1"),  is(true));
-        assertThat(list.poll().equals("String 2"),  is(true));
-        assertThat(list.poll().equals("String 3"),  is(true));
-        assertThat(list.poll().equals("String 4"),  is(true));
+        assertThat(list.poll(),  is("String 0"));
+        assertThat(list.poll(),  is("String 1"));
+        assertThat(list.poll(),  is("String 2"));
+        assertThat(list.poll(),  is("String 3"));
+        assertThat(list.poll(),  is("String 4"));
     }
 }

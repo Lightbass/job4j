@@ -1,11 +1,6 @@
 package ru.job4j.exam;
 
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -59,8 +54,8 @@ public class HeroTest {
             hero.move(1, 0, 100);
         });
         thread.start();
-        assertThat(hero.getCurrentCell().getX() == 0
-                && hero.getCurrentCell().getY() == 1, is(true));
+        assertThat(hero.getCurrentCell().getX(), is(0));
+        assertThat(hero.getCurrentCell().getY(), is(1));
     }
 
     /**
@@ -74,7 +69,7 @@ public class HeroTest {
             hero.move(-1, 0, 100);
         });
         thread.start();
-        assertThat(hero.getCurrentCell().getX() == 0
-                && hero.getCurrentCell().getY() == 1, is(true));
+        assertThat(hero.getCurrentCell().getX(), is(0));
+        assertThat(hero.getCurrentCell().getY(), is(1));
     }
 }
