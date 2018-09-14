@@ -2,11 +2,8 @@ package ru.job4j.exam;
 
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
