@@ -1,10 +1,7 @@
 package ru.job4j.exam;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.CyclicBarrier;
-import java.util.function.BiFunction;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Класс - свитчер потоков. Я сделал не для двух потоков, а для нескольких, тут можно
@@ -24,6 +21,8 @@ public class Switcher {
     private final int numbersInRow;
     /** Статус работы свитчера */
     private volatile boolean working = true;
+    /** Счетчик для запуска всех потоков одновременно с нужной точки */
+    private CountDownLatch latch;
 
     /**
      * Конструктор инициализирует кол-во цифр, которые подряд добавятся в строку.
@@ -37,50 +36,53 @@ public class Switcher {
      * Метод создает поток, который будет писать подряд одну и ту же цифру какое-то
      * кол-во раз и добавляет объект потока в список. Метод сделан так, что каждый
      * поток для ожидания использует в качестве монитора свой же объект потока и
-     * каждый из потоков, добавляемый этим методом сразу запускается и ждет, пока
-     * его пробудит с помощью метода notify() предыдущий поток в списке, как только
-     * он пробудится, он выведет число нужное кол-во раз и пробудит следующий в списке
-     * поток и так по кругу.
+     * каждый из потоков, добавляемый этим методом при запуске будет ждать, пока
+     * CountDownLatch не обнулится. После преодоления метода счетчика await() поток
+     * ждет, пока его пробудит с помощью метода notify() предыдущий поток в списке,
+     * как только с помощью метода notify() предыдущий поток в списке, как только
+     * он пробудится, он выведет число нужное кол-во раз и пробудит следующий в
+     * списке поток и так по кругу.
      * @param num число, которое будет добавляться подряд в строку.
      */
+
     public void addNumThread(final int num) {
-        final int index = listThread.size();
+        final int current = listThread.size();
         listThread.add(new Thread(() -> {
-            final Thread current = listThread.get(index);
-            synchronized (current) {
+            final int next = (listThread.size() - 1) == current ? 0 : (current + 1);
+            final Thread currentMonitor = listThread.get(current);
+            final Thread nextMonitor = listThread.get(next);
+            synchronized (currentMonitor) {
+                waitForCount();
                 while (working) {
                     try {
-                        current.wait();
+                        currentMonitor.wait();
                         for (int i = 0; i != numbersInRow; i++) {
                             sbuf.putToBuffer(num);
                         }
-                        final int next = (listThread.size() - 1) == index ? 0 : (index + 1);
-                        synchronized (listThread.get(next)) {
-                            listThread.get(next).notify();
+                        synchronized (nextMonitor) {
+                            nextMonitor.notify();
                         }
                     } catch (InterruptedException ie) {
-                        working = false;
-                        Thread.currentThread().interrupt();
+                        interruptAllThreads();
                     }
                 }
             }
         }));
-        listThread.get(index).start();
     }
 
     /**
-     * Метод пробуждает первый поток, чтобы он начал прописывать в строку свои первые числа.
-     * Перед тем, как вызвать для него notify() метод проверяет, что поток запустился и ждет
-     * в нужном месте в состоянии WAITING, иначе метод бы вызвал notify(), когда поток ещё
-     * даже не зашел в свой монитор.
+     * Метод запускает все потоки, которые будут ждать до момента, пока счетчик {@code latch}
+     * не обнулится, как только это произойдет и первый поток освободит монитор, дойдя до
+     * строки wait(), его тут же пробудит данный метод и цепочка исполнения потоков начнет
+     * свою работу.
      */
     public void startSwitcher() {
-        while (listThread.get(0).getState() != Thread.State.WAITING) {
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-            }
+        latch = new CountDownLatch(listThread.size());
+        listThread.stream().forEach(t -> t.start());
+        try {
+            latch.await();
+        } catch (InterruptedException ie) {
+            interruptAllThreads();
         }
         synchronized (listThread.get(0)) {
             listThread.get(0).notify();
@@ -93,6 +95,25 @@ public class Switcher {
      */
     public void terminateSwitcher() {
         listThread.get(0).interrupt();
+    }
+
+    /**
+     * Метод приостанавливает поток, пока не обнулится CountDownLatch.
+     */
+    private void waitForCount() {
+        try {
+            latch.countDown();
+            latch.await();
+        } catch (InterruptedException ie) {
+            interruptAllThreads();
+        }
+    }
+    /**
+     * Метод меняет флаг работы на {@code false} и прерывает текущий поток.
+     */
+    private void interruptAllThreads() {
+        working = false;
+        Thread.currentThread().interrupt();
     }
 
     /**
