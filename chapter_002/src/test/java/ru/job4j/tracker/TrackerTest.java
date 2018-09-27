@@ -1,13 +1,12 @@
 package ru.job4j.tracker;
 
+import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.tracker.data.Item;
+import ru.job4j.tracker.data.ItemContainer;
 import ru.job4j.tracker.data.Tracker;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -18,16 +17,20 @@ import static org.junit.Assert.assertThat;
  * @version 0.1
  */
 public class TrackerTest {
+    public ItemContainer tracker;
+
+    @Before
+    public void prepare() {
+        tracker = new Tracker();
+    }
 
     /**
      * Проверка вывода одного элемента из массива выдаваемого методом findAll().
      */
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        System.out.println(tracker.findAll().get(0).getId());
         assertThat(tracker.findAll().get(0), is(item));
     }
 
@@ -36,7 +39,6 @@ public class TrackerTest {
      */
     @Test
     public void whenAddNewItemsThenTrackerHasSameItems() {
-        Tracker tracker = new Tracker();
         Item[] item = new Item[] {new Item("test1", "test111", 123L),
                 new Item("test2", "test222", 123L),
                 new Item("test3", "test333", 123L)};
@@ -52,7 +54,6 @@ public class TrackerTest {
      */
     @Test
     public void whenAddNewItemsThenFindAllByName() {
-        Tracker tracker = new Tracker();
         Item[] item = {new Item("item1", "item111", 123L),
                 new Item("item2", "item222", 123L),
                 new Item("item3", "item333", 123L)};
@@ -75,7 +76,6 @@ public class TrackerTest {
      */
     @Test
     public void whenDeleteItemThenReturnRemaining() {
-        Tracker tracker = new Tracker();
         Item[] items = {new Item("item1", "item111", 123L),
                 new Item("item2", "item222", 456L),
                 new Item("item3", "item333", 123L),
@@ -98,7 +98,6 @@ public class TrackerTest {
      */
     @Test
     public void whenReplaceNameThenReturnNewName() {
-        Tracker tracker = new Tracker();
         Item previous = new Item("test1", "testDescription", 123L);
         tracker.add(previous);
         Item next = new Item("test2", "testDescription2", 1234L);

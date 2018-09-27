@@ -34,7 +34,7 @@ public class SimpleBlockingQueue<T> {
                 }
             }
             queue.offer(value);
-            notify();
+            notifyAll();
         }
     }
 
@@ -48,7 +48,7 @@ public class SimpleBlockingQueue<T> {
             while (queue.size() == 0) {
                 wait();
             }
-            notify();
+            notifyAll();
             return queue.poll();
         }
     }

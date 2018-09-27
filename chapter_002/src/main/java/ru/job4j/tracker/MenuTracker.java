@@ -36,7 +36,7 @@ public class MenuTracker {
          * @param tracker объект типа Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ItemContainer tracker) {
             System.out.println(LS + "------------ Редактирование заявки --------------" + LS);
             Item item = checkStrGetItem(input.ask("Введите ID заявки: "), tracker);
             if (item != null) {
@@ -72,7 +72,7 @@ public class MenuTracker {
          * @param tracker объект типа Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ItemContainer tracker) {
             System.out.println(LS + "------------ Удаление заявки --------------" + LS);
             Item item = checkStrGetItem(input.ask("Введите ID заявки: "), tracker);
             if (item != null) {
@@ -105,7 +105,7 @@ public class MenuTracker {
          * @param tracker объект типа Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ItemContainer tracker) {
             System.out.println(LS + "------------ Заявки в трекере --------------" + LS);
             List<Item> items = tracker.findAll();
             for (Item i : items) {
@@ -138,7 +138,7 @@ public class MenuTracker {
          * @param tracker объект типа Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ItemContainer tracker) {
             System.out.println(LS + "------------ Поиск заявок по имени --------------" + LS);
             String findName = input.ask("Введите искомое имя заявки: ");
             List<Item> items = tracker.findByName(findName);
@@ -176,7 +176,7 @@ public class MenuTracker {
          * @param tracker объект типа Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ItemContainer tracker) {
             System.out.println(LS + "------------ Поиск заявки по идентификатору --------------" + LS);
             Item item = checkStrGetItem(input.ask("Введите идентификатор(ID) заявки : "), tracker);
             if (item != null) {
@@ -208,7 +208,7 @@ public class MenuTracker {
          * @param tracker объект типа Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ItemContainer tracker) {
             System.out.println(LS + "------------ Выход из программы --------------" + LS);
             exit = true;
         }
@@ -237,7 +237,7 @@ public class MenuTracker {
          * @param tracker объект типа Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ItemContainer tracker) {
             System.out.println(LS + "------------ Добавление новой заявки --------------" + LS);
             String name = input.ask("Введите имя заявки : ");
             String desc = input.ask("Введите описание заявки : ");
@@ -255,7 +255,7 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
      */
-    private Tracker tracker;
+    private ItemContainer tracker;
 
     /**
      * @param хранит ссылку на массив типа UserAction.
@@ -273,7 +273,7 @@ public class MenuTracker {
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, ItemContainer tracker) {
         this.input = input;
         this.tracker = tracker;
     }

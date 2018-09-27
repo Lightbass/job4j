@@ -22,19 +22,14 @@ public class StartUI {
     /**
      * Хранилище заявок.
      */
-    private Tracker tracker;
-
-    /**
-     * Переход на следующую строку.
-     */
-    private final String nextLine = System.lineSeparator();
+    private ItemContainer tracker;
 
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, ItemContainer tracker) {
         this.tracker = tracker;
         this.input = input;
     }

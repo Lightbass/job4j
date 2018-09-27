@@ -1,5 +1,7 @@
 package ru.job4j.tracker.data;
 
+import java.util.Objects;
+
 /**
  * Класс - заявка.
  * @author Alexey Makarov
@@ -105,5 +107,23 @@ public class Item {
                 .append(System.lineSeparator())
                 .append("ID: ")
                 .append(id).toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Item item = (Item) o;
+        return Objects.equals(name, item.name)
+                && Objects.equals(description, item.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description);
     }
 }

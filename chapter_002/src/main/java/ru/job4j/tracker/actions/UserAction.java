@@ -1,7 +1,7 @@
 package ru.job4j.tracker.actions;
 
 import ru.job4j.tracker.data.Item;
-import ru.job4j.tracker.data.Tracker;
+import ru.job4j.tracker.data.ItemContainer;
 import ru.job4j.tracker.input.Input;
 
 /**
@@ -15,7 +15,7 @@ public interface UserAction {
     /**
      * Переход на следующую строку.
      */
-    final String LS = System.lineSeparator();
+    String LS = System.lineSeparator();
 
     /**
      * Валидатор, проверяющий идентификатор на валидность.
@@ -23,7 +23,7 @@ public interface UserAction {
      * @param tracker трекер заявок.
      * @return
      */
-    default Item checkStrGetItem(String str, Tracker tracker) {
+    default Item checkStrGetItem(String str, ItemContainer tracker) {
         Item result = null;
         try {
             long id = Long.parseLong(str);
@@ -48,7 +48,7 @@ public interface UserAction {
      * @param input объект типа Input
      * @param tracker объект типа Tracker
      */
-    void execute(Input input, Tracker tracker);
+    void execute(Input input, ItemContainer tracker);
 
     /**
      * Метод возвращает информацию о данном пункте меню.

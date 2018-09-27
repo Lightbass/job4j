@@ -37,7 +37,6 @@ public class ThreadPoolTest {
                     result[index] = result[index] * n;
                 }
             };
-
             pool.work(runTask[i]);
         }
         Thread.sleep(500);

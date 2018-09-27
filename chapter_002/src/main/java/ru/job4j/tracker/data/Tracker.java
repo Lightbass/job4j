@@ -11,7 +11,7 @@ import java.util.Random;
  * @since 03.08.2018
  * @version 0.1
  */
-public class Tracker {
+public class Tracker implements ItemContainer {
 
     /**
      * Массив для хранения заявок.
