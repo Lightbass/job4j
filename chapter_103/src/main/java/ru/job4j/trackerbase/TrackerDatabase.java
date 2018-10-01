@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import ru.job4j.tracker.StartUI;
 import ru.job4j.tracker.data.Item;
 import ru.job4j.tracker.data.ItemContainer;
-import ru.job4j.tracker.data.Tracker;
 import ru.job4j.tracker.input.ConsoleInput;
 import ru.job4j.tracker.input.ValidateInput;
 
@@ -42,7 +41,7 @@ public class TrackerDatabase implements ItemContainer, AutoCloseable {
      */
     public TrackerDatabase() {
         properties = new Properties();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("tracker/db.properties")) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trackerbase/db.properties")) {
             properties.load(inputStream);
             urlConnection = properties.getProperty("db.urlConnection");
             urlDBConnection = properties.getProperty("db.urlDBConnection");

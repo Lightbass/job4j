@@ -22,7 +22,6 @@ public class SimpleBlockingQueue<T> {
     /**
      * Метод добавляет элемент в блокирующую очередь.
      * @param value добавляемый элемент.
-     * @throws InterruptedException
      */
     public void offer(final T value) {
         synchronized (this) {
@@ -41,7 +40,7 @@ public class SimpleBlockingQueue<T> {
     /**
      * Метод возвращает элемент из блокирующей очереди.
      * @return элемент из очереди.
-     * @throws InterruptedException
+     * @throws InterruptedException если поток будет прерван.
      */
     public T poll() throws InterruptedException  {
         synchronized (this) {

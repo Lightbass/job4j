@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
  * @version 0.1
  */
 public class TrackerTest {
-    public ItemContainer tracker;
+    protected ItemContainer tracker;
 
     @Before
     public void prepare() {

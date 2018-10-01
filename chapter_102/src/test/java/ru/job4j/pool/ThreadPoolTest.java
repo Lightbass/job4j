@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 public class ThreadPoolTest {
 
-    ThreadPool pool;
+    private ThreadPool pool;
 
     @Before
     public void prepare() {

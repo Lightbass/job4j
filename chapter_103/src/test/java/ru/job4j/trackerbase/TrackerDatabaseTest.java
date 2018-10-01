@@ -2,13 +2,11 @@ package ru.job4j.trackerbase;
 
 import org.junit.Before;
 import ru.job4j.tracker.TrackerTest;
-import ru.job4j.tracker.data.Tracker;
-
 
 /**
- * JUnit тест класса Tracker.
+ * JUnit тест класса TrackerDatabase.
  * @author Alexey Makarov
- * @since 03.08.18
+ * @since 01.10.18
  * @version 0.1
  */
 public class TrackerDatabaseTest extends TrackerTest {
