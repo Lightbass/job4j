@@ -21,20 +21,20 @@ import java.util.*;
  */
 public class TrackerDatabase implements ItemContainer, AutoCloseable {
     private final static Logger LOG = LoggerFactory.getLogger(TrackerDatabase.class);
-    private Random r = new Random();
-    private Properties properties;
+    private final Random r = new Random();
+    private final Properties properties;
+    private final String urlConnection;
+    private final String urlDBConnection;
+    private final String existsDB;
+    private final String createDB;
+    private final String createTable;
+    private final String insertQuery;
+    private final String selectAllQuery;
+    private final String selectByIdQuery;
+    private final String selectByNameQuery;
+    private final String updateQuery;
+    private final String deleteQuery;
     private Connection connection;
-    private String urlConnection;
-    private String urlDBConnection;
-    private String existsDB;
-    private String createDB;
-    private String createTable;
-    private String insertQuery;
-    private String selectAllQuery;
-    private String selectByIdQuery;
-    private String selectByNameQuery;
-    private String updateQuery;
-    private String deleteQuery;
 
     /**
      * Конструктор инициализирует переменные запросов и запускает метод подключения к БД.
@@ -43,20 +43,20 @@ public class TrackerDatabase implements ItemContainer, AutoCloseable {
         properties = new Properties();
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trackerbase/db.properties")) {
             properties.load(inputStream);
-            urlConnection = properties.getProperty("db.urlConnection");
-            urlDBConnection = properties.getProperty("db.urlDBConnection");
-            existsDB = properties.getProperty("query.existsDB");
-            createDB = properties.getProperty("query.createDB");
-            createTable = properties.getProperty("query.createTable");
-            insertQuery = properties.getProperty("query.insert");
-            selectAllQuery = properties.getProperty("query.selectAll");
-            selectByIdQuery = properties.getProperty("query.selectById");
-            selectByNameQuery = properties.getProperty("query.selectByName");
-            updateQuery = properties.getProperty("query.update");
-            deleteQuery = properties.getProperty("query.delete");
         } catch (IOException ioe) {
             LOG.error(ioe.getMessage(), ioe);
         }
+        urlConnection = properties.getProperty("db.urlConnection");
+        urlDBConnection = properties.getProperty("db.urlDBConnection");
+        existsDB = properties.getProperty("query.existsDB");
+        createDB = properties.getProperty("query.createDB");
+        createTable = properties.getProperty("query.createTable");
+        insertQuery = properties.getProperty("query.insert");
+        selectAllQuery = properties.getProperty("query.selectAll");
+        selectByIdQuery = properties.getProperty("query.selectById");
+        selectByNameQuery = properties.getProperty("query.selectByName");
+        updateQuery = properties.getProperty("query.update");
+        deleteQuery = properties.getProperty("query.delete");
         createAndConnect();
     }
 

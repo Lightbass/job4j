@@ -22,7 +22,7 @@ public class Switcher {
     /** Статус работы свитчера */
     private volatile boolean working = true;
     /** Счетчик для запуска всех потоков одновременно с нужной точки */
-    private CountDownLatch latch;
+    private volatile CountDownLatch latch;
 
     /**
      * Конструктор инициализирует кол-во цифр, которые подряд добавятся в строку.
