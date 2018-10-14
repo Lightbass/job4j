@@ -91,6 +91,15 @@ public class ValidateService {
     }
 
     /**
+     * Метод ищет пользователя в хранилище по идентификатору и возвращает его.
+     * @param id идентификатор.
+     * @return пользователь.
+     */
+    public User findById(int id) {
+        return STORE.findById(id);
+    }
+
+    /**
      * Валидация адреса электронной почты, чтобы соответсвовала виду "sdsdsad@asdasd.asdasd".
      * @param email адрес электронной почты.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
