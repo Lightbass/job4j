@@ -27,7 +27,7 @@ public class UserCreateServlet extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         StringBuilder sb = new StringBuilder("<!DOCTYPE html> <html lang=\"en\">"
                 + "<head><meta charset=\"UTF-8\">"
-                + "<title>Users</title>"
+                + "<title>Create</title>"
                 + "</head><body>");
         sb.append("<form action='" + req.getContextPath() + "/list' method='post'>"
                 + "Name : <input type='text' name='name'/><br>"

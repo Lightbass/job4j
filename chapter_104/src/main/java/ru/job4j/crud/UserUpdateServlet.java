@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Класс - сервлет для отображения формы изменения пользователя.
@@ -31,7 +32,7 @@ public class UserUpdateServlet extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         StringBuilder sb = new StringBuilder("<!DOCTYPE html> <html lang=\"en\">"
                 + "<head><meta charset=\"UTF-8\">"
-                + "<title>Users</title>");
+                + "<title>Update</title>");
         try {
             user = logic.findById(Integer.parseInt(req.getParameter("id")));
             sb.append("</head><body><form action='" + req.getContextPath() + "/list' method='post'>"

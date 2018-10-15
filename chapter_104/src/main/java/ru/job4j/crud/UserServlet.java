@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        List<User> list = logic.findAll();
+        Collection<User> list = logic.findAll();
         StringBuilder sb = new StringBuilder("<!DOCTYPE html> <html lang=\"en\">"
                 + "<head><meta charset=\"UTF-8\">"
                 + "<title>Users</title>"
@@ -79,16 +80,8 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append("<!DOCTYPE html> <html lang='en'>"
-                + "<head><meta charset='UTF-8'>"
-                + "<title>Result</title>"
-                + "<meta http-equiv='refresh' content='2; url=" + req.getContextPath() + "/list'>"
-                + "</head><body>");
-        writer.append(makeAction(req) ? "Action done" : "Action error");
-        writer.append("</body></html>");
-        writer.flush();
+        resp.sendRedirect(req.getContextPath() + "/result.jsp?result="
+                + (makeAction(req) ? "1" : "0"));
     }
 
     /**

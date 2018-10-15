@@ -1,7 +1,10 @@
 package ru.job4j.crud;
 
 import net.jcip.annotations.ThreadSafe;
-import java.util.concurrent.CopyOnWriteArrayList;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 
 /**
@@ -14,7 +17,7 @@ import java.util.List;
 public class MemoryStore implements Store {
     private static final MemoryStore SINGLETON_INSTANCE = new MemoryStore();
     private final ValidateService logic = ValidateService.getInstance();
-    private final List<User> users = new CopyOnWriteArrayList<>();
+    private final Map<Integer, User> users = new ConcurrentHashMap<>();
 
     /**
      * Приватный конструктор для реализации синглтона.
@@ -37,7 +40,7 @@ public class MemoryStore implements Store {
      */
     @Override
     public void add(User user) {
-        users.add(user);
+        users.put(user.getId(), user);
     }
 
     /**
@@ -48,8 +51,7 @@ public class MemoryStore implements Store {
     @Override
     public void update(int id, User user) {
         user.setId(id);
-        users.remove(findById(id));
-        users.add(user);
+        users.put(id, user);
     }
 
     /**
@@ -58,7 +60,7 @@ public class MemoryStore implements Store {
      */
     @Override
     public void delete(int id) {
-        users.remove(findById(id));
+        users.remove(id);
     }
 
     /**
@@ -66,8 +68,8 @@ public class MemoryStore implements Store {
      * @return все пользователи.
      */
     @Override
-    public List<User> findAll() {
-        return users;
+    public Collection<User> findAll() {
+        return users.values();
     }
 
     /**
@@ -77,14 +79,7 @@ public class MemoryStore implements Store {
      */
     @Override
     public User findById(int id) {
-        User result = null;
-        for (User user : users) {
-            if (user.getId() == id) {
-                result = user;
-                break;
-            }
-        }
-        return result;
+        return users.getOrDefault(id, null);
     }
 
     /**
@@ -95,7 +90,7 @@ public class MemoryStore implements Store {
     @Override
     public User findByLogin(String login) {
         User result = null;
-        for (User user : users) {
+        for (User user : users.values()) {
             if (user.getLogin().equals(login)) {
                 result = user;
                 break;

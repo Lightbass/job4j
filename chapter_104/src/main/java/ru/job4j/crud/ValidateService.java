@@ -1,5 +1,6 @@
 package ru.job4j.crud;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +39,7 @@ public class ValidateService {
      */
     public boolean add(String name, String login, String email) {
         boolean result = false;
-        if (STORE.findByLogin(login) == null) {
+        if (STORE.findByLogin(login) == null && !login.equals("")) {
             if (validateEmail(email)) {
                 STORE.add(new User(name, login, email));
                 result = true;
@@ -58,7 +59,7 @@ public class ValidateService {
     public boolean update(int id, String name, String login, String email) {
         boolean result = false;
         if (STORE.findById(id) != null) {
-            if (STORE.findByLogin(login) == null || login == null) {
+            if ((STORE.findById(id).getLogin().equals(login) || STORE.findByLogin(login) == null)  && !login.equals("")) {
                 if (validateEmail(email) || email == null) {
                     STORE.update(id, new User(name, login, email));
                     result = true;
@@ -86,7 +87,7 @@ public class ValidateService {
      * Метод возвращает всех пользователей внутри хранилища.
      * @return все пользователи.
      */
-    public List<User> findAll() {
+    public Collection<User> findAll() {
         return STORE.findAll();
     }
 

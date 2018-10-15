@@ -1,6 +1,6 @@
 package ru.job4j.crud;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Интерфейс - хранилище пользователей.
@@ -32,7 +32,7 @@ public interface Store {
      * Метод возвращает всех пользователей в хранилище.
      * @return все пользователи.
      */
-    List<User> findAll();
+    Collection<User> findAll();
 
     /**
      * Метод ищет пользователя в хранилище по идентификатору и возвращает его.
