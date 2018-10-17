@@ -1,5 +1,5 @@
 <%@ page import="ru.job4j.crud.User" %>
-<%@ page import="ru.job4j.crud.MemoryStore" %>
+<%@ page import="ru.job4j.crud.ValidateService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,7 +8,7 @@
 </head>
 <body>
     <table>
-        <% for (User user : MemoryStore.getInstance().findAll()) {%>
+        <% for (User user : ValidateService.STORE.findAll()) {%>
         <tr>
             <td>
                 Name = <%= user.getName() %>,

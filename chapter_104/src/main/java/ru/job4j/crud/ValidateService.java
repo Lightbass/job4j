@@ -1,7 +1,6 @@
 package ru.job4j.crud;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class ValidateService {
     private static final ValidateService SINGLETON_INSTANCE = new ValidateService();
-    private static final MemoryStore STORE = MemoryStore.getInstance();
+    public static final Store STORE = DBStore.getInstance();
 
     /**
      * Приватный конструктор для реализации синглтона.

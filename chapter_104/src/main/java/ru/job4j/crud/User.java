@@ -6,12 +6,12 @@ import java.util.Date;
  * Класс - пользователь.
  */
 public class User {
-    static private int serial = 0;
-    private int id = serial++;
+    static private int serial = 1;
+    private int id;
     private String name;
     private String login;
     private String email;
-    private String createDate;
+    private Date createDate;
 
     /**
      * Конструктор инициализирует поля имени, логина и почты.
@@ -20,10 +20,22 @@ public class User {
      * @param email почта.
      */
     public User(String name, String login, String email) {
+        this(serial++, name, login, email, new Date().getTime());
+    }
+
+    /**
+     * Конструктор инициализирует поля идентификатора, имени, логина и почты.
+     * @param id идентификатор.
+     * @param name имя.
+     * @param login логин.
+     * @param email почта.
+     */
+    public User(int id, String name, String login, String email, long createDate) {
         this.name = name;
         this.login = login;
         this.email = email;
-        createDate = new Date().toString();
+        this.id = id;
+        this.createDate = new Date(createDate);
     }
 
     /**
@@ -94,7 +106,7 @@ public class User {
      * Метод возвращает дату создания пользователя.
      * @return дата создания.
      */
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 }

@@ -5,7 +5,6 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.List;
 
 /**
  * Класс - реализация хранилища пользователей, синглтон.
@@ -16,7 +15,6 @@ import java.util.List;
 @ThreadSafe
 public class MemoryStore implements Store {
     private static final MemoryStore SINGLETON_INSTANCE = new MemoryStore();
-    private final ValidateService logic = ValidateService.getInstance();
     private final Map<Integer, User> users = new ConcurrentHashMap<>();
 
     /**

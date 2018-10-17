@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ru.job4j.crud.User" %>
-<%@ page import="ru.job4j.crud.MemoryStore" %>
 <%@ page import="ru.job4j.crud.UserServlet" %>
+<%@ page import="ru.job4j.crud.ValidateService" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Update</title>
     <% User user = null;
         try {
-            user = MemoryStore.getInstance().findById(Integer.parseInt(request.getParameter("id")));
+            user = ValidateService.STORE.findById(Integer.parseInt(request.getParameter("id")));
         } catch (NumberFormatException nfe) {
             %>
     <meta http-equiv="refresh" content="2; url= <%= request.getContextPath() %>/list">

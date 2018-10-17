@@ -2,7 +2,6 @@ package ru.job4j.crud;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import ru.job4j.servlets.EchoServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -22,10 +20,9 @@ import java.util.function.Function;
  * @version 0.1
  */
 public class UserServlet extends HttpServlet {
-    public static final Logger LOGGER = LogManager.getLogger(EchoServlet.class);
+    public static final Logger LOGGER = LogManager.getLogger(UserServlet.class);
     private final ValidateService logic = ValidateService.getInstance();
     private final Map<String, Function<HttpServletRequest, Boolean>> dispatch = new HashMap<>();
-    private final String ls = System.lineSeparator();
 
     /**
      * В этом методе подготавливается объект для выбора действий.
