@@ -23,20 +23,6 @@ public class UserCreateServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        StringBuilder sb = new StringBuilder("<!DOCTYPE html> <html lang=\"en\">"
-                + "<head><meta charset=\"UTF-8\">"
-                + "<title>Create</title>"
-                + "</head><body>");
-        sb.append("<form action='" + req.getContextPath() + "/list' method='post'>"
-                + "Name : <input type='text' name='name'/><br>"
-                + "Login : <input type='text' name='login'/><br>"
-                + "e-mail : <input type='text' name='email'/><br>"
-                + "<input type='submit' name='action' value='add'>"
-                + "</form>");
-        sb.append("</body></html>");
-        writer.append(sb.toString());
-        writer.flush();
+        req.getRequestDispatcher("/WEB-INF/views/create.jsp").forward(req, resp);
     }
 }

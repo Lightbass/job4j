@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class ValidateService {
     private static final ValidateService SINGLETON_INSTANCE = new ValidateService();
-    public static final Store STORE = DBStore.getInstance();
+    public static final Store STORE = MemoryStore.getInstance();
 
     /**
      * Приватный конструктор для реализации синглтона.

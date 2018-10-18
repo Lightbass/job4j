@@ -43,28 +43,8 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        Collection<User> list = logic.findAll();
-        StringBuilder sb = new StringBuilder("<!DOCTYPE html> <html lang=\"en\">"
-                + "<head><meta charset=\"UTF-8\">"
-                + "<title>Users</title>"
-                + "</head><body><table>");
-        for (User user : list) {
-            sb.append(String.format("<tr><td>Name = %s, Login = %s, e-mail = %s, id = %d, date = %s</td>",
-                    user.getName(), user.getLogin(), user.getEmail(), user.getId(), user.getCreateDate()));
-            sb.append("<td><form>");
-            sb.append("<button formaction='" + req.getContextPath() + "/edit"
-                    + "' formmethod='get' name='id' value='" + user.getId() + "'>Edit</button>");
-            sb.append("<button formaction='" + req.getContextPath() + "/list?action=delete&id=" + user.getId()
-                    + "' formmethod='post'>Delete</button>");
-            sb.append("</form></td></tr>");
-        }
-        sb.append("</table><br><form>");
-        sb.append("<button formaction='" + req.getContextPath() + "/create' formmethod='get'>Create user</button>");
-        sb.append("</form></body></html>");
-        writer.append(sb.toString());
-        writer.flush();
+        req.setAttribute("users", logic.findAll());
+        req.getRequestDispatcher("/WEB-INF/views/users.jsp").forward(req, resp);
     }
 
     /**
@@ -77,8 +57,8 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(req.getContextPath() + "/result.jsp?result="
-                + (makeAction(req) ? "1" : "0"));
+        req.getRequestDispatcher("/WEB-INF/views/result.jsp?result="
+                + (makeAction(req) ? "1" : "0")).forward(req, resp);
     }
 
     /**
