@@ -31,6 +31,7 @@
     <br>
     <form>
         <button formaction="${pageContext.servletContext.contextPath}/create" formmethod="get">Create user</button>
+        <button formaction="${pageContext.servletContext.contextPath}/logout" formmethod="get">Logout</button>
     </form>
 </body>
 </html>

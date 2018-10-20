@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Класс - сервлет для отображения формы изменения пользователя.
@@ -30,6 +29,7 @@ public class UserUpdateServlet extends HttpServlet {
         req.setAttribute("exists", false);
         try {
             user = logic.findById(Integer.parseInt(req.getParameter("id")));
+            user.setPassword("");
             req.setAttribute("user", user);
             if (user != null) {
                 req.setAttribute("exists", true);

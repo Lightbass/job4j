@@ -86,8 +86,9 @@ public class DBStore implements Store {
              PreparedStatement st = connection.prepareStatement(insertQuery)) {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
-            st.setString(3, user.getEmail());
-            st.setTimestamp(4, new Timestamp(user.getCreateDate().getTime()));
+            st.setString(3, user.getPassword());
+            st.setString(4, user.getEmail());
+            st.setTimestamp(5, new Timestamp(user.getCreateDate().getTime()));
             st.execute();
         } catch (SQLException ex) {
             UserServlet.LOGGER.error(ex.getMessage(), ex);
@@ -104,8 +105,9 @@ public class DBStore implements Store {
              PreparedStatement st = connection.prepareStatement(updateQuery)) {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
-            st.setString(3, user.getEmail());
-            st.setInt(4, id);
+            st.setString(3, user.getPassword());
+            st.setString(4, user.getEmail());
+            st.setInt(5, id);
             st.execute();
             user.setId(id);
         } catch (SQLException ex) {
@@ -142,7 +144,8 @@ public class DBStore implements Store {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getTimestamp(5).getTime()));
+                        rs.getString(5),
+                        rs.getTimestamp(6).getTime()));
             }
         } catch (SQLException ex) {
             UserServlet.LOGGER.error(ex.getMessage(), ex);
@@ -166,7 +169,8 @@ public class DBStore implements Store {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getTimestamp(5).getTime());
+                        rs.getString(5),
+                        rs.getTimestamp(6).getTime());
             }
         } catch (SQLException ex) {
             UserServlet.LOGGER.error(ex.getMessage(), ex);
@@ -190,7 +194,8 @@ public class DBStore implements Store {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getTimestamp(5).getTime());
+                        rs.getString(5),
+                        rs.getTimestamp(6).getTime());
             }
         } catch (SQLException ex) {
             UserServlet.LOGGER.error(ex.getMessage(), ex);

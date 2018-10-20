@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class ValidateService {
     private static final ValidateService SINGLETON_INSTANCE = new ValidateService();
-    public static final Store STORE = MemoryStore.getInstance();
+    public static final Store STORE = DBStore.getInstance();
 
     /**
      * Приватный конструктор для реализации синглтона.
@@ -36,11 +36,11 @@ public class ValidateService {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
-    public boolean add(String name, String login, String email) {
+    public boolean add(String name, String login, String password, String email) {
         boolean result = false;
         if (STORE.findByLogin(login) == null && !login.equals("")) {
             if (validateEmail(email)) {
-                STORE.add(new User(name, login, email));
+                STORE.add(new User(name, login, password, email));
                 result = true;
             }
         }
@@ -55,12 +55,17 @@ public class ValidateService {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
-    public boolean update(int id, String name, String login, String email) {
+    public boolean update(int id, String name, String login, String password, String email) {
         boolean result = false;
-        if (STORE.findById(id) != null) {
-            if ((STORE.findById(id).getLogin().equals(login) || STORE.findByLogin(login) == null)  && !login.equals("")) {
+        User user = STORE.findById(id);
+        if (user != null) {
+            if ((user.getLogin().equals(login) || STORE.findByLogin(login) == null)  && !login.equals("")) {
                 if (validateEmail(email) || email == null) {
-                    STORE.update(id, new User(name, login, email));
+                    if (password.equals("")) {
+                        STORE.update(id, new User(name, login, user.getPassword(), email));
+                    } else {
+                        STORE.update(id, new User(name, login, password, email));
+                    }
                     result = true;
                 }
             }
@@ -97,6 +102,32 @@ public class ValidateService {
      */
     public User findById(int id) {
         return STORE.findById(id);
+    }
+
+    /**
+     * Метод ищет пользователя в хранилище по логину и возвращает его.
+     * @param login логин.
+     * @return пользователь.
+     */
+    public User findByLogin(String login) {
+        return STORE.findByLogin(login);
+    }
+
+    /**
+     * Метод ищет пользователя с данным логином и паролем для аутентификации.
+     * @param login логин.
+     * @param password пароль.
+     * @return {@code true}, если логин и пароль верные. {@code false}, если нет.
+     */
+    public boolean signIn(String login, String password) {
+        boolean result = false;
+        for (User user : this.findAll()) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     /**

@@ -19,6 +19,7 @@
             <form action="${pageContext.servletContext.contextPath}/" method="post">
                 Name : <input type="text" name="name" value="${user.name}"><br>
                 Login : <input type="text" name="login" value="${user.login}"><br>
+                Password : <input type="password" name="password" value="${user.password}"><br>
                 email : <input type="text" name="email" value="${user.email}"><br>
                 <input type="hidden" name="id" value="${user.id}">
                 <input type="submit" name="action" value="update">

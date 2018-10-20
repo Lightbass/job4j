@@ -9,6 +9,7 @@
     <form action="${pageContext.servletContext.contextPath}/" method="post">
         Name : <input type="text" name="name"><br>
         Login : <input type="text" name="login"><br>
+        Password : <input type="password" name="password"><br>
         email : <input type="text" name="email"><br>
         <input type="submit" name="action" value="add">
     </form>

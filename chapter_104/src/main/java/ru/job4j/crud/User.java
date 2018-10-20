@@ -12,6 +12,7 @@ public class User {
     private String login;
     private String email;
     private Date createDate;
+    private String password;
 
     /**
      * Конструктор инициализирует поля имени, логина и почты.
@@ -19,8 +20,8 @@ public class User {
      * @param login логин.
      * @param email почта.
      */
-    public User(String name, String login, String email) {
-        this(serial++, name, login, email, new Date().getTime());
+    public User(String name, String login, String password, String email) {
+        this(serial++, name, login, password, email, new Date().getTime());
     }
 
     /**
@@ -30,9 +31,10 @@ public class User {
      * @param login логин.
      * @param email почта.
      */
-    public User(int id, String name, String login, String email, long createDate) {
+    public User(int id, String name, String login, String password, String email, long createDate) {
         this.name = name;
         this.login = login;
+        this.password = password;
         this.email = email;
         this.id = id;
         this.createDate = new Date(createDate);
@@ -108,5 +110,21 @@ public class User {
      */
     public Date getCreateDate() {
         return createDate;
+    }
+
+    /**
+     * Метод изменяет пароль пользователя.
+     * @param password новый пароль.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Метод возвращает пароль пользователя.
+     * @return пароль.
+     */
+    public String getPassword() {
+        return password;
     }
 }

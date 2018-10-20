@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -81,7 +79,8 @@ public class UserServlet extends HttpServlet {
             String name = param.getParameter("name");
             String login = param.getParameter("login");
             String email = param.getParameter("email");
-            return logic.add(name, login, email);
+            String password = param.getParameter("password");
+            return logic.add(name, login, password, email);
         };
     }
 
@@ -98,7 +97,8 @@ public class UserServlet extends HttpServlet {
                 String name = param.getParameter("name");
                 String login = param.getParameter("login");
                 String email = param.getParameter("email");
-                result = logic.update(id, name, login, email);
+                String password = param.getParameter("password");
+                result = logic.update(id, name, login, password, email);
             } catch (NumberFormatException nfe) {
                 LOGGER.error(nfe.getMessage(), nfe);
             }
