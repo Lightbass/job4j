@@ -38,6 +38,7 @@ public class MemoryStore implements Store {
      */
     @Override
     public void add(User user) {
+        user.setId(users.size());
         users.put(user.getId(), user);
     }
 

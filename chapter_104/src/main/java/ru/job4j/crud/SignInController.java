@@ -31,10 +31,8 @@ public class SignInController extends HttpServlet {
         String password = req.getParameter("password");
         if (logic.signIn(login, password)) {
             HttpSession session = req.getSession();
-            synchronized (session) {
-                session.setAttribute("login", login);
-                resp.sendRedirect(String.format("%s/", req.getContextPath()));
-            }
+            session.setAttribute("login", login);
+            resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             req.setAttribute("error", "Credentional invalid");
             doGet(req, resp);

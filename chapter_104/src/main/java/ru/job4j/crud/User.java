@@ -6,7 +6,6 @@ import java.util.Date;
  * Класс - пользователь.
  */
 public class User {
-    static private int serial = 1;
     private int id;
     private String name;
     private String login;
@@ -21,7 +20,7 @@ public class User {
      * @param email почта.
      */
     public User(String name, String login, String password, String email) {
-        this(serial++, name, login, password, email, new Date().getTime());
+        this(-1, name, login, password, email, new Date().getTime());
     }
 
     /**

@@ -29,16 +29,14 @@ public class AuthFilter implements Filter {
                 || request.getRequestURI().contains("/create")
                 || request.getRequestURI().equals(request.getContextPath() + "/") && action.equals("add"))) {
             HttpSession session = request.getSession();
-            synchronized (session) {
-                String login = (String) session.getAttribute("login");
-                if (logic.findByLogin(login) == null) {
-                    ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
-                    return;
-                } else if (request.getRequestURI().contains("/logout")) {
-                    session.invalidate();
-                    ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
-                    return;
-                }
+            String login = (String) session.getAttribute("login");
+            if (logic.findByLogin(login) == null) {
+                ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
+                return;
+            } else if (request.getRequestURI().contains("/logout")) {
+                session.invalidate();
+                ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
+                return;
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);

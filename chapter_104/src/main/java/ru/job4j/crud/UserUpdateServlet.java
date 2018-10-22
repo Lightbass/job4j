@@ -25,10 +25,9 @@ public class UserUpdateServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = null;
         req.setAttribute("exists", false);
         try {
-            user = logic.findById(Integer.parseInt(req.getParameter("id")));
+            User user = logic.findById(Integer.parseInt(req.getParameter("id")));
             user.setPassword("");
             req.setAttribute("user", user);
             if (user != null) {
