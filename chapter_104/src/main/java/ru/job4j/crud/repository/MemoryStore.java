@@ -1,6 +1,7 @@
-package ru.job4j.crud;
+package ru.job4j.crud.repository;
 
 import net.jcip.annotations.ThreadSafe;
+import ru.job4j.crud.model.User;
 
 import java.util.Collection;
 import java.util.Map;

@@ -1,4 +1,6 @@
-package ru.job4j.crud;
+package ru.job4j.crud.controller;
+
+import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -1,6 +1,10 @@
-package ru.job4j.crud;
+package ru.job4j.crud.repository;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import ru.job4j.crud.model.User;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
@@ -12,6 +16,7 @@ import java.util.*;
  * @version 0.1
  */
 public class DBStore implements Store {
+    private static final Logger LOGGER = LogManager.getLogger(DBStore.class);
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static final DBStore SINGLETON_INSTANCE = new DBStore();
     private final Properties properties = new Properties();
@@ -37,14 +42,14 @@ public class DBStore implements Store {
                 }
             }
         } catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         try (Connection serverConnection = SOURCE.getConnection();
              Statement serverStatement = serverConnection.createStatement()) {
             serverStatement.execute(properties.getProperty("query.createTable"));
         }
         catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
     }
 
@@ -56,7 +61,7 @@ public class DBStore implements Store {
             properties.load(getClass().getClassLoader().getResourceAsStream("crud/app.properties"));
             Class.forName(properties.getProperty("jdbc.driver"));
         } catch (IOException | ClassNotFoundException | NoClassDefFoundError ioe) {
-            UserServlet.LOGGER.error(ioe.getMessage(), ioe);
+            LOGGER.error(ioe.getMessage(), ioe);
         }
         insertQuery = properties.getProperty("query.insert");
         selectQuery = properties.getProperty("query.select");
@@ -89,9 +94,10 @@ public class DBStore implements Store {
             st.setString(3, user.getPassword());
             st.setString(4, user.getEmail());
             st.setTimestamp(5, new Timestamp(user.getCreateDate().getTime()));
+            st.setBoolean(6, user.getRole());
             st.execute();
         } catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
     }
 
@@ -107,11 +113,12 @@ public class DBStore implements Store {
             st.setString(2, user.getLogin());
             st.setString(3, user.getPassword());
             st.setString(4, user.getEmail());
-            st.setInt(5, id);
+            st.setBoolean(5, user.getRole());
+            st.setInt(6, id);
             st.execute();
             user.setId(id);
         } catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
     }
 
@@ -125,7 +132,7 @@ public class DBStore implements Store {
             st.setInt(1, id);
             st.execute();
         } catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
     }
 
@@ -145,10 +152,11 @@ public class DBStore implements Store {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getTimestamp(6).getTime()));
+                        rs.getTimestamp(6).getTime(),
+                        rs.getBoolean(7)));
             }
         } catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return users;
     }
@@ -170,10 +178,11 @@ public class DBStore implements Store {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getTimestamp(6).getTime());
+                        rs.getTimestamp(6).getTime(),
+                        rs.getBoolean(7));
             }
         } catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return user;
     }
@@ -195,10 +204,11 @@ public class DBStore implements Store {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getTimestamp(6).getTime());
+                        rs.getTimestamp(6).getTime(),
+                        rs.getBoolean(7));
             }
         } catch (SQLException ex) {
-            UserServlet.LOGGER.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return user;
     }

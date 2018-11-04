@@ -5,7 +5,7 @@
          version="2.4">
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>ru.job4j.crud.AuthFilter</filter-class>
+        <filter-class>ru.job4j.crud.filter.AuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>UserViewServlet</servlet-name>
-        <servlet-class>ru.job4j.crud.UserServlet</servlet-class>
+        <servlet-class>ru.job4j.crud.controller.UserViewController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>UserCreateServlet</servlet-name>
-        <servlet-class>ru.job4j.crud.UserCreateServlet</servlet-class>
+        <servlet-class>ru.job4j.crud.controller.UserCreateController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -43,7 +43,7 @@
 
     <servlet>
         <servlet-name>UserUpdateServlet</servlet-name>
-        <servlet-class>ru.job4j.crud.UserUpdateServlet</servlet-class>
+        <servlet-class>ru.job4j.crud.controller.UserUpdateContoller</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -53,7 +53,7 @@
 
     <servlet>
         <servlet-name>UserSignIn</servlet-name>
-        <servlet-class>ru.job4j.crud.SignInController</servlet-class>
+        <servlet-class>ru.job4j.crud.controller.SignInController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

@@ -1,4 +1,4 @@
-package ru.job4j.crud;
+package ru.job4j.crud.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +12,7 @@ import java.io.IOException;
  * @since 14.10.2018
  * @version 0.1
  */
-public class UserCreateServlet extends HttpServlet {
+public class UserCreateController extends HttpServlet {
     /**
      * Метод возвращает HTML страницу с заполняемыми полями, для создания пользователя.
      * @param req запрос.

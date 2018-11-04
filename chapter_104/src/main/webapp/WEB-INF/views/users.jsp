@@ -17,20 +17,26 @@
                 <c:out value="${user.id}"></c:out>
                 <c:out value="${user.createDate}"></c:out>
             </td>
-            <td>
-                <form>
-                    <button formaction="${pageContext.servletContext.contextPath}/edit" formmethod="get"
-                            name="id" value="${user.id}">Edit</button>
-                    <button formaction="${pageContext.servletContext.contextPath}/?action=delete&id=${user.id}"
-                            formmethod="post">Delete</button>
-                </form>
-            </td>
+            <c:if test="${role || user.login == login}">
+                <td>
+                 <form>
+                        <button formaction="${pageContext.servletContext.contextPath}/edit" formmethod="get"
+                               name="id" value="${user.id}">Edit</button>
+                     <c:if test="${role}">
+                        <button formaction="${pageContext.servletContext.contextPath}/?action=delete&id=${user.id}"
+                                formmethod="post">Delete</button>
+                     </c:if>
+                    </form>
+                </td>
+            </c:if>
         <tr>
         </c:forEach>
     </table>
     <br>
     <form>
-        <button formaction="${pageContext.servletContext.contextPath}/create" formmethod="get">Create user</button>
+        <c:if test="${role}">
+            <button formaction="${pageContext.servletContext.contextPath}/create" formmethod="get">Create user</button>
+        </c:if>
         <button formaction="${pageContext.servletContext.contextPath}/logout" formmethod="get">Logout</button>
     </form>
 </body>

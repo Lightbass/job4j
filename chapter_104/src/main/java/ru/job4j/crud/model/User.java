@@ -1,4 +1,4 @@
-package ru.job4j.crud;
+package ru.job4j.crud.model;
 
 import java.util.Date;
 
@@ -12,6 +12,7 @@ public class User {
     private String email;
     private Date createDate;
     private String password;
+    private Boolean role;
 
     /**
      * Конструктор инициализирует поля имени, логина и почты.
@@ -19,8 +20,8 @@ public class User {
      * @param login логин.
      * @param email почта.
      */
-    public User(String name, String login, String password, String email) {
-        this(-1, name, login, password, email, new Date().getTime());
+    public User(String name, String login, String password, String email, Boolean role) {
+        this(-1, name, login, password, email, new Date().getTime(), role);
     }
 
     /**
@@ -30,13 +31,14 @@ public class User {
      * @param login логин.
      * @param email почта.
      */
-    public User(int id, String name, String login, String password, String email, long createDate) {
+    public User(int id, String name, String login, String password, String email, long createDate, Boolean role) {
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
         this.id = id;
         this.createDate = new Date(createDate);
+        this.role = role;
     }
 
     /**
@@ -125,5 +127,21 @@ public class User {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Метод изменяет роль пользователя.
+     * @param role роль пользователя.
+     */
+    public void setRole(Boolean role) {
+        this.role = role;
+    }
+
+    /**
+     * Метод возвращает роль пользователя.
+     * @return роль, если {@code true}, то это админ, если {@code false}, то это пользователь.
+     */
+    public Boolean getRole() {
+        return role;
     }
 }

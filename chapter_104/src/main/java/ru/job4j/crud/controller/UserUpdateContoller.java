@@ -1,4 +1,9 @@
-package ru.job4j.crud;
+package ru.job4j.crud.controller;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import ru.job4j.crud.model.User;
+import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +17,8 @@ import java.io.IOException;
  * @since 14.10.2018
  * @version 0.1
  */
-public class UserUpdateServlet extends HttpServlet {
+public class UserUpdateContoller extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(UserUpdateContoller.class);
     private final ValidateService logic = ValidateService.getInstance();
 
     /**
@@ -28,13 +34,13 @@ public class UserUpdateServlet extends HttpServlet {
         req.setAttribute("exists", false);
         try {
             User user = logic.findById(Integer.parseInt(req.getParameter("id")));
-            user.setPassword("");
-            req.setAttribute("user", user);
             if (user != null) {
+                user.setPassword("");
+                req.setAttribute("user", user);
                 req.setAttribute("exists", true);
             }
         } catch (NumberFormatException nfe) {
-            UserServlet.LOGGER.error(nfe.getMessage(), nfe);
+            LOGGER.error(nfe.getMessage(), nfe);
         }
         req.getRequestDispatcher("/WEB-INF/views/update.jsp").forward(req, resp);
     }

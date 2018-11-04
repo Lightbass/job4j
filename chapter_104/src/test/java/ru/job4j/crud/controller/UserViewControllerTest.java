@@ -1,6 +1,9 @@
-package ru.job4j.crud;
+package ru.job4j.crud.controller;
 
 import org.junit.Test;
+import ru.job4j.crud.controller.UserViewController;
+import ru.job4j.crud.model.User;
+import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,16 +16,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * JUnit тест класса UserServlet.
+ * JUnit тест класса UserViewController.
  * @author Alexey Makarov
  * @since 22.10.18
  * @version 0.1
  */
-public class UserServletTest {
+public class UserViewControllerTest {
+
     @Test
     public void whenAddUserThenOk() throws ServletException, IOException {
-        UserServlet userServlet = new UserServlet();
-        userServlet.init();
+        UserViewController userViewController = new UserViewController();
+        userViewController.init();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("action")).thenReturn("add");
@@ -30,12 +34,13 @@ public class UserServletTest {
         when(request.getParameter("login")).thenReturn("Bass");
         when(request.getParameter("password")).thenReturn("alexey");
         when(request.getParameter("email")).thenReturn("alex@gmail.com");
+        when(request.getParameter("role")).thenReturn("true");
         try {
-            userServlet.doPost(request, response);
+            userViewController.doPost(request, response);
         } catch (NullPointerException npe) {
             npe.fillInStackTrace();
         }
-        Collection<User> users = MemoryStore.getInstance().findAll();
+        Collection<User> users = ValidateService.STORE.findAll();
         System.out.println(users.size());
         assertThat(users.iterator().next().getLogin(), is("Bass"));
     }

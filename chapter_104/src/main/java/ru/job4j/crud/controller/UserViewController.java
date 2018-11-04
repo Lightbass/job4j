@@ -1,7 +1,9 @@
-package ru.job4j.crud;
+package ru.job4j.crud.controller;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import ru.job4j.crud.service.ValidateService;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +19,8 @@ import java.util.function.Function;
  * @since 13.10.2018
  * @version 0.1
  */
-public class UserServlet extends HttpServlet {
-    public static final Logger LOGGER = LogManager.getLogger(UserServlet.class);
+public class UserViewController extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(UserViewController.class);
     private final ValidateService logic = ValidateService.getInstance();
     private final Map<String, Function<HttpServletRequest, Boolean>> dispatch = new HashMap<>();
 
@@ -76,11 +78,20 @@ public class UserServlet extends HttpServlet {
      */
     public Function<HttpServletRequest, Boolean> add() {
         return param -> {
-            String name = param.getParameter("name");
+            boolean result = false;
             String login = param.getParameter("login");
-            String email = param.getParameter("email");
-            String password = param.getParameter("password");
-            return logic.add(name, login, password, email);
+            String userLogin = (String) param.getSession().getAttribute("login");
+            if (userLogin == null || logic.checkUserRole(userLogin)) {
+                String name = param.getParameter("name");
+                String email = param.getParameter("email");
+                String password = param.getParameter("password");
+                Boolean role = false;
+                if (logic.checkUserRole(userLogin)) {
+                    role = param.getParameter("role").contains("true");
+                }
+                result = logic.add(name, login, password, email, role);
+            }
+            return result;
         };
     }
 
@@ -92,15 +103,22 @@ public class UserServlet extends HttpServlet {
         return param -> {
             boolean result = false;
             int id = -1;
-            try {
-                id = Integer.parseInt(param.getParameter("id"));
-                String name = param.getParameter("name");
-                String login = param.getParameter("login");
-                String email = param.getParameter("email");
-                String password = param.getParameter("password");
-                result = logic.update(id, name, login, password, email);
-            } catch (NumberFormatException nfe) {
-                LOGGER.error(nfe.getMessage(), nfe);
+            String login = param.getParameter("login");
+            String userLogin = (String) param.getSession().getAttribute("login");
+            if (login.equals(userLogin) || logic.checkUserRole(userLogin)) {
+                try {
+                    id = Integer.parseInt(param.getParameter("id"));
+                    String name = param.getParameter("name");
+                    String email = param.getParameter("email");
+                    String password = param.getParameter("password");
+                    Boolean role = false;
+                    if (logic.checkUserRole(userLogin)) {
+                        role = param.getParameter("role").contains("true");
+                    }
+                    result = logic.update(id, name, login, password, email, role);
+                } catch (NumberFormatException nfe) {
+                    LOGGER.error(nfe.getMessage(), nfe);
+                }
             }
             return result;
         };
@@ -114,11 +132,14 @@ public class UserServlet extends HttpServlet {
         return param -> {
             boolean result = false;
             int id = -1;
-            try {
-                id = Integer.parseInt(param.getParameter("id"));
-                result = logic.delete(id);
-            } catch (NumberFormatException nfe) {
-                LOGGER.error(nfe.getMessage(), nfe);
+            String userLogin = (String) param.getSession().getAttribute("login");
+            if (logic.checkUserRole(userLogin)) {
+                try {
+                    id = Integer.parseInt(param.getParameter("id"));
+                    result = logic.delete(id);
+                } catch (NumberFormatException nfe) {
+                    LOGGER.error(nfe.getMessage(), nfe);
+                }
             }
             return result;
         };

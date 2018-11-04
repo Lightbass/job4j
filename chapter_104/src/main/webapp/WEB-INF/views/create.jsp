@@ -11,6 +11,17 @@
         Login : <input type="text" name="login"><br>
         Password : <input type="password" name="password"><br>
         email : <input type="text" name="email"><br>
+        <c:choose>
+            <c:when test="${role}">
+                <select name="role">
+                    <option value="true">Admin</option>
+                    <option value="false">user</option>
+                </select>
+            </c:when>
+            <c:otherwise>
+                <input type="hidden" name="role" value="false">
+            </c:otherwise>
+        </c:choose>
         <input type="submit" name="action" value="add">
     </form>
 </body>

@@ -1,6 +1,11 @@
-package ru.job4j.crud;
+package ru.job4j.crud.service;
+
+import ru.job4j.crud.repository.Store;
+import ru.job4j.crud.model.User;
+import ru.job4j.crud.repository.DBStore;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,11 +41,11 @@ public class ValidateService {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
-    public boolean add(String name, String login, String password, String email) {
+    public boolean add(String name, String login, String password, String email, Boolean role) {
         boolean result = false;
         if (STORE.findByLogin(login) == null && !login.equals("")) {
             if (validateEmail(email)) {
-                STORE.add(new User(name, login, password, email));
+                STORE.add(new User(name, login, password, email, role));
                 result = true;
             }
         }
@@ -55,16 +60,16 @@ public class ValidateService {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
-    public boolean update(int id, String name, String login, String password, String email) {
+    public boolean update(int id, String name, String login, String password, String email, Boolean role) {
         boolean result = false;
         User user = STORE.findById(id);
         if (user != null) {
             if ((user.getLogin().equals(login) || STORE.findByLogin(login) == null)  && !login.equals("")) {
                 if (validateEmail(email) || email == null) {
                     if (password.equals("")) {
-                        STORE.update(id, new User(name, login, user.getPassword(), email));
+                        STORE.update(id, new User(name, login, user.getPassword(), email, role));
                     } else {
-                        STORE.update(id, new User(name, login, password, email));
+                        STORE.update(id, new User(name, login, password, email, role));
                     }
                     result = true;
                 }
@@ -111,6 +116,11 @@ public class ValidateService {
      */
     public User findByLogin(String login) {
         return STORE.findByLogin(login);
+    }
+
+    public boolean checkUserRole(String login) {
+        User user = STORE.findByLogin(login);
+        return user == null ? false : user.getRole();
     }
 
     /**

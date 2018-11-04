@@ -1,7 +1,9 @@
-package ru.job4j.crud;
+package ru.job4j.crud.filter;
+
+import ru.job4j.crud.model.User;
+import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,12 +27,18 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String action = request.getParameter("action") == null ? "null" : "add";
-        if (!(request.getRequestURI().contains("/signin")
-                || request.getRequestURI().contains("/create")
-                || request.getRequestURI().equals(request.getContextPath() + "/") && action.equals("add"))) {
-            HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+        String uri = request.getRequestURI();
+        if (session.getAttribute("login") == null) {
+            if (!(uri.contains("/signin") || uri.contains("/create")
+                    || (uri.equals(request.getContextPath() + "/")) && action.equals("add") && ((HttpServletRequest) servletRequest).getMethod().equals("POST"))) {
+                ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
+                return;
+            }
+        } else {
             String login = (String) session.getAttribute("login");
-            if (logic.findByLogin(login) == null) {
+            User user = logic.findByLogin(login);
+            if (user == null) {
                 ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
                 return;
             } else if (request.getRequestURI().contains("/logout")) {
@@ -38,6 +46,7 @@ public class AuthFilter implements Filter {
                 ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
                 return;
             }
+            servletRequest.setAttribute("role", user.getRole());
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

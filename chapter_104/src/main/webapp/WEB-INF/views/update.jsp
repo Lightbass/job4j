@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Update</title>
-    <c:set var="exists" scope="session" value="${exists}"/>
-    <c:set var="user" scope="session" value="${user}"/>
     <c:if test="${!exists}">
         <meta http-equiv="refresh" content="2; url=${pageContext.servletContext.contextPath}">
     </c:if>
@@ -21,6 +19,24 @@
                 Login : <input type="text" name="login" value="${user.login}"><br>
                 Password : <input type="password" name="password" value="${user.password}"><br>
                 email : <input type="text" name="email" value="${user.email}"><br>
+                <c:choose>
+                    <c:when test="${role}">
+                        <select name="role">
+                            <option value="true">Admin</option>
+                            <c:choose>
+                            <c:when test="${user.role}">
+                                <option value="false">user</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option selected value="false">user</option>
+                            </c:otherwise>
+                            </c:choose>
+                        </select>
+                    </c:when>
+                    <c:otherwise>
+                        <input type="hidden" name="role" value="false">
+                    </c:otherwise>
+                </c:choose>
                 <input type="hidden" name="id" value="${user.id}">
                 <input type="submit" name="action" value="update">
             </form>
