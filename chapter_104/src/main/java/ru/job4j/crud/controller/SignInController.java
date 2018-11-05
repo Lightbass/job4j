@@ -1,5 +1,6 @@
 package ru.job4j.crud.controller;
 
+import ru.job4j.crud.service.Validate;
 import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SignInController extends HttpServlet {
-    private final ValidateService logic = ValidateService.getInstance();
+    private final Validate logic = ValidateService.getInstance();
 
     /**
      * Отображение страницы для аутентификации.

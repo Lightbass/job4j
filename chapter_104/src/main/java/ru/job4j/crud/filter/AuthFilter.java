@@ -1,6 +1,7 @@
 package ru.job4j.crud.filter;
 
 import ru.job4j.crud.model.User;
+import ru.job4j.crud.service.Validate;
 import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.*;
@@ -16,7 +17,7 @@ import java.io.IOException;
  * @version 0.1
  */
 public class AuthFilter implements Filter {
-    private final ValidateService logic = ValidateService.getInstance();
+    private final Validate logic = ValidateService.getInstance();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

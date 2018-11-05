@@ -1,35 +1,21 @@
 package ru.job4j.crud.service;
 
-import ru.job4j.crud.repository.Store;
 import ru.job4j.crud.model.User;
-import ru.job4j.crud.repository.DBStore;
+import ru.job4j.crud.repository.MemoryStore;
+import ru.job4j.crud.repository.Store;
+
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Класс логики, обрабатывает поступающую информацию, синглтон.
- * @author Alexey Makarov
- * @since 13.10.2018
- * @version 0.1
- */
-public class ValidateService implements Validate {
-    private static final Validate SINGLETON_INSTANCE = new ValidateService();
-    private static final Store STORE = DBStore.getInstance();
+public class ValidateStub implements Validate {
+    public static final Store STORE = MemoryStore.getInstance();
+    private int ids = 0;
 
-    /**
-     * Приватный конструктор для реализации синглтона.
-     */
-    private ValidateService() {
-
-    }
-
-    /**
-     * Возвращает единственный объект этого класса.
-     * @return объект.
-     */
-    public static Validate getInstance() {
-        return SINGLETON_INSTANCE;
+    public ValidateStub() {
+        STORE.findAll().clear();
+        STORE.add(new User("Vasya", "vas", "vas", "vas@vas.com", true));
+        STORE.add(new User("Masya", "mas", "mas", "mas@mas.com", false));
     }
 
     /**
@@ -116,11 +102,6 @@ public class ValidateService implements Validate {
         return STORE.findByLogin(login);
     }
 
-    /**
-     * Метод проверяет, есть ли у данного пользователя права администратора.
-     * @param login пользователь.
-     * @return {@code true} пользователь является администратором, {@code false} он обычный пользователь.
-     */
     public boolean checkUserRole(String login) {
         User user = STORE.findByLogin(login);
         return user == null ? false : user.getRole();

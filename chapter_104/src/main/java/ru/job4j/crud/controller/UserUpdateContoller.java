@@ -3,6 +3,7 @@ package ru.job4j.crud.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.job4j.crud.model.User;
+import ru.job4j.crud.service.Validate;
 import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ import java.io.IOException;
  */
 public class UserUpdateContoller extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(UserUpdateContoller.class);
-    private final ValidateService logic = ValidateService.getInstance();
+    private final Validate logic = ValidateService.getInstance();
 
     /**
      * Метод возвращает HTML страницу с заполняемыми полями, которые уже заполнены данными пользователя с конкретным

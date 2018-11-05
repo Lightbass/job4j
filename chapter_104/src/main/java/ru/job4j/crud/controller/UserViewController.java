@@ -2,12 +2,14 @@ package ru.job4j.crud.controller;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import ru.job4j.crud.service.Validate;
 import ru.job4j.crud.service.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +23,7 @@ import java.util.function.Function;
  */
 public class UserViewController extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(UserViewController.class);
-    private final ValidateService logic = ValidateService.getInstance();
+    private final Validate logic = ValidateService.getInstance();
     private final Map<String, Function<HttpServletRequest, Boolean>> dispatch = new HashMap<>();
 
     /**
@@ -80,7 +82,11 @@ public class UserViewController extends HttpServlet {
         return param -> {
             boolean result = false;
             String login = param.getParameter("login");
-            String userLogin = (String) param.getSession().getAttribute("login");
+            HttpSession session = param.getSession();
+            String userLogin = null;
+            if (session != null) {
+                userLogin = (String) param.getSession().getAttribute("login");
+            }
             if (userLogin == null || logic.checkUserRole(userLogin)) {
                 String name = param.getParameter("name");
                 String email = param.getParameter("email");
@@ -104,7 +110,11 @@ public class UserViewController extends HttpServlet {
             boolean result = false;
             int id = -1;
             String login = param.getParameter("login");
-            String userLogin = (String) param.getSession().getAttribute("login");
+            HttpSession session = param.getSession();
+            String userLogin = null;
+            if (session != null) {
+                userLogin = (String) param.getSession().getAttribute("login");
+            }
             if (login.equals(userLogin) || logic.checkUserRole(userLogin)) {
                 try {
                     id = Integer.parseInt(param.getParameter("id"));
