@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Регистрация</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+  <h1>Регистрация аккаунта</h1>
+  <p>Укажите пожалуйста свои данные для регистрации:</p> 
+</div>
+<div class="container-fluid">
+ <form action="/action_page.php" style="width:300px">
+  <div class="form-group">
+    <label for="email">Email адрес:</label>
+    <input type="email" class="form-control" id="email">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Пароль:</label>
+    <input type="password" class="form-control" id="pwd">
+  </div>
+  <div class="form-group">
+    <label for="name">Имя:</label>
+    <input type="input" class="form-control" id="name">
+  </div>
+  <div class="form-group">
+    <label for="sname">Фамилия:</label>
+    <input type="input" class="form-control" id="sname">
+  </div>
+  <div class="form-group">
+    <label for="sex">Пол:</label>
+    <input type="input" class="form-control" id="sex">
+  </div>
+  <div class="form-group">
+    <label for="decription">Описание:</label>
+    <input type="text" class="form-control" id="decription">
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox"> Запомнить меня</label>
+  </div>
+  <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+</form> 
+</br></br></br>
+<table class="table table-bordered" style="width:600px">
+    <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Email</th>
+		<th>Пол</th>
+		<th>Описание</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Александр</td>
+        <td>Папанага</td>
+        <td>deddok@guddok.ru</td>
+		<td>Мужской</td>
+		<td>Холостяк, никому не нужен.</td>
+      </tr>
+      <tr>
+        <td>Иванов</td>
+        <td>Артем</td>
+        <td>tema666@gmail.com</td>
+		<td>Мужской</td>
+		<td>Геймер.</td>
+      </tr>
+      <tr>
+        <td>Ольга</td>
+        <td>Яковлева</td>
+        <td>olga222@mail.ru</td>
+		<td>Женский</td>
+		<td>Живу с кошками.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
