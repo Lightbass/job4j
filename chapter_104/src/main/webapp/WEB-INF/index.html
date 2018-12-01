@@ -22,6 +22,14 @@
 		}
 		return false;
 	}
+	function addRow() {
+		var name = $('#name').val();
+		$('#table tr:last').after('<tr><td>' + $('#name').val() +'</td><td>' 
+			+ $('#sname').val() +'</td><td>' 
+			+ $('#email').val() +'</td><td>' 
+			+ $('#sex').val() +'</td><td>' 
+			+ $('#description').val() +'</td></tr>');
+	}
   </script>
 </head>
 <body>
@@ -53,8 +61,8 @@
     <input type="input" class="form-control" id="sex">
   </div>
   <div class="form-group">
-    <label for="decription">Описание</label>:
-    <input type="text" class="form-control" id="decription">
+    <label for="description">Описание</label>:
+    <input type="text" class="form-control" id="description">
   </div>
   <div class="checkbox">
     <label><input type="checkbox"> Запомнить меня</label>
@@ -62,7 +70,7 @@
   <button type="submit" onclick="return validate();" class="btn btn-default">Зарегистрироваться</button>
 </form> 
 </br></br></br>
-<table class="table table-bordered" style="width:600px">
+<table id='table' class="table table-bordered" style="width:600px">
     <thead>
       <tr>
         <th>Имя</th>
@@ -96,6 +104,8 @@
       </tr>
     </tbody>
   </table>
+  <button onclick="addRow()" class="btn btn-default">Добавить строку</button>
+
 </div>
 </body>
 </html>
