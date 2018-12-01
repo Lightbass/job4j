@@ -7,6 +7,22 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+	function validate() {
+		var result = "";
+		$('input[class="form-control"]').each(function(){
+			if (this.value == '') {
+				var label = $("label[for='" + this.id + "']");
+				result = result + label.text() + "\n";
+			}
+		});
+		if(result != "") {
+			alert("Заполните остальные поля:\n" + result);
+			return true;
+		}
+		return false;
+	}
+  </script>
 </head>
 <body>
 
@@ -17,33 +33,33 @@
 <div class="container-fluid">
  <form action="/action_page.php" style="width:300px">
   <div class="form-group">
-    <label for="email">Email адрес:</label>
+    <label for="email">Email адрес</label>:
     <input type="email" class="form-control" id="email">
   </div>
   <div class="form-group">
-    <label for="pwd">Пароль:</label>
+    <label for="pwd">Пароль</label>:
     <input type="password" class="form-control" id="pwd">
   </div>
   <div class="form-group">
-    <label for="name">Имя:</label>
+    <label for="name">Имя</label>:
     <input type="input" class="form-control" id="name">
   </div>
   <div class="form-group">
-    <label for="sname">Фамилия:</label>
+    <label for="sname">Фамилия</label>:
     <input type="input" class="form-control" id="sname">
   </div>
   <div class="form-group">
-    <label for="sex">Пол:</label>
+    <label for="sex">Пол</label>:
     <input type="input" class="form-control" id="sex">
   </div>
   <div class="form-group">
-    <label for="decription">Описание:</label>
+    <label for="decription">Описание</label>:
     <input type="text" class="form-control" id="decription">
   </div>
   <div class="checkbox">
     <label><input type="checkbox"> Запомнить меня</label>
   </div>
-  <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+  <button type="submit" onclick="return validate();" class="btn btn-default">Зарегистрироваться</button>
 </form> 
 </br></br></br>
 <table class="table table-bordered" style="width:600px">
