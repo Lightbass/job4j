@@ -8,28 +8,66 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
+      $(document).ready(function(){
+          $.ajax({ url: "./json",
+              context: document.body,
+              method: "GET",
+              success: function(data){
+                  update(data);
+              }});
+      });
+
 	function validate() {
 		var result = "";
+		var jsonres = new Object();
 		$('input[class="form-control"]').each(function(){
+            var label = $("label[for='" + this.id + "']");
 			if (this.value == '') {
-				var label = $("label[for='" + this.id + "']");
 				result = result + label.text() + "\n";
-			}
-		});
+			} else {
+                jsonres[this.id] = $("input[id='" + this.id + "']").val();
+            }
+        });
 		if(result != "") {
 			alert("Заполните остальные поля:\n" + result);
-			return true;
+			return false;
 		}
-		return false;
+        $.ajax({
+            type: "POST",
+            url: "./json",
+            data: JSON.stringify(jsonres),
+            success: function() {
+                $.get("./json", function (data) {
+                    update(data);
+                });
+            },
+            contentType : "application/json"
+        });
+		return true;
 	}
+
 	function addRow() {
-		var name = $('#name').val();
 		$('#table tr:last').after('<tr><td>' + $('#name').val() +'</td><td>' 
 			+ $('#sname').val() +'</td><td>' 
 			+ $('#email').val() +'</td><td>' 
 			+ $('#sex').val() +'</td><td>' 
 			+ $('#description').val() +'</td></tr>');
 	}
+
+	function update(mas) {
+        var row = $("#table tr");
+        var table = $("#table")[0];
+        for(var i = 1; i < row.length; i++) {
+            table.deleteRow(row[i].rowIndex);
+        }
+        for(var i = 0; i < mas.length; i++) {
+            $('#table tr:last').after('<tr><td>' + mas[i].name +'</td><td>'
+                + mas[i].sname +'</td><td>'
+                + mas[i].email +'</td><td>'
+                + mas[i].sex +'</td><td>'
+                + mas[i].description +'</td></tr>');
+        }
+    }
   </script>
 </head>
 <body>
@@ -67,7 +105,7 @@
   <div class="checkbox">
     <label><input type="checkbox"> Запомнить меня</label>
   </div>
-  <button type="submit" onclick="return validate();" class="btn btn-default">Зарегистрироваться</button>
+  <button type="button" onclick="return validate();" class="btn btn-default">Зарегистрироваться</button>
 </form> 
 </br></br></br>
 <table id='table' class="table table-bordered" style="width:600px">
@@ -81,27 +119,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Александр</td>
-        <td>Папанага</td>
-        <td>deddok@guddok.ru</td>
-		<td>Мужской</td>
-		<td>Холостяк, никому не нужен.</td>
-      </tr>
-      <tr>
-        <td>Иванов</td>
-        <td>Артем</td>
-        <td>tema666@gmail.com</td>
-		<td>Мужской</td>
-		<td>Геймер.</td>
-      </tr>
-      <tr>
-        <td>Ольга</td>
-        <td>Яковлева</td>
-        <td>olga222@mail.ru</td>
-		<td>Женский</td>
-		<td>Живу с кошками.</td>
-      </tr>
     </tbody>
   </table>
   <button onclick="addRow()" class="btn btn-default">Добавить строку</button>

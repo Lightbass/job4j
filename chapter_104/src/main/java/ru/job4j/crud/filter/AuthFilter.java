@@ -31,7 +31,7 @@ public class AuthFilter implements Filter {
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
         if (session.getAttribute("login") == null) {
-            if (!(uri.contains("/signin") || uri.contains("/create")
+            if (!(uri.contains("/signin") || uri.contains("/create") || uri.contains("/index.html") || uri.contains("/json")
                     || (uri.equals(request.getContextPath() + "/")) && action.equals("add") && ((HttpServletRequest) servletRequest).getMethod().equals("POST"))) {
                 ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/signin", request.getContextPath()));
                 return;

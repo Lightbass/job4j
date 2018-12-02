@@ -13,6 +13,15 @@
     </filter-mapping>
 
     <servlet>
+        <servlet-name>JsonServlet</servlet-name>
+        <servlet-class>ru.job4j.json.JsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JsonServlet</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>EchoServlet</servlet-name>
         <servlet-class>ru.job4j.servlets.EchoServlet</servlet-class>
     </servlet>
@@ -28,7 +37,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserViewServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern></url-pattern>
     </servlet-mapping>
 
     <servlet>
