@@ -8,14 +8,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
-      $(document).ready(function(){
-          $.ajax({ url: "./json",
-              context: document.body,
-              method: "GET",
-              success: function(data){
-                  update(data);
-              }});
-      });
+      $(document).ready(getData);
+
+    function getData(){
+        $.get("./json", function (data) {
+            update(data);
+        });
+      }
 
 	function validate() {
 		var result = "";
@@ -36,13 +35,15 @@
             type: "POST",
             url: "./json",
             data: JSON.stringify(jsonres),
-            success: function() {
-                $.get("./json", function (data) {
-                    update(data);
-                });
-            },
+            success: getData,
             contentType : "application/json"
         });
+        $('input[id="email"]').val('');
+        $('input[id="pwd"]').val('');
+        $('input[id="name"]').val('');
+        $('input[id="sname"]').val('');
+        $('input[id="sex"]').val('');
+        $('input[id="description"]').val('');
 		return true;
 	}
 

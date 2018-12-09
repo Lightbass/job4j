@@ -5,6 +5,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,9 +29,14 @@ public class JsonService {
         return SINGLETON_INSTANCE;
     }
 
-    public void parseJson(String json) throws Exception {
-        User user = mapper.readValue(json, User.class);
-        map.put(user.getEmail(), user);
+    public void parseJson(InputStream in) {
+        try {
+            User user = mapper.readValue(in, User.class);
+            map.put(user.getEmail(), user);
+        } catch (IOException ioe) {
+            LOGGER.error(ioe.getMessage(), ioe);
+        }
+        //User user = mapper.readValue(json, User.class);
     }
 
     public void encodeJson(OutputStream out) {
@@ -39,5 +45,9 @@ public class JsonService {
         } catch (IOException ioe) {
             LOGGER.error(ioe.getMessage(), ioe);
         }
+    }
+
+    public User getUserByEmail(String email) {
+        return map.get(email);
     }
 }
