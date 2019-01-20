@@ -91,11 +91,13 @@ public class UserViewController extends HttpServlet {
                 String name = param.getParameter("name");
                 String email = param.getParameter("email");
                 String password = param.getParameter("password");
+                String country = param.getParameter("country");
+                String city = param.getParameter("city");
                 Boolean role = false;
                 if (logic.checkUserRole(userLogin)) {
                     role = param.getParameter("role").contains("true");
                 }
-                result = logic.add(name, login, password, email, role);
+                result = logic.add(name, login, password, email, role, country, city);
             }
             return result;
         };
@@ -121,11 +123,13 @@ public class UserViewController extends HttpServlet {
                     String name = param.getParameter("name");
                     String email = param.getParameter("email");
                     String password = param.getParameter("password");
+                    String country = param.getParameter("country");
+                    String city = param.getParameter("city");
                     Boolean role = false;
                     if (logic.checkUserRole(userLogin)) {
                         role = param.getParameter("role").contains("true");
                     }
-                    result = logic.update(id, name, login, password, email, role);
+                    result = logic.update(id, name, login, password, email, role, country, city);
                 } catch (NumberFormatException nfe) {
                     LOGGER.error(nfe.getMessage(), nfe);
                 }

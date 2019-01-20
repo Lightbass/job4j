@@ -13,6 +13,8 @@ public class User {
     private Date createDate;
     private String password;
     private Boolean role;
+    private String country;
+    private String city;
 
     /**
      * Конструктор инициализирует поля имени, логина и почты.
@@ -20,8 +22,8 @@ public class User {
      * @param login логин.
      * @param email почта.
      */
-    public User(String name, String login, String password, String email, Boolean role) {
-        this(-1, name, login, password, email, new Date().getTime(), role);
+    public User(String name, String login, String password, String email, Boolean role, String country, String city) {
+        this(-1, name, login, password, email, new Date().getTime(), role, country, city);
     }
 
     /**
@@ -31,7 +33,7 @@ public class User {
      * @param login логин.
      * @param email почта.
      */
-    public User(int id, String name, String login, String password, String email, long createDate, Boolean role) {
+    public User(int id, String name, String login, String password, String email, long createDate, Boolean role, String country, String city) {
         this.name = name;
         this.login = login;
         this.password = password;
@@ -39,6 +41,8 @@ public class User {
         this.id = id;
         this.createDate = new Date(createDate);
         this.role = role;
+        this.country = country;
+        this.city = city;
     }
 
     /**
@@ -135,6 +139,38 @@ public class User {
      */
     public void setRole(Boolean role) {
         this.role = role;
+    }
+
+    /**
+     * Метод возвращает страну пользователя.
+     * @return страна.
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Метод изменяет страну пользователя.
+     * @param country страна пользователя.
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    /**
+     * Метод возвращает город пользователя.
+     * @return город.
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Метод изменяет город пользователя.
+     * @param city город пользователя.
+     */
+    public void setCity(String city) {
+        this.city = city;
     }
 
     /**

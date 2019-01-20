@@ -133,9 +133,10 @@ public class JsonServletTest {
         JsonService jsonService = JsonService.getInstance();
         OutputStream os = new ByteArrayOutputStream();
         jsonService.encodeJson(os);
-        assertThat(os.toString().contains("Артем"), is(true));
-        assertThat(os.toString().contains("Яковлева"), is(true));
-        assertThat(os.toString().contains("Папанага"), is(true));
+        System.out.println(os.toString());
+        assertThat(os.toString().contains("tema666@gmail.com"), is(true));
+        assertThat(os.toString().contains("olga222@mail.ru"), is(true));
+        assertThat(os.toString().contains("deddok@guddok.ru"), is(true));
     }
 
 }

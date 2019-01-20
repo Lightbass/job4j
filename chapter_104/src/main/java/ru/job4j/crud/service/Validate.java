@@ -18,7 +18,7 @@ public interface Validate {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
-    boolean add(String name, String login, String password, String email, Boolean role);
+    boolean add(String name, String login, String password, String email, Boolean role, String country, String city);
 
     /**
      * Метод обновляет пользователя в хранилище.
@@ -28,7 +28,7 @@ public interface Validate {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
-    boolean update(int id, String name, String login, String password, String email, Boolean role);
+    boolean update(int id, String name, String login, String password, String email, Boolean role, String country, String city);
 
     /**
      * Метод удаляет пользователя в хранилище.

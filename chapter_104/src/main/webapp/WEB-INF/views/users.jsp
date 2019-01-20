@@ -5,12 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-    <table>
+<div class="container-fluid" style="margin-top: 15px">
+    <table class="table table-hover" style="width: 50%">
         <c:forEach items="${users}" var="user">
-        <tr>
-            <td>
+        <tr style="vertical-align: middle">
+            <td style="vertical-align: middle">
                 <c:out value="${user.name}"></c:out>
                 <c:out value="${user.login}"></c:out>
                 <c:out value="${user.email}"></c:out>
@@ -18,26 +21,38 @@
                 <c:out value="${user.createDate}"></c:out>
             </td>
             <c:if test="${role || user.login == login}">
-                <td>
-                 <form>
+            <td class="col-md-2">
+                <form>
+                    <div class="col-sm-6">
                         <button formaction="${pageContext.servletContext.contextPath}/edit" formmethod="get"
-                               name="id" value="${user.id}">Edit</button>
-                     <c:if test="${role}">
-                        <button formaction="${pageContext.servletContext.contextPath}/?action=delete&id=${user.id}"
-                                formmethod="post">Delete</button>
-                     </c:if>
-                    </form>
-                </td>
+                                name="id" value="${user.id}" style="margin-left: 15px" class="btn btn-default">Edit
+                        </button>
+                    </div>
+
+                    <c:if test="${role}">
+                        <div class="col-sm-4">
+                            <button formaction="${pageContext.servletContext.contextPath}/?action=delete&id=${user.id}"
+                                    formmethod="post" class="btn btn-danger">Delete
+                            </button>
+                        </div>
+                    </c:if>
+                </form>
+            </td>
             </c:if>
         <tr>
-        </c:forEach>
+            </c:forEach>
     </table>
     <br>
     <form>
         <c:if test="${role}">
-            <button formaction="${pageContext.servletContext.contextPath}/create" formmethod="get">Create user</button>
+            <button formaction="${pageContext.servletContext.contextPath}/create" formmethod="get"
+                    class="btn btn-success">Create user
+            </button>
         </c:if>
-        <button formaction="${pageContext.servletContext.contextPath}/logout" formmethod="get">Logout</button>
+        <button formaction="${pageContext.servletContext.contextPath}/logout" formmethod="get" class="btn btn-warning">
+            Logout
+        </button>
     </form>
+</div>
 </body>
 </html>

@@ -1,14 +1,11 @@
 package ru.job4j.crud.controller;
 
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import ru.job4j.crud.model.User;
 import ru.job4j.crud.service.Validate;
 import ru.job4j.crud.service.ValidateService;
 import ru.job4j.crud.service.ValidateStub;
@@ -25,8 +22,7 @@ import java.util.HashMap;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.isNull;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

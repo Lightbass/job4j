@@ -95,6 +95,8 @@ public class DBStore implements Store {
             st.setString(4, user.getEmail());
             st.setTimestamp(5, new Timestamp(user.getCreateDate().getTime()));
             st.setBoolean(6, user.getRole());
+            st.setString(7, user.getCountry());
+            st.setString(8, user.getCity());
             st.execute();
         } catch (SQLException ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -114,7 +116,9 @@ public class DBStore implements Store {
             st.setString(3, user.getPassword());
             st.setString(4, user.getEmail());
             st.setBoolean(5, user.getRole());
-            st.setInt(6, id);
+            st.setString(6, user.getCountry());
+            st.setString(7, user.getCity());
+            st.setInt(8, id);
             st.execute();
             user.setId(id);
         } catch (SQLException ex) {
@@ -153,7 +157,9 @@ public class DBStore implements Store {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getTimestamp(6).getTime(),
-                        rs.getBoolean(7)));
+                        rs.getBoolean(7),
+                        rs.getString(8),
+                        rs.getString(9)));
             }
         } catch (SQLException ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -179,7 +185,9 @@ public class DBStore implements Store {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getTimestamp(6).getTime(),
-                        rs.getBoolean(7));
+                        rs.getBoolean(7),
+                        rs.getString(8),
+                        rs.getString(9));
             }
         } catch (SQLException ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -205,7 +213,9 @@ public class DBStore implements Store {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getTimestamp(6).getTime(),
-                        rs.getBoolean(7));
+                        rs.getBoolean(7),
+                        rs.getString(8),
+                        rs.getString(9));
             }
         } catch (SQLException ex) {
             LOGGER.error(ex.getMessage(), ex);
