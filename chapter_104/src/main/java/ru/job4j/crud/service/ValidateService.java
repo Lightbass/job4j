@@ -1,8 +1,11 @@
 package ru.job4j.crud.service;
 
-import ru.job4j.crud.repository.Store;
+import ru.job4j.crud.model.City;
+import ru.job4j.crud.model.Country;
 import ru.job4j.crud.model.User;
 import ru.job4j.crud.repository.DBStore;
+import ru.job4j.crud.repository.Store;
+
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,6 +42,7 @@ public class ValidateService implements Validate {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
+    @Override
     public boolean add(String name, String login, String password, String email, Boolean role, String country, String city) {
         boolean result = false;
         if (STORE.findByLogin(login) == null && !login.equals("")) {
@@ -58,6 +62,7 @@ public class ValidateService implements Validate {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
+    @Override
     public boolean update(int id, String name, String login, String password, String email, Boolean role, String country, String city) {
         boolean result = false;
         User user = STORE.findById(id);
@@ -81,6 +86,7 @@ public class ValidateService implements Validate {
      * @param id идентификатор пользователя.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
+    @Override
     public boolean delete(int id) {
         boolean result = false;
         if (STORE.findById(id) != null) {
@@ -94,6 +100,7 @@ public class ValidateService implements Validate {
      * Метод возвращает всех пользователей внутри хранилища.
      * @return все пользователи.
      */
+    @Override
     public Collection<User> findAll() {
         return STORE.findAll();
     }
@@ -103,6 +110,7 @@ public class ValidateService implements Validate {
      * @param id идентификатор.
      * @return пользователь.
      */
+    @Override
     public User findById(int id) {
         return STORE.findById(id);
     }
@@ -112,6 +120,7 @@ public class ValidateService implements Validate {
      * @param login логин.
      * @return пользователь.
      */
+    @Override
     public User findByLogin(String login) {
         return STORE.findByLogin(login);
     }
@@ -121,9 +130,28 @@ public class ValidateService implements Validate {
      * @param login пользователь.
      * @return {@code true} пользователь является администратором, {@code false} он обычный пользователь.
      */
+    @Override
     public boolean checkUserRole(String login) {
         User user = STORE.findByLogin(login);
         return user == null ? false : user.getRole();
+    }
+
+    /**
+     * Метод возвращает всех пользователей внутри хранилища.
+     * @return все пользователи.
+     */
+    @Override
+    public Collection<Country> findAllCountries() {
+        return STORE.findAllCountries();
+    }
+
+    /**
+     * Метод возвращает всех пользователей внутри хранилища.
+     * @return все пользователи.
+     */
+    @Override
+    public Collection<City> findCitiesByCountryId(Long countryId) {
+        return STORE.findCitiesByCountryId(countryId);
     }
 
     /**
@@ -132,6 +160,7 @@ public class ValidateService implements Validate {
      * @param password пароль.
      * @return {@code true}, если логин и пароль верные. {@code false}, если нет.
      */
+    @Override
     public boolean signIn(String login, String password) {
         boolean result = false;
         for (User user : this.findAll()) {

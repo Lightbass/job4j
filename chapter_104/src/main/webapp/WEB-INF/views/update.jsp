@@ -34,23 +34,27 @@
             }
             return true;
         }
-        function getCities() {
-            var country = $('select[id="country"]').val();
-            var cities;
-            if (country == "russia") {
-                cities = ["Saint-Petersburg","Moscow","Pskov"];
-            } else if(country == "france") {
-                cities = ["Paris","Marseille","Lyon"];
-            } else if(country == "japan") {
-                cities = ["Tokyo","Kyoto","Hiroshima"];
-            } else if(country == "uk") {
-                cities = ["London","Manchester","Oxford"];
-            }
-            $('select[id="city"]').empty();
-            cities.forEach(function(item) {
-                $('select[id="city"]').append('<option name="city" value=' + item + '>' + item + '</option>');
+
+        function getCountries() {
+            $('select[id="country"]').append('<option name="country" selected disabled hidden value=${user.country}>${user.country}</option>');
+            $.getJSON('countries', function(data){
+                data.forEach(function (item) {
+                    $('select[id="country"]').append('<option name="country" value=' + item.id + '>' + item.name + '</option>');
+                });
             });
         }
+
+        function getCities() {
+            $('select[id="city"]').empty();
+            var country = $('select[id="country"]').val();
+            $.getJSON('cities?countryId=' + country, function(data){
+                data.forEach(function (item) {
+                    $('select[id="city"]').append('<option name="city" value=' + item.name + '>' + item.name + '</option>');
+                });
+            });
+        }
+
+        window.onload = getCountries;
     </script>
 </head>
 <body>
@@ -66,15 +70,13 @@
                 <input id="pwd" type="password" placeholder="Password" name="password" value="${user.password}" class="form-control"><br>
                 <input id="email" type="text" name="email" placeholder="email" value="${user.email}" class="form-control"><br>
                 Country : <select class="form-control" name="country" id="country" onchange="getCities()">
-                <option value="">Select country</option>
-                <option value="russia">Russia</option>
-                <option value="japan">Japan</option>
-                <option value="uk">United Kingdom</option>
-                <option value="france">France</option>
                 </select><br>
-                City : <select class="form-control" name="city" id="city"></select><br>
+                City : <select class="form-control" name="city" id="city">
+                        <option value="${user.city}" selected disabled hidden>${user.city}</option>
+                </select><br>
                 <c:choose>
                     <c:when test="${role}">
+                        Role :
                             <select class="form-control" name="role">
                                 <option value="true">Admin</option>
                                 <c:choose>

@@ -1,5 +1,7 @@
 package ru.job4j.crud.service;
 
+import ru.job4j.crud.model.City;
+import ru.job4j.crud.model.Country;
 import ru.job4j.crud.model.User;
 import ru.job4j.crud.repository.MemoryStore;
 import ru.job4j.crud.repository.Store;
@@ -25,6 +27,7 @@ public class ValidateStub implements Validate {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
+    @Override
     public boolean add(String name, String login, String password, String email, Boolean role, String country, String city) {
         boolean result = false;
         if (STORE.findByLogin(login) == null && !login.equals("")) {
@@ -44,6 +47,7 @@ public class ValidateStub implements Validate {
      * @param email почта.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
+    @Override
     public boolean update(int id, String name, String login, String password, String email, Boolean role, String country, String city) {
         boolean result = false;
         User user = STORE.findById(id);
@@ -67,6 +71,7 @@ public class ValidateStub implements Validate {
      * @param id идентификатор пользователя.
      * @return {@code true}, операция прошла успешно. {@code false}, произошла ошибка.
      */
+    @Override
     public boolean delete(int id) {
         boolean result = false;
         if (STORE.findById(id) != null) {
@@ -80,6 +85,7 @@ public class ValidateStub implements Validate {
      * Метод возвращает всех пользователей внутри хранилища.
      * @return все пользователи.
      */
+    @Override
     public Collection<User> findAll() {
         return STORE.findAll();
     }
@@ -89,6 +95,7 @@ public class ValidateStub implements Validate {
      * @param id идентификатор.
      * @return пользователь.
      */
+    @Override
     public User findById(int id) {
         return STORE.findById(id);
     }
@@ -98,10 +105,12 @@ public class ValidateStub implements Validate {
      * @param login логин.
      * @return пользователь.
      */
+    @Override
     public User findByLogin(String login) {
         return STORE.findByLogin(login);
     }
 
+    @Override
     public boolean checkUserRole(String login) {
         User user = STORE.findByLogin(login);
         return user == null ? false : user.getRole();
@@ -113,6 +122,7 @@ public class ValidateStub implements Validate {
      * @param password пароль.
      * @return {@code true}, если логин и пароль верные. {@code false}, если нет.
      */
+    @Override
     public boolean signIn(String login, String password) {
         boolean result = false;
         for (User user : this.findAll()) {
@@ -133,5 +143,15 @@ public class ValidateStub implements Validate {
         Pattern pattern = Pattern.compile("\\A[^@]+@([^@\\.]+\\.)+[^@\\.]+\\z");
         Matcher match = pattern.matcher(email);
         return match.matches();
+    }
+
+    @Override
+    public Collection<Country> findAllCountries() {
+        return null;
+    }
+
+    @Override
+    public Collection<City> findCitiesByCountryId(Long countryId) {
+        return null;
     }
 }

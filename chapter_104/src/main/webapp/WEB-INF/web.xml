@@ -70,4 +70,24 @@
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CountryController</servlet-name>
+        <servlet-class>ru.job4j.crud.controller.CountryController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CountryController</servlet-name>
+        <url-pattern>/countries</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CityController</servlet-name>
+        <servlet-class>ru.job4j.crud.controller.CityController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CityController</servlet-name>
+        <url-pattern>/cities</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -1,6 +1,9 @@
 package ru.job4j.crud.service;
 
+import ru.job4j.crud.model.City;
+import ru.job4j.crud.model.Country;
 import ru.job4j.crud.model.User;
+
 import java.util.Collection;
 
 /**
@@ -56,6 +59,18 @@ public interface Validate {
      * @return пользователь.
      */
     User findByLogin(String login);
+
+    /**
+     * Метод возвращает все страны внутри хранилища.
+     * @return все страны.
+     */
+    Collection<Country> findAllCountries();
+
+    /**
+     * Метод возвращает все страны внутри хранилища.
+     * @return все страны.
+     */
+    Collection<City> findCitiesByCountryId(Long countryId);
 
     /**
      * Метод проверяет, есть ли у данного пользователя права администратора.

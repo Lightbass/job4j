@@ -35,23 +35,26 @@
             return true;
         }
 
-        function getCities() {
-            var country = $('select[id="country"]').val();
-            var cities;
-            if (country == "russia") {
-                cities = ["Saint-Petersburg", "Moscow", "Pskov"];
-            } else if (country == "france") {
-                cities = ["Paris", "Marseille", "Lyon"];
-            } else if (country == "japan") {
-                cities = ["Tokyo", "Kyoto", "Hiroshima"];
-            } else if (country == "uk") {
-                cities = ["London", "Manchester", "Oxford"];
-            }
-            $('select[id="city"]').empty();
-            cities.forEach(function (item) {
-                $('select[id="city"]').append('<option name="city" value=' + item + '>' + item + '</option>');
+        function getCountries() {
+            $('select[id="country"]').append('<option name="country" value="0">Select country</option>');
+            $.getJSON('countries', function(data){
+                data.forEach(function (item) {
+                    $('select[id="country"]').append('<option name="country" value=' + item.id + '>' + item.name + '</option>');
+                });
             });
         }
+
+        function getCities() {
+            $('select[id="city"]').empty();
+            $('select[id="city"]').append('<option name="city" value="0">Select city</option>');
+            var country = $('select[id="country"]').val();
+            $.getJSON('cities?countryId=' + country, function(data){
+                data.forEach(function (item) {
+                    $('select[id="city"]').append('<option name="city" value=' + item.name + '>' + item.name + '</option>');
+                });
+            });
+        }
+        window.onload = getCountries;
     </script>
 </head>
 
@@ -63,11 +66,6 @@
         Password : <input id="pwd" type="password" name="password" class="form-control">
         Email : <input id="email" type="text" name="email" class="form-control">
         Country : <select class="form-control" name="country" id="country" onchange="getCities()">
-        <option value="">Select country</option>
-        <option value="russia">Russia</option>
-        <option value="japan">Japan</option>
-        <option value="uk">United Kingdom</option>
-        <option value="france">France</option>
     </select>
         City : <select class="form-control" name="city" id="city"></select><br>
         <c:choose>

@@ -1,6 +1,8 @@
 package ru.job4j.crud.repository;
 
 import net.jcip.annotations.ThreadSafe;
+import ru.job4j.crud.model.City;
+import ru.job4j.crud.model.Country;
 import ru.job4j.crud.model.User;
 
 import java.util.Collection;
@@ -97,5 +99,15 @@ public class MemoryStore implements Store {
             }
         }
         return result;
+    }
+
+    @Override
+    public Collection<Country> findAllCountries() {
+        return null;
+    }
+
+    @Override
+    public Collection<City> findCitiesByCountryId(Long countryId) {
+        return null;
     }
 }

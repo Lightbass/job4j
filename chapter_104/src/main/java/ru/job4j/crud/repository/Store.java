@@ -1,5 +1,7 @@
 package ru.job4j.crud.repository;
 
+import ru.job4j.crud.model.City;
+import ru.job4j.crud.model.Country;
 import ru.job4j.crud.model.User;
 
 import java.util.Collection;
@@ -49,4 +51,17 @@ public interface Store {
      * @return пользователь.
      */
     User findByLogin(String login);
+
+    /**
+     * Метод возвращает все страны в хранилище.
+     * @return все страны.
+     */
+    Collection<Country> findAllCountries();
+
+    /**
+     * Метод возвращает все города в конкретной стране из хранилища.
+     * @param countryId идентификатор страны.
+     * @return все города в данной стране.
+     */
+    Collection<City> findCitiesByCountryId(Long countryId);
 }
