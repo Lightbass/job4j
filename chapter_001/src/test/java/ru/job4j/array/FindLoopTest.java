@@ -101,4 +101,40 @@ public class FindLoopTest {
         int expect = -1;
         assertThat(result, is(expect));
     }
+
+    /**
+     * Сортируем выборкой массив из 3 чисел
+     */
+    @Test
+    public void whenArrayLengthEquals3ThenSortOk() {
+        FindLoop find = new FindLoop();
+        int[] input = new int[] {5, 1, 3};
+        input = find.sort(input);
+        int[] expect = new int[] {1, 3, 5};
+        assertThat(input, is(expect));
+    }
+
+    /**
+     * Сортируем выборкой массив из 5 чисел
+     */
+    @Test
+    public void whenArrayLengthEquals5ThenSortOk() {
+        FindLoop find = new FindLoop();
+        int[] input = new int[] {0, -1, 5, 1, 3};
+        input = find.sort(input);
+        int[] expect = new int[] {-1, 0, 1, 3, 5};
+        assertThat(input, is(expect));
+    }
+
+    /**
+     * Сортируем пустой массив.
+     */
+    @Test
+    public void whenEmptyArrayThenSortOk() {
+        FindLoop find = new FindLoop();
+        int[] input = new int[0];
+        input = find.sort(input);
+        int[] expect = new int[0];
+        assertThat(input, is(expect));
+    }
 }
