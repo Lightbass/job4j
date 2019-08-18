@@ -22,6 +22,7 @@ public class EndsWith {
             for (int i = 0; i < pst.length; i++) {
                 if (wrd[wrd.length - 1 - i] != pst[pst.length - 1 - i]) {
                     result = false;
+                    break;
                 }
             }
         }
