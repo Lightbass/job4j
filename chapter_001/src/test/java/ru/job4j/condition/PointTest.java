@@ -23,4 +23,20 @@ public class PointTest {
         double result = p1.distanceTo(p2);
         assertThat(result, closeTo(5.65, 0.1));
     }
+
+    @Test
+    public void whenFindDistanceOnZeroAndTen() {
+        Point p1 = new Point(0, 0, 0);
+        Point p2 = new Point(0, 0, 10);
+        double result = p1.distanceTo3d(p2);
+        assertThat(result, closeTo(10, 0));
+    }
+
+    @Test
+    public void whenFindDistanceOnDifferentPointsIn3D() {
+        Point p1 = new Point(1, 1, 1);
+        Point p2 = new Point(3, 4, 5);
+        double result = p1.distanceTo3d(p2);
+        assertThat(result, closeTo(5.38, 0.01));
+    }
 }

@@ -22,7 +22,8 @@
         <module>chapter_103</module>
         <module>chapter_104</module>
 		<module>puzzle</module>
-    </modules>
+		<module>chapter_004</module>
+	</modules>
 	
 	<build>
 		<plugins>
