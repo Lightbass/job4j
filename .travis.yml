@@ -1,8 +1,8 @@
-dist: trusty
+dist: xenial
 # используем язык java.
 language: java
 jdk:
-- oraclejdk8
+- openjdk8
 # используем режим обычного пользователя для сборки проекта.
 sudo: true
 
@@ -14,6 +14,7 @@ addons:
     packages:
     - postgresql-10
     - postgresql-client-10
+    - openjfx
 
 before_script:
 # Use default port
