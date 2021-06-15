@@ -23,7 +23,8 @@
         <module>chapter_104</module>
 		<module>puzzle</module>
 		<module>chapter_004</module>
-	</modules>
+        <module>chapter_311_threads</module>
+    </modules>
 	
 	<build>
 		<plugins>
