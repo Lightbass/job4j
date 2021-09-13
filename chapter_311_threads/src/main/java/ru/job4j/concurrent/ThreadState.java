@@ -2,7 +2,7 @@ package ru.job4j.concurrent;
 
 public class ThreadState {
     public static void main(String[] args) {
-        Runnable runnable = () -> {};
+        Runnable runnable = () -> { };
         Thread first = new Thread(runnable);
         Thread second = new Thread(runnable);
         printTwoThreadInfo(first, second);
