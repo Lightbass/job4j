@@ -1,12 +1,13 @@
-package ru.job4j.tracker;
+package ru.job4j.trackerbase;
 
 import org.junit.After;
 import org.junit.Before;
-import ru.job4j.tracker.data.Item;
-import ru.job4j.tracker.data.Tracker;
-import ru.job4j.tracker.input.*;
 import org.junit.Test;
-import ru.job4j.tracker.input.StubInput;
+import ru.job4j.trackerbase.data.Item;
+import ru.job4j.trackerbase.data.Tracker;
+import ru.job4j.trackerbase.input.Input;
+import ru.job4j.trackerbase.input.StubInput;
+import ru.job4j.trackerbase.input.ValidateInput;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

@@ -7,8 +7,9 @@
         <groupId>ru.job4j</groupId>
         <version>2.0</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>chapter_102</artifactId>
-    <packaging>jar</packaging>
+
+    <artifactId>tracker</artifactId>
+
+
 </project>

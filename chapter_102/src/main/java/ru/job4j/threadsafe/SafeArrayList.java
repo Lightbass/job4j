@@ -2,7 +2,7 @@ package ru.job4j.threadsafe;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import ru.job4j.list.CustomArrayList;
+import ru.job4j.util.CustomArrayList;
 
 import java.util.Iterator;
 

@@ -1,6 +1,4 @@
-package ru.job4j.tracker.input;
-
-import java.util.*;
+package ru.job4j.trackerbase.input;
 
 /**
  * Интерфейс для консольного ввода и вывода.

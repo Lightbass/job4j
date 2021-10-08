@@ -1,12 +1,16 @@
-package ru.job4j.tracker;
+package ru.job4j.trackerbase;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import ru.job4j.trackerbase.input.StubInput;
+import ru.job4j.trackerbase.input.ValidateInput;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import org.junit.*;
-import ru.job4j.tracker.data.*;
-import ru.job4j.tracker.input.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * JUnit тест класса ValidateInput.

@@ -1,8 +1,8 @@
-package ru.job4j.tracker.input;
+package ru.job4j.trackerbase.input;
 
-import ru.job4j.tracker.MenuOutException;
+import ru.job4j.trackerbase.MenuOutException;
 
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * Реализация интерфейса Input.

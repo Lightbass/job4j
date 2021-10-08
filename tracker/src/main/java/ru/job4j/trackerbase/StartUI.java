@@ -1,10 +1,10 @@
-package ru.job4j.tracker;
+package ru.job4j.trackerbase;
 
-import ru.job4j.tracker.data.*;
-import ru.job4j.tracker.input.*;
-import ru.job4j.tracker.actions.*;
-
-import java.util.*;
+import ru.job4j.trackerbase.data.ItemContainer;
+import ru.job4j.trackerbase.data.Tracker;
+import ru.job4j.trackerbase.input.ConsoleInput;
+import ru.job4j.trackerbase.input.Input;
+import ru.job4j.trackerbase.input.ValidateInput;
 
 /**
  * Класс для пользовательского консольного интерфейса.

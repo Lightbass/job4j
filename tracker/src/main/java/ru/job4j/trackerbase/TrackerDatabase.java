@@ -2,15 +2,23 @@ package ru.job4j.trackerbase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.tracker.StartUI;
-import ru.job4j.tracker.data.Item;
-import ru.job4j.tracker.data.ItemContainer;
-import ru.job4j.tracker.input.ConsoleInput;
-import ru.job4j.tracker.input.ValidateInput;
+import ru.job4j.trackerbase.data.Item;
+import ru.job4j.trackerbase.data.ItemContainer;
+import ru.job4j.trackerbase.input.ConsoleInput;
+import ru.job4j.trackerbase.input.ValidateInput;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
 /**
  * Класс - меню для работы с базой данных postgresql.

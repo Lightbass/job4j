@@ -1,9 +1,13 @@
-package ru.job4j.tracker;
+package ru.job4j.trackerbase;
 
-import ru.job4j.tracker.actions.*;
-import ru.job4j.tracker.data.*;
-import ru.job4j.tracker.input.*;
-import java.util.*;
+import ru.job4j.trackerbase.actions.BaseAction;
+import ru.job4j.trackerbase.actions.UserAction;
+import ru.job4j.trackerbase.data.Item;
+import ru.job4j.trackerbase.data.ItemContainer;
+import ru.job4j.trackerbase.input.Input;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс для меню.

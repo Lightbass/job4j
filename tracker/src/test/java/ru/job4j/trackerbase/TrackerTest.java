@@ -1,12 +1,14 @@
-package ru.job4j.tracker;
+package ru.job4j.trackerbase;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.tracker.data.Item;
-import ru.job4j.tracker.data.ItemContainer;
-import ru.job4j.tracker.data.Tracker;
+import ru.job4j.trackerbase.data.Item;
+import ru.job4j.trackerbase.data.ItemContainer;
+import ru.job4j.trackerbase.data.Tracker;
+
 import java.util.Arrays;
 import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

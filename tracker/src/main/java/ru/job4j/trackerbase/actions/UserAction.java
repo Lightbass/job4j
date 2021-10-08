@@ -1,8 +1,8 @@
-package ru.job4j.tracker.actions;
+package ru.job4j.trackerbase.actions;
 
-import ru.job4j.tracker.data.Item;
-import ru.job4j.tracker.data.ItemContainer;
-import ru.job4j.tracker.input.Input;
+import ru.job4j.trackerbase.data.Item;
+import ru.job4j.trackerbase.data.ItemContainer;
+import ru.job4j.trackerbase.input.Input;
 
 /**
  * Интерфейс - осуществляемое пользователем действие.

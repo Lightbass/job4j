@@ -2,7 +2,7 @@ package ru.job4j.threadsafe;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.list.CustomArrayList;
+import ru.job4j.util.CustomArrayList;
 
 import java.util.*;
 

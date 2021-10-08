@@ -1,7 +1,6 @@
 package ru.job4j.trackerbase;
 
 import org.junit.Before;
-import ru.job4j.tracker.TrackerTest;
 
 /**
  * JUnit тест класса TrackerDatabase.

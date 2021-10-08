@@ -24,7 +24,8 @@
 		<module>puzzle</module>
 		<module>chapter_004</module>
         <module>chapter_311_threads</module>
-    </modules>
+		<module>tracker</module>
+	</modules>
 	
 	<build>
 		<plugins>
