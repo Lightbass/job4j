@@ -36,7 +36,6 @@ public class JsonService {
         } catch (IOException ioe) {
             LOGGER.error(ioe.getMessage(), ioe);
         }
-        //User user = mapper.readValue(json, User.class);
     }
 
     public void encodeJson(OutputStream out) {

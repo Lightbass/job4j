@@ -6,7 +6,7 @@ import ru.job4j.puzzle.firuges.Figure;
 import java.util.Arrays;
 
 /**
- * //TODO add comments.
+ * Логика для пазла.
  *
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$

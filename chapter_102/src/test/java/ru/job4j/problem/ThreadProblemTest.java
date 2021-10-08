@@ -31,6 +31,5 @@ public class ThreadProblemTest {
             ie.printStackTrace();
         }
         System.out.println(inc.get());
-        //assertThat(inc.get() == 200000, is(false));
     }
 }

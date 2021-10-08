@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ListIterator;
 
 /**
- * //TODO add comments.
+ * Логика для фигуры PawnWhite
  *
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
