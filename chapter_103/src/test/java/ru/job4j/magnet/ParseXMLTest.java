@@ -30,8 +30,7 @@ public class ParseXMLTest {
             convertXSQT.convert(new File("simpleXML.txt"), dest, scheme);
             ParseXML parseXML = new ParseXML(dest);
             assertThat(parseXML.getSum(), is(answer));
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
