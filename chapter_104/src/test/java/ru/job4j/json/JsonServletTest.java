@@ -1,38 +1,16 @@
 package ru.job4j.json;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import ru.job4j.crud.controller.SignInController;
-import ru.job4j.crud.controller.UserViewController;
-import ru.job4j.crud.service.Validate;
-import ru.job4j.crud.service.ValidateService;
-import ru.job4j.crud.service.ValidateStub;
 
 import javax.servlet.ReadListener;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -43,8 +21,6 @@ import static org.mockito.Mockito.when;
  * @since 09.12.18
  * @version 0.1
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(JsonServlet.class)
 public class JsonServletTest {
 
     private ServletInputStream sin = new ServletInputStream() {
@@ -109,7 +85,6 @@ public class JsonServletTest {
     public void whenAddOneMoreUserThenFindIt() throws IOException {
         JsonServlet jsonServlet = new JsonServlet();
         JsonService jsonService = JsonService.getInstance();
-        PowerMockito.mockStatic(JsonServlet.class);
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
 

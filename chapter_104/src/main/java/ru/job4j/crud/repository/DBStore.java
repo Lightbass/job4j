@@ -63,8 +63,7 @@ public class DBStore implements Store {
             serverStatement.execute(properties.getProperty("query.createCityTable"));
             serverStatement.execute(properties.getProperty("query.initCountryTable"));
             serverStatement.execute(properties.getProperty("query.initCityTable"));
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             LOGGER.error(ex.getMessage(), ex);
         }
     }

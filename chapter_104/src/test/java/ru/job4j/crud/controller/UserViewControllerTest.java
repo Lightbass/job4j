@@ -1,12 +1,8 @@
 package ru.job4j.crud.controller;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import ru.job4j.crud.service.Validate;
 import ru.job4j.crud.service.ValidateService;
 import ru.job4j.crud.service.ValidateStub;
@@ -33,9 +29,6 @@ import static org.mockito.Mockito.when;
  * @since 22.10.18
  * @version 0.1
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(ValidateService.class)
-@PowerMockIgnore({"javax.net.ssl.*"})
 public class UserViewControllerTest {
 
     HttpSession session = new HttpSession() {
@@ -131,186 +124,195 @@ public class UserViewControllerTest {
     @Test
     public void whenAddOneMoreUserThenFindIt() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        UserViewController userViewController = new UserViewController();
-        userViewController.init();
-        when(req.getParameter("action")).thenReturn("add");
-        when(req.getParameter("name")).thenReturn("Alexey");
-        when(req.getParameter("login")).thenReturn("Alex");
-        when(req.getParameter("password")).thenReturn("alexey");
-        when(req.getParameter("email")).thenReturn("alex@gmail.com");
-        when(req.getParameter("role")).thenReturn("true");
-        try {
-            userViewController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            UserViewController userViewController = new UserViewController();
+            userViewController.init();
+            when(req.getParameter("action")).thenReturn("add");
+            when(req.getParameter("name")).thenReturn("Alexey");
+            when(req.getParameter("login")).thenReturn("Alex");
+            when(req.getParameter("password")).thenReturn("alexey");
+            when(req.getParameter("email")).thenReturn("alex@gmail.com");
+            when(req.getParameter("role")).thenReturn("true");
+            try {
+                userViewController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("Alexey")), is(true));
         }
-        assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("Alexey")), is(true));
     }
 
     @Test
     public void whenDeleteUserWithoutAdminRoleThenNoChanges() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        Mockito.when(req.getSession()).thenReturn(session);
-        UserViewController userViewController = new UserViewController();
-        userViewController.init();
-        session.setAttribute("login", "mas");
-        when(req.getParameter("action")).thenReturn("delete");
-        when(req.getParameter("id")).thenReturn("0");
-        try {
-            userViewController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            Mockito.when(req.getSession()).thenReturn(session);
+            UserViewController userViewController = new UserViewController();
+            userViewController.init();
+            session.setAttribute("login", "mas");
+            when(req.getParameter("action")).thenReturn("delete");
+            when(req.getParameter("id")).thenReturn("0");
+            try {
+                userViewController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            assertThat(validate.findAll().size(), is(2));
         }
-        assertThat(validate.findAll().size(), is(2));
     }
 
     @Test
     public void whenDeleteUserWithAdminRoleThenOneUserDeleted() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        Mockito.when(req.getSession()).thenReturn(session);
-        UserViewController userViewController = new UserViewController();
-        userViewController.init();
-        session.setAttribute("login", "vas");
-        when(req.getParameter("action")).thenReturn("delete");
-        when(req.getParameter("id")).thenReturn("0");
-        try {
-            userViewController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            Mockito.when(req.getSession()).thenReturn(session);
+            UserViewController userViewController = new UserViewController();
+            userViewController.init();
+            session.setAttribute("login", "vas");
+            when(req.getParameter("action")).thenReturn("delete");
+            when(req.getParameter("id")).thenReturn("0");
+            try {
+                userViewController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            assertThat(validate.findAll().size(), is(1));
         }
-        assertThat(validate.findAll().size(), is(1));
     }
 
     @Test
     public void whenChangeUserWithoutAdminRoleThenNothingChanged() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        Mockito.when(req.getSession()).thenReturn(session);
-        UserViewController userViewController = new UserViewController();
-        userViewController.init();
-        session.setAttribute("login", "mas");
-        when(req.getParameter("action")).thenReturn("update");
-        when(req.getParameter("id")).thenReturn("0");
-        when(req.getParameter("login")).thenReturn("allo");
-        when(req.getParameter("password")).thenReturn("pass");
-        when(req.getParameter("name")).thenReturn("allo");
-        when(req.getParameter("email")).thenReturn("allo@allo.com");
-        when(req.getParameter("role")).thenReturn("true");
-        try {
-            userViewController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            Mockito.when(req.getSession()).thenReturn(session);
+            UserViewController userViewController = new UserViewController();
+            userViewController.init();
+            session.setAttribute("login", "mas");
+            when(req.getParameter("action")).thenReturn("update");
+            when(req.getParameter("id")).thenReturn("0");
+            when(req.getParameter("login")).thenReturn("allo");
+            when(req.getParameter("password")).thenReturn("pass");
+            when(req.getParameter("name")).thenReturn("allo");
+            when(req.getParameter("email")).thenReturn("allo@allo.com");
+            when(req.getParameter("role")).thenReturn("true");
+            try {
+                userViewController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("Vasya")), is(true));
         }
-        assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("Vasya")), is(true));
     }
 
     @Test
     public void whenChangeUserSelfWithoutAdminRoleThenUserChanged() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        Mockito.when(req.getSession()).thenReturn(session);
-        UserViewController userViewController = new UserViewController();
-        userViewController.init();
-        session.setAttribute("login", "mas");
-        when(req.getParameter("action")).thenReturn("update");
-        when(req.getParameter("id")).thenReturn("1");
-        when(req.getParameter("login")).thenReturn("mas");
-        when(req.getParameter("password")).thenReturn("pass");
-        when(req.getParameter("name")).thenReturn("allo");
-        when(req.getParameter("email")).thenReturn("allo@allo.com");
-        when(req.getParameter("role")).thenReturn("false");
-        try {
-            userViewController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            Mockito.when(req.getSession()).thenReturn(session);
+            UserViewController userViewController = new UserViewController();
+            userViewController.init();
+            session.setAttribute("login", "mas");
+            when(req.getParameter("action")).thenReturn("update");
+            when(req.getParameter("id")).thenReturn("1");
+            when(req.getParameter("login")).thenReturn("mas");
+            when(req.getParameter("password")).thenReturn("pass");
+            when(req.getParameter("name")).thenReturn("allo");
+            when(req.getParameter("email")).thenReturn("allo@allo.com");
+            when(req.getParameter("role")).thenReturn("false");
+            try {
+                userViewController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            validate.findAll().stream().map(v -> v.getName()).forEach(System.out::println);
+            assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("allo")), is(true));
         }
-        validate.findAll().stream().map(v -> v.getName()).forEach(System.out::println);
-        assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("allo")), is(true));
     }
 
     @Test
     public void whenChangeUserWithAdminRoleThenOneUserChanged() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        Mockito.when(req.getSession()).thenReturn(session);
-        UserViewController userViewController = new UserViewController();
-        userViewController.init();
-        session.setAttribute("login", "vas");
-        when(req.getParameter("action")).thenReturn("update");
-        when(req.getParameter("id")).thenReturn("0");
-        when(req.getParameter("login")).thenReturn("allo");
-        when(req.getParameter("password")).thenReturn("pass");
-        when(req.getParameter("name")).thenReturn("allo");
-        when(req.getParameter("email")).thenReturn("allo@allo.com");
-        when(req.getParameter("role")).thenReturn("true");
-        try {
-            userViewController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            Mockito.when(req.getSession()).thenReturn(session);
+            UserViewController userViewController = new UserViewController();
+            userViewController.init();
+            session.setAttribute("login", "vas");
+            when(req.getParameter("action")).thenReturn("update");
+            when(req.getParameter("id")).thenReturn("0");
+            when(req.getParameter("login")).thenReturn("allo");
+            when(req.getParameter("password")).thenReturn("pass");
+            when(req.getParameter("name")).thenReturn("allo");
+            when(req.getParameter("email")).thenReturn("allo@allo.com");
+            when(req.getParameter("role")).thenReturn("true");
+            try {
+                userViewController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("allo")), is(true));
         }
-        assertThat(validate.findAll().stream().anyMatch(u -> u.getName().equals("allo")), is(true));
     }
 
     @Test
     public void whenLoginTrueUserThenOK() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        Mockito.when(req.getSession()).thenReturn(session);
-        UserViewController userViewController = new UserViewController();
-        SignInController signInController = new SignInController();
-        userViewController.init();
-        when(req.getParameter("login")).thenReturn("vas");
-        when(req.getParameter("password")).thenReturn("vas");
-        try {
-            signInController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            Mockito.when(req.getSession()).thenReturn(session);
+            UserViewController userViewController = new UserViewController();
+            SignInController signInController = new SignInController();
+            userViewController.init();
+            when(req.getParameter("login")).thenReturn("vas");
+            when(req.getParameter("password")).thenReturn("vas");
+            try {
+                signInController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            assertThat(session.getAttribute("login"), is("vas"));
         }
-        assertThat(session.getAttribute("login"), is("vas"));
     }
 
     @Test
     public void whenLoginFakeUserThenOK() throws ServletException, IOException {
         Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        Mockito.when(req.getSession()).thenReturn(session);
-        UserViewController userViewController = new UserViewController();
-        SignInController signInController = new SignInController();
-        userViewController.init();
-        when(req.getParameter("login")).thenReturn("blabla");
-        when(req.getParameter("password")).thenReturn("blabla");
-        try {
-            signInController.doPost(req, resp);
-        } catch (NullPointerException npe) {
-            npe.fillInStackTrace();
+        try (MockedStatic<ValidateService> validateService = Mockito.mockStatic(ValidateService.class)) {
+            validateService.when(ValidateService::getInstance).thenReturn(validate);
+            HttpServletRequest req = mock(HttpServletRequest.class);
+            HttpServletResponse resp = mock(HttpServletResponse.class);
+            Mockito.when(req.getSession()).thenReturn(session);
+            UserViewController userViewController = new UserViewController();
+            SignInController signInController = new SignInController();
+            userViewController.init();
+            when(req.getParameter("login")).thenReturn("blabla");
+            when(req.getParameter("password")).thenReturn("blabla");
+            try {
+                signInController.doPost(req, resp);
+            } catch (NullPointerException npe) {
+                npe.fillInStackTrace();
+            }
+            assertThat(session.getAttribute("login"), is(nullValue()));
         }
-        assertThat(session.getAttribute("login"), is(nullValue()));
     }
 }
