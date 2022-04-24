@@ -26,7 +26,7 @@ public class ConvertXSQT {
     public boolean convert(File source, File dest, File scheme) {
         boolean result = false;
         try {
-            Files.readAllBytes(scheme.toPath());
+            System.out.println(new String(Files.readAllBytes(scheme.toPath())));
             TransformerFactory factory = TransformerFactory.newInstance();
             Transformer transformer = factory.newTransformer(
                     new StreamSource(new ByteArrayInputStream(Files.readAllBytes(scheme.toPath()))));

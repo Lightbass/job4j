@@ -19,6 +19,16 @@ import static org.junit.Assert.assertThat;
  */
 public class ParseXMLTest {
 
+    @Test
+    public void whenGenerate10ObjectsAndConvertInXMLThen55ParseOk() {
+        whenGenerateNObjectsAndConvertInXMLThenParseOk(10, 55);
+    }
+
+    @Test
+    public void whenGenerateBillionObjectsAndConvertInXMLThenParseOk() {
+        whenGenerateNObjectsAndConvertInXMLThenParseOk(1000000, 500000500000L);
+    }
+
     public void whenGenerateNObjectsAndConvertInXMLThenParseOk(int n, long answer) {
         try (StoreSQL storeSQL = new StoreSQL(new Config())) {
             StoreXML storeXML = new StoreXML(new File("simpleXML.txt"));
@@ -33,15 +43,5 @@ public class ParseXMLTest {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    @Test
-    public void whenGenerate10ObjectsAndConvertInXMLThen55ParseOk() {
-        whenGenerateNObjectsAndConvertInXMLThenParseOk(10, 55);
-    }
-
-    @Test
-    public void whenGenerateBillionObjectsAndConvertInXMLThenParseOk() {
-        whenGenerateNObjectsAndConvertInXMLThenParseOk(1000000, 500000500000L);
     }
 }
