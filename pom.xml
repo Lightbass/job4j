@@ -28,8 +28,7 @@
         <module>chapter_104</module>
 		<module>puzzle</module>
 		<module>chapter_004</module>
-        <module>chapter_311_threads</module>
-		<module>chapter_312_resources</module>
+        <module>chapter_31_multithreading</module>
 		<module>tracker</module>
 	</modules>
 
