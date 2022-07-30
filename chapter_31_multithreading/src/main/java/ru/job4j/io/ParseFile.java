@@ -1,6 +1,6 @@
 package ru.job4j.io;
 
-import ru.job4j.io.filter.RawFilter;
+import ru.job4j.io.filter.ParseFilter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,22 +18,22 @@ public class ParseFile {
     }
 
     public ParseFile(File file) {
-        this(file, new RawFilter());
+        this(file, ParseFilter.RAW_FILTER);
     }
 
     private synchronized String getContent() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         int data;
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            while ((data = in.read()) > 0) {
+            while ((data = in.read()) != -1) {
                 char charData = (char) data;
                 if (filter.test(charData)) {
-                    output += charData;
+                    output.append(charData);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return output;
+        return output.toString();
     }
 }
