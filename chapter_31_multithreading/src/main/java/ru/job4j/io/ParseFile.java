@@ -10,18 +10,16 @@ import java.util.function.Predicate;
 public class ParseFile {
 
     private final File file;
-    private final Predicate<Character> filter;
-
-    public ParseFile(File file, Predicate<Character> filter) {
-        this.file = file;
-        this.filter = filter;
-    }
 
     public ParseFile(File file) {
-        this(file, ParseFilter.RAW_FILTER);
+        this.file = file;
     }
 
-    private synchronized String getContent() {
+    public synchronized String getContent() {
+        return getContent(ParseFilter.RAW_FILTER);
+    }
+
+    public synchronized String getContent(Predicate<Character> filter) {
         StringBuilder output = new StringBuilder();
         int data;
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
