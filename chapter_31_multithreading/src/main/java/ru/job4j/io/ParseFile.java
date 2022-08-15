@@ -15,8 +15,12 @@ public class ParseFile {
         this.file = file;
     }
 
-    public synchronized String getContent() {
+    public synchronized String getContentRaw() {
         return getContent(ParseFilter.RAW_FILTER);
+    }
+
+    public synchronized String getContentWithoutUnicode() {
+        return getContent(ParseFilter.WITHOUT_UNICODE_FILTER);
     }
 
     public synchronized String getContent(Predicate<Character> filter) {
