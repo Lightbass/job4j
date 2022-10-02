@@ -7,12 +7,7 @@ public class AccountStorage {
     private final HashMap<Integer, Account> accounts = new HashMap<>();
 
     public synchronized boolean add(Account account) {
-        boolean contains = false;
-        if (!accounts.containsKey(account.id())) {
-            accounts.put(account.id(), account);
-            contains = true;
-        }
-        return contains;
+        return accounts.putIfAbsent(account.id(), account) == null;
     }
 
     public synchronized boolean update(Account account) {

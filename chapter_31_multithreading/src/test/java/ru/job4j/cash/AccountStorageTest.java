@@ -15,6 +15,17 @@ class AccountStorageTest {
     }
 
     @Test
+    void whenAddElementWithSameIdTwice() {
+        var storage = new AccountStorage();
+        var addResult1 = storage.add(new Account(1, 100));
+        var addResult2 = storage.add(new Account(1, 200));
+        var firstAccount = storage.getById(1)
+                .orElseThrow(() -> new IllegalStateException("Not found account by id = 1"));
+        assertThat(addResult1).isEqualTo(true);
+        assertThat(addResult2).isEqualTo(false);
+    }
+
+    @Test
     void whenUpdate() {
         var storage = new AccountStorage();
         storage.add(new Account(1, 100));
