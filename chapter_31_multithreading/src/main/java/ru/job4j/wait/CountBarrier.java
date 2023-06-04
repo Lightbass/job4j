@@ -11,6 +11,22 @@ public class CountBarrier {
         this.total = total;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Main thread started");
+        CountBarrier countBarrier = new CountBarrier(2);
+        Runnable threadTask = () -> {
+            System.out.println(Thread.currentThread().getName() + " started");
+            System.out.println("call countBarrier.count() in " + Thread.currentThread().getName());
+            countBarrier.count();
+        };
+        Thread thread1 = new Thread(threadTask);
+        Thread thread2 = new Thread(threadTask);
+        thread1.start();
+        thread2.start();
+        countBarrier.await();
+        System.out.println("Main thread ended");
+    }
+
     public void count() {
         synchronized (monitor) {
             count++;
