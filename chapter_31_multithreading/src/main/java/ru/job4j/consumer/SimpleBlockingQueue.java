@@ -13,6 +13,10 @@ public class SimpleBlockingQueue<T> {
     private final Queue<T> queue = new LinkedList<>();
     private final int maxSize;
 
+    public SimpleBlockingQueue() {
+        this(10);
+    }
+
     public SimpleBlockingQueue(int maxSize) {
         this.maxSize = maxSize;
     }
@@ -32,5 +36,9 @@ public class SimpleBlockingQueue<T> {
         T value = queue.poll();
         notify();
         return value;
+    }
+
+    public synchronized int size() {
+        return queue.size();
     }
 }
