@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/Lightbass/job4j.svg?branch=master)](https://travis-ci.com/Lightbass/job4j)
 [![codecov](https://codecov.io/gh/Lightbass/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/Lightbass/job4j)
 
 # Репозиторий Макарова Алексея
@@ -26,3 +25,7 @@ http://job4j.ru/
 #Контакты и дальнейшее развитие проекта
 
 Не все задачи на курсе были доделаны пока.
+
+В курсе производилась работа в ветках git
+
+Создание ветки из IDEA
